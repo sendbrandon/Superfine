@@ -32,16 +32,17 @@ export async function GET(request: Request) {
     return redirectHome(request.url, "rejected");
   }
 
-  await addPaidEntry({
+  const entry = await addPaidEntry({
     name,
     tier,
     dedication,
     sessionId
   });
 
-  const destination = new URL("/", request.url);
-  destination.searchParams.set("added", name);
-  destination.searchParams.set("tier", tier);
+  const destination = new URL(
+    `/n/${entry.slug || encodeURIComponent(name.toLocaleLowerCase("en-US"))}`,
+    request.url
+  );
   return NextResponse.redirect(destination);
 }
 

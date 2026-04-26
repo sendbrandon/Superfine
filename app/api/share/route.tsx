@@ -1,5 +1,11 @@
 import { ImageResponse } from "@vercel/og";
-import { getCount, getNeighbors, isTier, type Tier } from "@/lib/list";
+import {
+  formatEntryNumber,
+  getCount,
+  getNeighbors,
+  isTier,
+  type Tier
+} from "@/lib/list";
 import { normalizeSubmittedName } from "@/lib/moderate";
 
 export const runtime = "edge";
@@ -29,6 +35,7 @@ export async function GET(request: Request) {
   const displayName = neighbors?.current?.name || name;
   const previous = neighbors?.previous?.name || "FREDERICK DOUGLASS";
   const next = neighbors?.next?.name || "LEWIS HAMILTON";
+  const entryNumber = formatEntryNumber(neighbors?.current?.entryNumber);
 
   return new ImageResponse(
     (
@@ -42,7 +49,7 @@ export async function GET(request: Request) {
           flexDirection: "column",
           padding: "62px 72px",
           fontFamily: "Tinos",
-          border: "16px solid #8B1A2F"
+          border: "16px solid #FF6B00"
         }}
       >
         <div
@@ -72,7 +79,7 @@ export async function GET(request: Request) {
               style={{
                 width: 8,
                 height: 390,
-                background: "#8B1A2F"
+                background: "#FF6B00"
               }}
             />
             <div
@@ -85,7 +92,7 @@ export async function GET(request: Request) {
               <span style={{ fontSize: 34, fontStyle: "italic" }}>{previous}</span>
               <span
                 style={{
-                  color: "#8B1A2F",
+                  color: "#FF6B00",
                   fontSize: 92,
                   lineHeight: 0.88,
                   fontWeight: 700,
@@ -108,7 +115,7 @@ export async function GET(request: Request) {
           >
             <span
               style={{
-                color: "#8B1A2F",
+                color: "#FF6B00",
                 fontSize: 142,
                 lineHeight: 0.78,
                 fontWeight: 700,
@@ -143,7 +150,13 @@ export async function GET(request: Request) {
             letterSpacing: 5
           }}
         >
-          <span>{displayName ? TIER_LABEL[tier] : "ADD YOURSELF, $1"}</span>
+          <span>
+            {displayName
+              ? entryNumber
+                ? `${entryNumber} — ${TIER_LABEL[tier]}`
+                : TIER_LABEL[tier]
+              : "ADD YOURSELF, $1"}
+          </span>
           <span>{count.total.toLocaleString("en-US")} NAMES</span>
         </div>
       </div>

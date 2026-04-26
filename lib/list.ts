@@ -6,7 +6,9 @@ export type PaidEntry = {
   id: string;
   name: string;
   sortName: string;
+  slug?: string;
   tier: Tier;
+  entryNumber?: number;
   dedication?: string;
   createdAt: string;
   sessionId?: string;
@@ -16,8 +18,10 @@ export type GuestEntry = {
   id: string;
   name: string;
   sortName: string;
+  slug?: string;
   tier: "curated" | Tier;
   source: "curated" | "paid";
+  entryNumber?: number;
   dedication?: string;
   createdAt?: string;
 };
@@ -34,6 +38,23 @@ const MEMORY_SYMBOL = Symbol.for("superfine.guest-list.memory");
 
 export function isTier(value: unknown): value is Tier {
   return value === "seat" || value === "ribbon" || value === "patron";
+}
+
+export function toNameSlug(name: string) {
+  return toSortKey(name)
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLocaleLowerCase("en-US")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function formatEntryNumber(entryNumber?: number) {
+  if (!entryNumber) {
+    return "";
+  }
+
+  return `N° ${entryNumber.toString().padStart(6, "0")}`;
 }
 
 export async function getPaidEntries(): Promise<PaidEntry[]> {
@@ -65,7 +86,9 @@ export async function addPaidEntry(input: {
     id: input.sessionId || crypto.randomUUID(),
     name: input.name,
     sortName: toSortKey(input.name),
+    slug: toNameSlug(input.name),
     tier: input.tier,
+    entryNumber: CURATED_NAMES.length + paidEntries.length + 1,
     dedication: input.dedication || undefined,
     createdAt: new Date().toISOString(),
     sessionId: input.sessionId
@@ -93,7 +116,7 @@ export async function getMergedList(): Promise<GuestEntry[]> {
 
   return sortEntries([
     ...curatedEntries,
-    ...paidEntries.map((entry) => ({
+    ...numberPaidEntries(paidEntries).map((entry) => ({
       ...entry,
       source: "paid" as const
     }))
@@ -102,7 +125,7 @@ export async function getMergedList(): Promise<GuestEntry[]> {
 
 export async function getPatrons(): Promise<PaidEntry[]> {
   const paidEntries = await getPaidEntries();
-  return paidEntries
+  return numberPaidEntries(paidEntries)
     .filter((entry) => entry.tier === "patron")
     .sort((left, right) => right.createdAt.localeCompare(left.createdAt));
 }
@@ -120,7 +143,10 @@ export async function getNeighbors(name: string): Promise<{
   current?: GuestEntry;
   next?: GuestEntry;
 }> {
-  const mergedList = await getMergedList();
+  const [mergedList, paidEntries] = await Promise.all([
+    getMergedList(),
+    getPaidEntries()
+  ]);
   const normalizedName = name.trim().toLocaleLowerCase("en-US");
   const exactIndex = mergedList.findIndex(
     (entry) => entry.name.toLocaleLowerCase("en-US") === normalizedName
@@ -138,8 +164,10 @@ export async function getNeighbors(name: string): Promise<{
     id: "pending",
     name,
     sortName: toSortKey(name),
+    slug: toNameSlug(name),
     tier: "seat",
-    source: "paid"
+    source: "paid",
+    entryNumber: CURATED_NAMES.length + paidEntries.length + 1
   };
   const withInserted = sortEntries([...mergedList, inserted]);
   const insertedIndex = withInserted.findIndex((entry) => entry.id === "pending");
@@ -149,6 +177,18 @@ export async function getNeighbors(name: string): Promise<{
     current: inserted,
     next: withInserted[insertedIndex + 1]
   };
+}
+
+export async function getPaidEntryBySlug(slug: string): Promise<PaidEntry | null> {
+  const paidEntries = numberPaidEntries(await getPaidEntries());
+  const normalizedSlug = slug.trim().toLocaleLowerCase("en-US");
+
+  return (
+    [...paidEntries]
+      .reverse()
+      .find((entry) => (entry.slug || toNameSlug(entry.name)) === normalizedSlug) ||
+    null
+  );
 }
 
 function sortEntries<T extends { sortName: string; name: string }>(entries: T[]) {
@@ -161,6 +201,14 @@ function sortEntries<T extends { sortName: string; name: string }>(entries: T[])
     }
     return left.name.localeCompare(right.name, "en", { sensitivity: "base" });
   });
+}
+
+function numberPaidEntries(entries: PaidEntry[]) {
+  return entries.map((entry, index) => ({
+    ...entry,
+    slug: entry.slug || toNameSlug(entry.name),
+    entryNumber: entry.entryNumber || CURATED_NAMES.length + index + 1
+  }));
 }
 
 async function getKv(): Promise<VercelKv | null> {

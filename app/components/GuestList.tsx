@@ -33,7 +33,7 @@ const TIERS: Array<{
     id: "ribbon",
     label: "THE RIBBON",
     price: "$25",
-    detail: "OXBLOOD GLYPH"
+    detail: "ORANGE GLYPH"
   },
   {
     id: "patron",
@@ -54,6 +54,7 @@ export default function GuestList({
   error
 }: GuestListProps) {
   const [tier, setTier] = useState<Tier>(addedTier || "seat");
+  const [nameValue, setNameValue] = useState("");
   const [message, setMessage] = useState(error ? errorForCode(error) : "");
   const [isPending, startTransition] = useTransition();
   const [ticketOpen, setTicketOpen] = useState(Boolean(addedName));
@@ -63,6 +64,43 @@ export default function GuestList({
     () => addedName.trim().toLocaleLowerCase("en-US"),
     [addedName]
   );
+  const lineagePreview = useMemo(() => {
+    const name = nameValue.trim();
+    if (name.replace(/[^\p{L}\p{N}]/gu, "").length < 2) {
+      return null;
+    }
+
+    const pending = {
+      id: "preview",
+      name,
+      sortName: sortKeyForClient(name)
+    };
+    const sortedEntries = [
+      ...entries.map((entry) => ({
+        id: entry.id,
+        name: entry.name,
+        sortName: entry.sortName || sortKeyForClient(entry.name)
+      })),
+      pending
+    ].sort((left, right) => {
+      const sortResult = left.sortName.localeCompare(right.sortName, "en", {
+        sensitivity: "base"
+      });
+      if (sortResult !== 0) {
+        return sortResult;
+      }
+
+      return left.name.localeCompare(right.name, "en", { sensitivity: "base" });
+    });
+    const index = sortedEntries.findIndex((entry) => entry.id === pending.id);
+
+    return {
+      previous: sortedEntries[index - 1]?.name || "THE DOOR",
+      current: name,
+      next: sortedEntries[index + 1]?.name || "THE END",
+      entryNumber: initialTotal + 1
+    };
+  }, [entries, initialTotal, nameValue]);
 
   useEffect(() => {
     if (!highlightedKey) {
@@ -134,11 +172,23 @@ export default function GuestList({
               required
               minLength={2}
               maxLength={80}
+              value={nameValue}
+              onChange={(event) => setNameValue(event.target.value)}
             />
             <button type="submit" disabled={isPending}>
               {isPending ? "OPENING" : "ENTER"}
             </button>
           </div>
+
+          {lineagePreview ? (
+            <div className="lineage-preview" aria-live="polite">
+              <span>LINEAGE PREVIEW</span>
+              <em>{lineagePreview.previous}</em>
+              <strong>{lineagePreview.current}</strong>
+              <em>{lineagePreview.next}</em>
+              <span>{formatEntryNumber(lineagePreview.entryNumber)}</span>
+            </div>
+          ) : null}
 
           {tier === "patron" ? (
             <input
@@ -203,15 +253,28 @@ export default function GuestList({
               className={isHighlighted ? "guest-row highlight" : "guest-row"}
               data-name-key={key}
             >
-              <span className="guest-name">{entry.name}</span>
-              {entry.tier === "ribbon" ? (
-                <span className="ribbon-mark" aria-label="Ribbon">
-                  ▎
-                </span>
-              ) : null}
-              {entry.tier === "patron" ? (
-                <span className="patron-mark">PATRON</span>
-              ) : null}
+              {entry.source === "paid" && entry.slug ? (
+                <a className="guest-name" href={`/n/${entry.slug}`}>
+                  {entry.name}
+                </a>
+              ) : (
+                <span className="guest-name">{entry.name}</span>
+              )}
+              <span className="guest-flags">
+                {entry.entryNumber ? (
+                  <span className="entry-number">
+                    {formatEntryNumber(entry.entryNumber)}
+                  </span>
+                ) : null}
+                {entry.tier === "ribbon" ? (
+                  <span className="ribbon-mark" aria-label="Ribbon">
+                    ▎
+                  </span>
+                ) : null}
+                {entry.tier === "patron" ? (
+                  <span className="patron-mark">PATRON</span>
+                ) : null}
+              </span>
             </li>
           );
         })}
@@ -243,4 +306,16 @@ function errorForCode(code: string) {
     return "PAYMENT NOT CONFIRMED.";
   }
   return "THE DOOR DID NOT OPEN.";
+}
+
+function sortKeyForClient(name: string) {
+  return name
+    .normalize("NFKD")
+    .replace(/^(a|an|the)\s+/i, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function formatEntryNumber(entryNumber: number) {
+  return `N° ${entryNumber.toString().padStart(6, "0")}`;
 }

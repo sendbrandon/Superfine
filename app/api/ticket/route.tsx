@@ -1,5 +1,5 @@
 import { ImageResponse } from "@vercel/og";
-import { getNeighbors, isTier, type Tier } from "@/lib/list";
+import { formatEntryNumber, getNeighbors, isTier, type Tier } from "@/lib/list";
 import { normalizeSubmittedName } from "@/lib/moderate";
 
 export const runtime = "edge";
@@ -28,6 +28,7 @@ export async function GET(request: Request) {
   const displayName = neighbors.current?.name || name || "UNNAMED";
   const previous = neighbors.previous?.name || "FREDERICK DOUGLASS";
   const next = neighbors.next?.name || "LEWIS HAMILTON";
+  const entryNumber = formatEntryNumber(neighbors.current?.entryNumber);
 
   return new ImageResponse(
     (
@@ -41,7 +42,7 @@ export async function GET(request: Request) {
           flexDirection: "column",
           padding: "88px",
           fontFamily: "Tinos",
-          border: "20px solid #8B1A2F"
+          border: "20px solid #FF6B00"
         }}
       >
         <div
@@ -84,7 +85,7 @@ export async function GET(request: Request) {
           <span style={{ fontSize: 46, fontStyle: "italic" }}>{previous}</span>
           <span
             style={{
-              color: "#8B1A2F",
+              color: "#FF6B00",
               fontSize: 112,
               lineHeight: 0.95,
               fontWeight: 700,
@@ -108,7 +109,7 @@ export async function GET(request: Request) {
             fontSize: 32
           }}
         >
-          <span>{TIER_LABEL[tier]}</span>
+          <span>{entryNumber || TIER_LABEL[tier]}</span>
           <span>MET GALA 2026</span>
         </div>
       </div>

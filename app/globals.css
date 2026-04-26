@@ -1,7 +1,7 @@
 :root {
   --ground: #f5edd8;
   --ink: #000000;
-  --accent: #8b1a2f;
+  --accent: #ff6b00;
 }
 
 * {
@@ -82,7 +82,7 @@ button {
   max-width: none;
   margin: 72px 0 0;
   color: var(--accent);
-  background-image: url("/oxblood-grain.png");
+  background-image: url("/hermes-grain.png");
   background-position: center;
   background-size: 720px 240px;
   background-clip: text;
@@ -163,6 +163,37 @@ button {
 .dedication-input {
   border-right: 1px solid var(--ink);
   font-size: clamp(18px, 2vw, 30px);
+}
+
+.lineage-preview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 6px;
+  border-left: 8px solid var(--accent);
+  padding: 4px 0 4px 16px;
+}
+
+.lineage-preview span {
+  font-size: 12px;
+  font-style: normal;
+}
+
+.lineage-preview em,
+.lineage-preview strong {
+  min-width: 0;
+  font-size: clamp(21px, 2.5vw, 36px);
+  line-height: 0.96;
+}
+
+.lineage-preview em {
+  font-weight: 400;
+}
+
+.lineage-preview strong {
+  color: var(--accent);
+  font-style: normal;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 .name-line input::placeholder,
@@ -296,10 +327,28 @@ button {
 
 .guest-name {
   min-width: 0;
+  color: inherit;
   font-size: clamp(34px, 5vw, 88px);
   font-style: italic;
   line-height: 0.96;
+  text-decoration: none;
   overflow-wrap: anywhere;
+}
+
+.guest-name[href]:hover {
+  color: var(--accent);
+}
+
+.guest-flags {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.entry-number {
+  font-size: clamp(12px, 1vw, 16px);
+  font-style: normal;
+  white-space: nowrap;
 }
 
 .ribbon-mark {
