@@ -1,6 +1,8 @@
 'use server';
 
 import Stripe from 'stripe';
+import { moderateName } from '@/lib/moderate';
+import type { Tier } from '@/lib/curated-names';
 
 export interface AddNameResult {
   ok: boolean;
@@ -8,48 +10,72 @@ export interface AddNameResult {
   message?: string;
 }
 
-const PRICE_USD = 1;
+const PRICES: Record<Tier, number> = {
+  seat: 1,
+  ribbon: 25,
+  patron: 100,
+};
 
-function sanitize(input: string): string {
-  return input
-    .normalize('NFKC')
-    .replace(/[\r\n\t]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 80);
+const TIER_LABELS: Record<Tier, string> = {
+  seat: 'Take a seat',
+  ribbon: 'The Ribbon',
+  patron: 'Patron',
+};
+
+function isValidTier(t: string): t is Tier {
+  return t === 'seat' || t === 'ribbon' || t === 'patron';
 }
 
 /**
- * Server action: create a Stripe Checkout session for one $1 add-name
- * payment. The name is stored in the session metadata and persisted
- * to Vercel KV by the /api/confirm route after successful payment.
+ * Server action: create a Stripe Checkout session for the chosen tier.
+ *
+ * - $1 seat — name in the alphabetical scroll
+ * - $25 ribbon — name in the scroll with an oxblood ribbon glyph
+ * - $100 patron — name in the Patrons block at the top + dedication line
  *
  * Without STRIPE_SECRET_KEY, the action gracefully degrades — returns
- * a mock success URL so the UX flow demos locally. Set the env on
- * Vercel to flip on real charging.
+ * a mock success URL so the UX flow demos locally.
  */
 export async function addName(formData: FormData): Promise<AddNameResult> {
   const rawName = String(formData.get('name') ?? '');
-  const name = sanitize(rawName);
+  const rawTier = String(formData.get('tier') ?? 'seat');
+  const rawDedication = String(formData.get('dedication') ?? '');
 
-  if (!name || name.length < 2) {
-    return { ok: false, message: 'Add a name (at least 2 characters).' };
+  if (!isValidTier(rawTier)) {
+    return { ok: false, message: 'Pick a tier.' };
   }
+  const tier: Tier = rawTier;
 
-  if (name.length > 80) {
-    return { ok: false, message: 'Name is too long (80 characters max).' };
+  const moderation = moderateName(rawName);
+  if (!moderation.ok) {
+    return { ok: false, message: moderation.reason };
   }
+  const name = rawName.normalize('NFKC').trim();
+
+  // Dedication is optional, only honored on patron tier
+  const dedication =
+    tier === 'patron'
+      ? rawDedication.normalize('NFKC').trim().slice(0, 240) || undefined
+      : undefined;
 
   const apiKey = process.env.STRIPE_SECRET_KEY?.trim();
   const baseUrl =
     process.env.NEXT_PUBLIC_BASE_URL?.trim() ||
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
 
+  // Build return-URL params once
+  const returnParams = new URLSearchParams({
+    name,
+    tier,
+    ...(dedication ? { dedication } : {}),
+  });
+
   if (!apiKey) {
-    console.log(`[superfine] (no Stripe env) would add: ${name}`);
+    console.log(`[superfine] (no Stripe env) would add: ${name} (${tier}${dedication ? ', dedication' : ''})`);
+    returnParams.set('mock', '1');
     return {
       ok: true,
-      url: `${baseUrl}/?added=${encodeURIComponent(name)}&mock=1`,
+      url: `${baseUrl}/api/confirm?${returnParams.toString()}`,
     };
   }
 
@@ -62,21 +88,21 @@ export async function addName(formData: FormData): Promise<AddNameResult> {
         {
           price_data: {
             currency: 'usd',
-            unit_amount: PRICE_USD * 100,
+            unit_amount: PRICES[tier] * 100,
             product_data: {
-              name: 'SUPERFINE · The Guest List',
+              name: `SUPERFINE · ${TIER_LABELS[tier]}`,
               description: `Add ${name} to the Superfine Guest List, permanently.`,
             },
           },
           quantity: 1,
         },
       ],
-      // Pass the name through both metadata (for the webhook later)
-      // and the success URL query (for the immediate confirm route).
-      success_url: `${baseUrl}/api/confirm?session_id={CHECKOUT_SESSION_ID}&name=${encodeURIComponent(name)}`,
+      success_url: `${baseUrl}/api/confirm?session_id={CHECKOUT_SESSION_ID}&${returnParams.toString()}`,
       cancel_url: `${baseUrl}/?cancelled=1`,
       metadata: {
         name,
+        tier,
+        dedication: dedication ?? '',
         source: 'superfine-guest-list',
       },
     });

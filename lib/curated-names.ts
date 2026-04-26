@@ -206,7 +206,6 @@ const RAW_NAMES = [
   'Carly Cushnie',
   'Brandon Maxwell',
   'Christopher John Rogers',
-  'Aurora James',
   'Recho Omondi',
 
   // Producers + DJs (Sunday-OS adjacent — the catalog rhyme)
@@ -231,12 +230,19 @@ export const CURATED_NAMES = [...RAW_NAMES].sort((a, b) =>
   sortKey(a).localeCompare(sortKey(b))
 );
 
+/** Tier of a list entry. */
+export type Tier = 'seat' | 'ribbon' | 'patron';
+
 export interface ListEntry {
   name: string;
   /** ms epoch timestamp; 0 for curated entries */
   addedAt: number;
   /** true if this entry came from a paid user add */
   paid: boolean;
+  /** purchase tier; curated entries don't have a tier */
+  tier?: Tier;
+  /** dedication line; only on patron tier */
+  dedication?: string;
 }
 
 export const CURATED_ENTRIES: ListEntry[] = CURATED_NAMES.map((name) => ({
