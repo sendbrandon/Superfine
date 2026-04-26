@@ -13,13 +13,24 @@ export const metadata: Metadata = {
     title: "THE GUEST LIST — SUPERFINE",
     description:
       "The only invitation list more exclusive than the one Anna keeps — this one already includes the dead.",
-    type: "website"
+    type: "website",
+    url: "/",
+    siteName: "SUPERFINE",
+    images: [
+      {
+        url: "/api/share",
+        width: 1200,
+        height: 630,
+        alt: "THE GUEST LIST — SUPERFINE"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
     title: "THE GUEST LIST — SUPERFINE",
     description:
-      "The only invitation list more exclusive than the one Anna keeps — this one already includes the dead."
+      "The only invitation list more exclusive than the one Anna keeps — this one already includes the dead.",
+    images: ["/api/share"]
   }
 };
 
