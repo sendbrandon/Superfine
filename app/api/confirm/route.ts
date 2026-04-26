@@ -1,79 +1,52 @@
-import { NextRequest, NextResponse } from 'next/server';
-import Stripe from 'stripe';
-import { addPaidEntry } from '@/lib/list';
-import type { Tier } from '@/lib/curated-names';
+import { NextResponse } from "next/server";
+import Stripe from "stripe";
+import { addPaidEntry, isTier } from "@/lib/list";
+import { moderateName, normalizeSubmittedName } from "@/lib/moderate";
 
-function isValidTier(t: string | null | undefined): t is Tier {
-  return t === 'seat' || t === 'ribbon' || t === 'patron';
+export const dynamic = "force-dynamic";
+
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const sessionId = url.searchParams.get("session_id");
+
+  if (!sessionId || !process.env.STRIPE_SECRET_KEY) {
+    return redirectHome(request.url, "missing-session");
+  }
+
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+  if (session.payment_status !== "paid") {
+    return redirectHome(request.url, "unpaid");
+  }
+
+  const name = normalizeSubmittedName(session.metadata?.name || "");
+  const tier = isTier(session.metadata?.tier) ? session.metadata.tier : "seat";
+  const dedication =
+    tier === "patron"
+      ? normalizeSubmittedName(session.metadata?.dedication || "").slice(0, 120)
+      : undefined;
+
+  const moderation = moderateName(name);
+  if (!moderation.ok) {
+    return redirectHome(request.url, "rejected");
+  }
+
+  await addPaidEntry({
+    name,
+    tier,
+    dedication,
+    sessionId
+  });
+
+  const destination = new URL("/", request.url);
+  destination.searchParams.set("added", name);
+  destination.searchParams.set("tier", tier);
+  return NextResponse.redirect(destination);
 }
 
-export async function GET(req: NextRequest) {
-  const url = new URL(req.url);
-  const sessionId = url.searchParams.get('session_id');
-  const name = url.searchParams.get('name');
-  const tierParam = url.searchParams.get('tier');
-  const dedicationParam = url.searchParams.get('dedication');
-  const mock = url.searchParams.get('mock') === '1';
-
-  if (!name) {
-    return NextResponse.redirect(new URL('/?error=missing_name', req.url));
-  }
-  if (!isValidTier(tierParam)) {
-    return NextResponse.redirect(new URL('/?error=missing_tier', req.url));
-  }
-  const tier: Tier = tierParam;
-
-  const apiKey = process.env.STRIPE_SECRET_KEY?.trim();
-
-  // Mock / no-Stripe path — trust the URL, persist, redirect
-  if (!apiKey || mock) {
-    await addPaidEntry({
-      name,
-      tier,
-      dedication: dedicationParam ?? undefined,
-    });
-    return NextResponse.redirect(
-      new URL(`/?added=${encodeURIComponent(name)}&tier=${tier}`, req.url)
-    );
-  }
-
-  // Real path — verify the session was paid before persisting
-  if (!sessionId) {
-    return NextResponse.redirect(new URL('/?error=missing_session', req.url));
-  }
-
-  try {
-    const stripe = new Stripe(apiKey);
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
-
-    if (session.payment_status !== 'paid') {
-      console.warn('[superfine] confirm: session not paid', session.id);
-      return NextResponse.redirect(new URL('/?error=not_paid', req.url));
-    }
-
-    // Trust session metadata over URL params (URL can be spoofed)
-    const trustedName = session.metadata?.name?.trim() || name;
-    const trustedTierStr = session.metadata?.tier?.trim() || tier;
-    const trustedTier: Tier = isValidTier(trustedTierStr) ? trustedTierStr : tier;
-    const trustedDedication =
-      trustedTier === 'patron'
-        ? session.metadata?.dedication?.trim() || undefined
-        : undefined;
-
-    await addPaidEntry({
-      name: trustedName,
-      tier: trustedTier,
-      dedication: trustedDedication,
-    });
-
-    return NextResponse.redirect(
-      new URL(
-        `/?added=${encodeURIComponent(trustedName)}&tier=${trustedTier}`,
-        req.url
-      )
-    );
-  } catch (err) {
-    console.error('[superfine] confirm error:', err);
-    return NextResponse.redirect(new URL('/?error=server', req.url));
-  }
+function redirectHome(requestUrl: string, error: string) {
+  const destination = new URL("/", requestUrl);
+  destination.searchParams.set("error", error);
+  return NextResponse.redirect(destination);
 }

@@ -1,44 +1,39 @@
-import type { Metadata, Viewport } from 'next';
-import './globals.css';
+import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
+import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://superfine.vercel.app'),
-  title: 'SUPERFINE — The Guest List',
+  title: "THE GUEST LIST — SUPERFINE",
   description:
-    'The only invitation list more exclusive than the one Anna keeps — this one already includes the dead. Met Gala 2026 · Tailoring Black Style.',
-  keywords: [
-    'met gala 2026',
-    'tailoring black style',
-    'superfine',
-    'black dandyism',
-    'monica miller',
-  ],
+    "A one-dollar counter-institution for the Black dandyism lineage.",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+  ),
   openGraph: {
-    type: 'website',
-    title: 'SUPERFINE — The Guest List',
+    title: "THE GUEST LIST — SUPERFINE",
     description:
-      'Met Gala 2026 · The only invite list that already includes the dead.',
-    siteName: 'SUPERFINE',
+      "The only invitation list more exclusive than the one Anna keeps — this one already includes the dead.",
+    type: "website"
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'SUPERFINE — The Guest List',
+    card: "summary_large_image",
+    title: "THE GUEST LIST — SUPERFINE",
     description:
-      'Met Gala 2026 · The only invite list that already includes the dead.',
-  },
+      "The only invitation list more exclusive than the one Anna keeps — this one already includes the dead."
+  }
 };
 
 export const viewport: Viewport = {
-  themeColor: '#F5EDD8',
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
+  themeColor: "#F5EDD8"
 };
 
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+  children
+}: Readonly<{
+  children: ReactNode;
+}>) {
   return (
     <html lang="en">
       <body>{children}</body>

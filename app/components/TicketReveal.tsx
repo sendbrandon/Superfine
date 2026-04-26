@@ -1,113 +1,109 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import type { Tier } from '@/lib/curated-names';
+import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
+import type { Tier } from "@/lib/list";
 
-interface Props {
+type TicketRevealProps = {
+  open: boolean;
+  onClose: () => void;
   name: string;
   tier: Tier;
-  onClose: () => void;
-}
+};
 
-const SITE_URL =
-  typeof window !== 'undefined' ? window.location.origin : 'https://superfine.vercel.app';
-
-export function TicketReveal({ name, tier, onClose }: Props) {
+export default function TicketReveal({
+  open,
+  onClose,
+  name,
+  tier
+}: TicketRevealProps) {
   const [copied, setCopied] = useState(false);
+  const [shareUrl, setShareUrl] = useState("");
+  const ticketUrl = useMemo(() => {
+    const params = new URLSearchParams({ name, tier });
+    return `/api/ticket?${params.toString()}`;
+  }, [name, tier]);
 
-  const ticketSrc = `/api/ticket?name=${encodeURIComponent(name)}&tier=${tier}`;
-  const shareText = `My name is on the SUPERFINE Guest List. The only invitation list more exclusive than the Met Gala — this one already includes the dead.`;
-  const shareUrl = SITE_URL;
+  useEffect(() => {
+    setShareUrl(window.location.href);
+  }, []);
 
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`;
+  if (!open || !name) {
+    return null;
+  }
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(`${shareText}\n${shareUrl}`);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      /* clipboard unavailable */
+  async function saveTicket() {
+    const response = await fetch(ticketUrl);
+    const blob = await response.blob();
+    const objectUrl = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = objectUrl;
+    anchor.download = `${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-guest-list.png`;
+    document.body.append(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(objectUrl);
+  }
+
+  async function copyLink() {
+    await navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1400);
+  }
+
+  async function shareNative() {
+    if (!navigator.share) {
+      await copyLink();
+      return;
     }
-  };
 
-  const handleNativeShare = async () => {
-    if ('share' in navigator) {
-      try {
-        await navigator.share({
-          title: 'SUPERFINE — The Guest List',
-          text: shareText,
-          url: shareUrl,
-        });
-      } catch {
-        /* user cancelled */
-      }
-    } else {
-      handleCopy();
-    }
-  };
+    await navigator.share({
+      title: "THE GUEST LIST",
+      text: `${name} entered THE GUEST LIST.`,
+      url: shareUrl || window.location.href
+    });
+  }
 
-  const handleDownload = async () => {
-    try {
-      const res = await fetch(ticketSrc);
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `superfine-${name.replace(/\s+/g, '-').toLowerCase()}.png`;
-      a.click();
-      URL.revokeObjectURL(url);
-    } catch {
-      window.open(ticketSrc, '_blank');
-    }
-  };
+  const shareText = encodeURIComponent(`${name} entered THE GUEST LIST.`);
+  const encodedShareUrl = encodeURIComponent(shareUrl);
 
   return (
-    <div className="ticket-overlay" role="dialog" aria-modal="true">
-      <div className="ticket-backdrop" onClick={onClose} />
-      <div className="ticket-card">
-        <button className="ticket-close" onClick={onClose} aria-label="close">×</button>
-        <div className="ticket-eyebrow">your seat is confirmed.</div>
-        <h2 className="ticket-title">Show them.</h2>
-        <p className="ticket-lede">
-          Save the card. Post it. Send it. The list grows by who shares.
-        </p>
-
-        <div className="ticket-image-wrap">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={ticketSrc}
-            alt={`SUPERFINE ticket for ${name}`}
-            className="ticket-image"
-          />
-        </div>
-
+    <div className="modal-plane" role="dialog" aria-modal="true">
+      <div className="ticket-shell">
+        <button className="modal-close" type="button" onClick={onClose}>
+          CLOSE
+        </button>
+        <Image
+          src={ticketUrl}
+          alt={`${name} ticket for THE GUEST LIST`}
+          width={1080}
+          height={1920}
+          unoptimized
+          priority
+        />
         <div className="ticket-actions">
-          <button className="ticket-btn primary" onClick={handleDownload}>
-            Save image
+          <button type="button" onClick={saveTicket}>
+            SAVE
           </button>
           <a
-            className="ticket-btn"
-            href={twitterUrl}
+            href={`https://twitter.com/intent/tweet?text=${shareText}&url=${encodedShareUrl}`}
+            rel="noreferrer"
             target="_blank"
-            rel="noopener noreferrer"
           >
-            Twitter
+            TWITTER
           </a>
           <a
-            className="ticket-btn"
-            href={facebookUrl}
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodedShareUrl}`}
+            rel="noreferrer"
             target="_blank"
-            rel="noopener noreferrer"
           >
-            Facebook
+            FACEBOOK
           </a>
-          <button className="ticket-btn" onClick={handleNativeShare}>
-            More
+          <button type="button" onClick={shareNative}>
+            SHARE
           </button>
-          <button className="ticket-btn" onClick={handleCopy}>
-            {copied ? 'Copied.' : 'Copy'}
+          <button type="button" onClick={copyLink}>
+            {copied ? "COPIED" : "COPY"}
           </button>
         </div>
       </div>

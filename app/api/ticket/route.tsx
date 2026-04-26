@@ -1,220 +1,115 @@
-import { ImageResponse } from 'next/og';
-import { NextRequest } from 'next/server';
-import { getNeighbors } from '@/lib/list';
+import { ImageResponse } from "@vercel/og";
+import { getNeighbors, isTier, type Tier } from "@/lib/list";
+import { normalizeSubmittedName } from "@/lib/moderate";
 
-export const runtime = 'edge';
+export const runtime = "edge";
+export const dynamic = "force-dynamic";
 
-const PAPER = '#F5EDD8';
-const INK = '#000000';
-const OXBLOOD = '#8B1A2F';
+const tinosBold = fetch(new URL("./fonts/Tinos-Bold.ttf", import.meta.url)).then(
+  (response) => response.arrayBuffer()
+);
+const tinosItalic = fetch(
+  new URL("./fonts/Tinos-Italic.ttf", import.meta.url)
+).then((response) => response.arrayBuffer());
 
-/**
- * Personalized share-card image for someone who's been added to the list.
- * 1080×1920 (Instagram Story). PNG.
- *
- * URL: /api/ticket?name=Frederick%20Douglass[&tier=seat|ribbon|patron]
- *
- * The card includes the user's name, their position in line, and the
- * names directly above and below them — the lineage they're now part of.
- * That positional context is the moment.
- *
- * Note: Satori (the @vercel/og engine) requires display:flex on every
- * div that has more than one child. We set it everywhere defensively.
- */
-export async function GET(req: NextRequest) {
-  const url = new URL(req.url);
-  const name = url.searchParams.get('name')?.trim();
-  const tier = (url.searchParams.get('tier') ?? 'seat') as 'seat' | 'ribbon' | 'patron';
+const TIER_LABEL: Record<Tier, string> = {
+  seat: "TAKE A SEAT",
+  ribbon: "THE RIBBON",
+  patron: "PATRON"
+};
 
-  if (!name) {
-    return new Response('missing name', { status: 400 });
-  }
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const name = normalizeSubmittedName(url.searchParams.get("name") || "");
+  const tierValue = url.searchParams.get("tier") || "seat";
+  const tier: Tier = isTier(tierValue) ? tierValue : "seat";
+  const neighbors = await getNeighbors(name);
 
-  const { before, after, position } = await getNeighbors(name);
-
-  const tinosBold = await fetch(
-    new URL('./fonts/Tinos-Bold.ttf', import.meta.url)
-  ).then((r) => r.arrayBuffer());
-
-  const tinosItalic = await fetch(
-    new URL('./fonts/Tinos-Italic.ttf', import.meta.url)
-  ).then((r) => r.arrayBuffer());
-
-  const tierLabel =
-    tier === 'patron' ? 'PATRON' : tier === 'ribbon' ? 'RIBBON' : 'GUEST';
-  const positionStr = position > 0 ? position.toLocaleString() : '—';
-  const tierLine = `${tierLabel} · #${positionStr}`;
-  const beforeName = before ?? '';
-  const afterName = after ?? '';
+  const displayName = neighbors.current?.name || name || "UNNAMED";
+  const previous = neighbors.previous?.name || "FREDERICK DOUGLASS";
+  const next = neighbors.next?.name || "LEWIS HAMILTON";
 
   return new ImageResponse(
     (
       <div
         style={{
-          background: PAPER,
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '120px 80px',
-          fontFamily: 'Tinos',
+          width: "100%",
+          height: "100%",
+          background: "#F5EDD8",
+          color: "#000000",
+          display: "flex",
+          flexDirection: "column",
+          padding: "88px",
+          fontFamily: "Tinos",
+          border: "20px solid #8B1A2F"
         }}
       >
-        {/* TOP — wordmark + tagline + tier line */}
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '100%',
+            display: "flex",
+            justifyContent: "space-between",
+            fontSize: 34,
+            fontWeight: 700,
+            letterSpacing: 8
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              fontSize: 90,
-              fontWeight: 700,
-              letterSpacing: '-2px',
-              color: INK,
-              textTransform: 'uppercase',
-              lineHeight: 1,
-            }}
-          >
-            SUPERFINE
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              fontSize: 28,
-              fontStyle: 'italic',
-              color: INK,
-              opacity: 0.7,
-              marginTop: 16,
-            }}
-          >
-            — the guest list.
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              fontSize: 22,
-              fontStyle: 'italic',
-              color: OXBLOOD,
-              marginTop: 32,
-              letterSpacing: '4px',
-              textTransform: 'uppercase',
-              fontWeight: 700,
-            }}
-          >
-            {tierLine}
-          </div>
+          <span>SUPERFINE</span>
+          <span>DROP 002</span>
         </div>
-
-        {/* MIDDLE — lineage stack */}
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '100%',
-            paddingTop: 60,
-            paddingBottom: 60,
+            marginTop: 170,
+            fontSize: 62,
+            fontStyle: "italic"
           }}
         >
-          <div
-            style={{
-              display: 'flex',
-              fontSize: 38,
-              fontStyle: 'italic',
-              color: INK,
-              opacity: 0.45,
-              marginBottom: 24,
-              minHeight: 50,
-            }}
-          >
-            {beforeName}
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              padding: '32px 16px',
-              borderTop: `2px solid ${OXBLOOD}`,
-              borderBottom: `2px solid ${OXBLOOD}`,
-              maxWidth: '92%',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                fontSize: name.length > 24 ? 76 : 96,
-                fontStyle: 'italic',
-                fontWeight: 700,
-                color: INK,
-                lineHeight: 1.05,
-                letterSpacing: '-1px',
-                textAlign: 'center',
-              }}
-            >
-              {name}
-            </div>
-          </div>
-
-          <div
-            style={{
-              display: 'flex',
-              fontSize: 38,
-              fontStyle: 'italic',
-              color: INK,
-              opacity: 0.45,
-              marginTop: 24,
-              minHeight: 50,
-            }}
-          >
-            {afterName}
-          </div>
+          THE GUEST LIST
         </div>
-
-        {/* BOTTOM — event meta */}
         <div
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '100%',
+            marginTop: 26,
+            height: 2,
+            background: "#000000",
+            width: "100%"
+          }}
+        />
+        <div
+          style={{
+            marginTop: 135,
+            display: "flex",
+            flexDirection: "column",
+            gap: 38
           }}
         >
-          <div
+          <span style={{ fontSize: 46, fontStyle: "italic" }}>{previous}</span>
+          <span
             style={{
-              display: 'flex',
-              fontSize: 24,
+              color: "#8B1A2F",
+              fontSize: 112,
+              lineHeight: 0.95,
               fontWeight: 700,
-              color: INK,
-              letterSpacing: '6px',
-              textTransform: 'uppercase',
+              textTransform: "uppercase"
             }}
           >
-            MET GALA · 4 MAY 2026
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              fontSize: 22,
-              fontStyle: 'italic',
-              color: INK,
-              opacity: 0.65,
-              marginTop: 14,
-              textAlign: 'center',
-              maxWidth: '85%',
-            }}
-          >
-            the only invitation list that already includes the dead.
-          </div>
+            {displayName}
+          </span>
+          <span style={{ fontSize: 46, fontStyle: "italic" }}>{next}</span>
+        </div>
+        <div style={{ flex: 1 }} />
+        <div
+          style={{
+            borderTop: "2px solid #000000",
+            paddingTop: 38,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            fontWeight: 700,
+            letterSpacing: 7,
+            fontSize: 32
+          }}
+        >
+          <span>{TIER_LABEL[tier]}</span>
+          <span>MET GALA 2026</span>
         </div>
       </div>
     ),
@@ -223,21 +118,18 @@ export async function GET(req: NextRequest) {
       height: 1920,
       fonts: [
         {
-          name: 'Tinos',
-          data: tinosBold,
-          style: 'normal',
+          name: "Tinos",
+          data: await tinosBold,
           weight: 700,
+          style: "normal"
         },
         {
-          name: 'Tinos',
-          data: tinosItalic,
-          style: 'italic',
+          name: "Tinos",
+          data: await tinosItalic,
           weight: 400,
-        },
-      ],
-      headers: {
-        'Cache-Control': 'public, max-age=300, s-maxage=300',
-      },
+          style: "italic"
+        }
+      ]
     }
   );
 }

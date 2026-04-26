@@ -1,203 +1,246 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useState } from 'react';
-import type { ListEntry, Tier } from '@/lib/curated-names';
-import { addName, type AddNameResult } from '../actions/add-name';
-import { LiveCounter } from './LiveCounter';
-import { TicketReveal } from './TicketReveal';
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { addNameAction } from "../actions/add-name";
+import LiveCounter from "./LiveCounter";
+import TicketReveal from "./TicketReveal";
+import type { GuestEntry, PaidEntry, Tier } from "@/lib/list";
 
-interface Props {
-  patrons: ListEntry[];
-  alphabetical: ListEntry[];
-  totalCount: number;
-  highlight?: string;
-  highlightTier?: Tier;
-}
+type GuestListProps = {
+  entries: GuestEntry[];
+  patrons: PaidEntry[];
+  initialPaid: number;
+  initialTotal: number;
+  addedName: string;
+  addedTier: Tier;
+  mockMode: boolean;
+  error: string;
+};
 
-const TIERS: { id: Tier; price: number; label: string; sub: string }[] = [
-  { id: 'seat', price: 1, label: 'Take a seat', sub: 'your name in the scroll' },
-  { id: 'ribbon', price: 25, label: 'The Ribbon', sub: 'your name with an oxblood ribbon' },
-  { id: 'patron', price: 100, label: 'Patron', sub: 'your name at the top, with a dedication' },
+const TIERS: Array<{
+  id: Tier;
+  label: string;
+  price: string;
+  detail: string;
+}> = [
+  {
+    id: "seat",
+    label: "TAKE A SEAT",
+    price: "$1",
+    detail: "NAME IN THE SCROLL"
+  },
+  {
+    id: "ribbon",
+    label: "THE RIBBON",
+    price: "$25",
+    detail: "OXBLOOD GLYPH"
+  },
+  {
+    id: "patron",
+    label: "PATRON",
+    price: "$100",
+    detail: "PATRONS BLOCK"
+  }
 ];
 
-export function GuestList({
+export default function GuestList({
+  entries,
   patrons,
-  alphabetical,
-  totalCount,
-  highlight,
-  highlightTier,
-}: Props) {
-  const [name, setName] = useState('');
-  const [tier, setTier] = useState<Tier>('seat');
-  const [dedication, setDedication] = useState('');
-  const [pending, setPending] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [showTicket, setShowTicket] = useState(false);
-  const highlightRef = useRef<HTMLLIElement>(null);
+  initialPaid,
+  initialTotal,
+  addedName,
+  addedTier,
+  mockMode,
+  error
+}: GuestListProps) {
+  const [tier, setTier] = useState<Tier>(addedTier || "seat");
+  const [message, setMessage] = useState(error ? errorForCode(error) : "");
+  const [isPending, startTransition] = useTransition();
+  const [ticketOpen, setTicketOpen] = useState(Boolean(addedName));
+  const formRef = useRef<HTMLFormElement>(null);
 
-  // Open ticket modal automatically on first paint after a successful add
+  const highlightedKey = useMemo(
+    () => addedName.trim().toLocaleLowerCase("en-US"),
+    [addedName]
+  );
+
   useEffect(() => {
-    if (highlight) {
-      setShowTicket(true);
-      const t = setTimeout(() => {
-        highlightRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-      }, 400);
-      return () => clearTimeout(t);
-    }
-  }, [highlight]);
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (pending) return;
-    setError(null);
-    setPending(true);
-
-    const fd = new FormData();
-    fd.set('name', name);
-    fd.set('tier', tier);
-    if (tier === 'patron' && dedication) fd.set('dedication', dedication);
-
-    const result: AddNameResult = await addName(fd);
-
-    if (!result.ok || !result.url) {
-      setError(result.message ?? 'Something went wrong.');
-      setPending(false);
+    if (!highlightedKey) {
       return;
     }
-    window.location.href = result.url;
-  };
+
+    const target = document.querySelector<HTMLElement>(
+      `[data-name-key="${window.CSS.escape(highlightedKey)}"]`
+    );
+    target?.scrollIntoView({ block: "center" });
+  }, [highlightedKey]);
+
+  function submit(formData: FormData) {
+    setMessage("");
+    startTransition(async () => {
+      const result = await addNameAction(formData);
+      if (result.error) {
+        setMessage(result.error);
+        return;
+      }
+
+      if (result.redirectTo) {
+        window.location.href = result.redirectTo;
+      }
+    });
+  }
 
   return (
-    <main className="superfine">
-      <header className="head">
-        <h1 className="wordmark">SUPERFINE</h1>
-        <p className="kicker">— the guest list.</p>
-        <p className="lede">
-          Met Gala · 4 May 2026 · <em>Tailoring Black Style.</em><br />
-          The only invitation list more exclusive than the one Anna keeps —{' '}
-          <em>this one already includes the dead.</em>
-        </p>
-        <LiveCounter initialCount={totalCount} />
+    <main className="page-shell">
+      <header className="artifact-header" aria-labelledby="page-title">
+        <div className="technical-row">
+          <span>SUPERFINE</span>
+          <span>DROP 002</span>
+          <span>MET GALA 2026</span>
+        </div>
+
+        <h1 id="page-title" className="wordmark">
+          THE GUEST LIST
+        </h1>
+
+        <div className="lede-row">
+          <p>
+            The only invitation list more exclusive than the one Anna keeps —
+            this one already includes the dead.
+          </p>
+          <LiveCounter initialPaid={initialPaid} initialTotal={initialTotal} />
+        </div>
       </header>
 
-      <section className="add">
-        <form onSubmit={handleSubmit} className="add-form">
-          <label className="add-label">Add yourself</label>
+      <section className="entry-panel" aria-label="Add yourself">
+        <form
+          ref={formRef}
+          action={submit}
+          className="entry-form"
+          aria-describedby={message ? "form-message" : undefined}
+        >
+          <input type="hidden" name="tier" value={tier} />
 
-          <div className="tier-tiles">
-            {TIERS.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                className={`tier-tile${tier === t.id ? ' active' : ''}${t.id === 'patron' ? ' patron-tier' : ''}${t.id === 'ribbon' ? ' ribbon-tier' : ''}`}
-                onClick={() => setTier(t.id)}
-              >
-                <span className="tier-price">${t.price}</span>
-                <span className="tier-name">{t.label}</span>
-                <span className="tier-sub">— {t.sub}</span>
-              </button>
-            ))}
-          </div>
-
-          <input
-            type="text"
-            className="add-input"
-            placeholder="your name, exactly as you want it carved"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            maxLength={80}
-            required
-            disabled={pending}
-            autoComplete="name"
-          />
-
-          {tier === 'patron' && (
-            <textarea
-              className="add-dedication"
-              placeholder="optional dedication — e.g., in memoriam, Eleanor Harris, 1922\u20132018"
-              value={dedication}
-              onChange={(e) => setDedication(e.target.value)}
-              maxLength={240}
-              rows={2}
-              disabled={pending}
+          <label className="field-label" htmlFor="name">
+            ADD YOURSELF, $1
+          </label>
+          <div className="name-line">
+            <input
+              id="name"
+              name="name"
+              type="text"
+              autoComplete="name"
+              placeholder="YOUR NAME"
+              required
+              minLength={2}
+              maxLength={80}
             />
-          )}
-
-          <button type="submit" className="add-submit" disabled={pending}>
-            {pending ? 'sending…' : `pay $${TIERS.find((t) => t.id === tier)!.price} \u00b7 add me`}
-          </button>
-
-          {error && <div className="add-error">{error}</div>}
-
-          <div className="add-fineprint">
-            One-time payment, charged once. Your name appears in the list,
-            permanently. Secured by Stripe. No refunds.
+            <button type="submit" disabled={isPending}>
+              {isPending ? "OPENING" : "ENTER"}
+            </button>
           </div>
+
+          {tier === "patron" ? (
+            <input
+              className="dedication-input"
+              name="dedication"
+              type="text"
+              placeholder="DEDICATION LINE"
+              maxLength={120}
+            />
+          ) : null}
+
+          {message ? (
+            <p id="form-message" className="form-message">
+              {message}
+            </p>
+          ) : null}
+          {mockMode ? (
+            <p className="fineprint">
+              LOCAL MOCK PATH — PERSISTENCE VANISHES WHEN THE SERVER DOES.
+            </p>
+          ) : null}
         </form>
+
+        <div className="tier-grid" aria-label="Tiers">
+          {TIERS.map((item) => (
+            <button
+              key={item.id}
+              className={tier === item.id ? "tier-tile selected" : "tier-tile"}
+              type="button"
+              onClick={() => setTier(item.id)}
+              aria-pressed={tier === item.id}
+            >
+              <span>{item.label}</span>
+              <span>{item.price}</span>
+              <span>{item.detail}</span>
+            </button>
+          ))}
+        </div>
       </section>
 
-      {patrons.length > 0 && (
-        <section className="patrons">
-          <h2 className="patrons-title">Patrons</h2>
-          <ol className="patrons-list">
-            {patrons.map((p) => (
-              <li key={`${p.name}-${p.addedAt}`} className="patron-item">
-                <div className="patron-name">{p.name}</div>
-                {p.dedication && (
-                  <div className="patron-dedication">{p.dedication}</div>
-                )}
+      {patrons.length ? (
+        <section className="patrons" aria-labelledby="patrons-title">
+          <h2 id="patrons-title">PATRONS</h2>
+          <ol>
+            {patrons.map((patron) => (
+              <li key={patron.id}>
+                <span>{patron.name}</span>
+                {patron.dedication ? <em>{patron.dedication}</em> : null}
               </li>
             ))}
           </ol>
         </section>
-      )}
+      ) : null}
 
-      <ol className="list">
-        {alphabetical.map((entry) => {
-          const isHighlight =
-            highlight && entry.name.toLowerCase() === highlight.toLowerCase();
-          const cls = [
-            'item',
-            entry.paid ? 'paid' : '',
-            entry.tier === 'ribbon' ? 'ribbon' : '',
-            isHighlight ? 'highlight' : '',
-          ]
-            .filter(Boolean)
-            .join(' ');
+      <ol className="guest-list" aria-label="Alphabetical guest list">
+        {entries.map((entry) => {
+          const key = entry.name.toLocaleLowerCase("en-US");
+          const isHighlighted = highlightedKey && key === highlightedKey;
           return (
             <li
-              key={`${entry.name}-${entry.addedAt}`}
-              ref={isHighlight ? highlightRef : null}
-              className={cls}
+              key={entry.id}
+              className={isHighlighted ? "guest-row highlight" : "guest-row"}
+              data-name-key={key}
             >
-              {entry.tier === 'ribbon' && <span className="ribbon-glyph">▎</span>}
-              {entry.name}
+              <span className="guest-name">{entry.name}</span>
+              {entry.tier === "ribbon" ? (
+                <span className="ribbon-mark" aria-label="Ribbon">
+                  ▎
+                </span>
+              ) : null}
+              {entry.tier === "patron" ? (
+                <span className="patron-mark">PATRON</span>
+              ) : null}
             </li>
           );
         })}
       </ol>
 
-      <footer className="foot">
-        <p>SUPERFINE · The Guest List · Met Gala 2026.</p>
-        <p className="micro">
-          A drop by{' '}
-          <a href="https://github.com/sendbrandon" target="_blank" rel="noopener noreferrer">
-            VNMSFX
-          </a>
-          .
-        </p>
+      <footer className="site-footer">
+        <span>BLACK DANDYISM AND THE STYLING OF BLACK DIASPORIC IDENTITY.</span>
+        <span>ONE DOLLAR AT THE DOOR.</span>
       </footer>
 
-      {showTicket && highlight && (
-        <TicketReveal
-          name={highlight}
-          tier={highlightTier ?? 'seat'}
-          onClose={() => setShowTicket(false)}
-        />
-      )}
+      <TicketReveal
+        open={ticketOpen}
+        onClose={() => setTicketOpen(false)}
+        name={addedName}
+        tier={addedTier}
+      />
     </main>
   );
+}
+
+function errorForCode(code: string) {
+  if (code === "cancelled") {
+    return "CHECKOUT CLOSED.";
+  }
+  if (code === "rejected") {
+    return "NAME REJECTED.";
+  }
+  if (code === "unpaid") {
+    return "PAYMENT NOT CONFIRMED.";
+  }
+  return "THE DOOR DID NOT OPEN.";
 }

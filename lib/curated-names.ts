@@ -1,252 +1,172 @@
-/**
- * SUPERFINE · The Guest List — curated seed names
- *
- * 150+ historical and contemporary Black dandies whose tailoring,
- * style, and self-presentation made the case Monica L. Miller
- * argues in *Slaves to Fashion*: Black dandyism as resistance and
- * self-creation across the diaspora.
- *
- * Stored alphabetical (sorted at module load). User-paid additions
- * from Vercel KV are merged at render time and re-sorted, so the
- * final list always reads as one continuous alphabet.
- *
- * Editorial note: this list is the *floor*, not the ceiling.
- * Add, swap, prune as the curation deepens. Each name carries
- * its own dandyism story.
- */
+export type CuratedName = {
+  name: string;
+};
 
-const RAW_NAMES = [
-  // 19th-century intellectuals + activists
-  'Frederick Douglass',
-  'Booker T. Washington',
-  'W. E. B. Du Bois',
-  'A. Philip Randolph',
-  'Marcus Garvey',
-  'Madame C. J. Walker',
+const LEADING_ARTICLE = /^(a|an|the)\s+/i;
 
-  // Harlem Renaissance & early-20th-century
-  'Langston Hughes',
-  'Countee Cullen',
-  'Zora Neale Hurston',
-  'Claude McKay',
-  'Jean Toomer',
-  'Wallace Thurman',
-  'Bruce Nugent',
-  'Alain Locke',
-  'Adam Clayton Powell Jr.',
+export function toSortKey(name: string) {
+  return name
+    .normalize("NFKD")
+    .replace(LEADING_ARTICLE, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
 
-  // Jazz era — the original suiting class
-  'Duke Ellington',
-  'Cab Calloway',
-  'Count Basie',
-  'Louis Armstrong',
-  'Lester Young',
-  'Dizzy Gillespie',
-  'Charlie Parker',
-  'Billy Eckstine',
-  'Nat King Cole',
-  'Sammy Davis Jr.',
-  'Ella Fitzgerald',
-  'Sarah Vaughan',
-  'Lena Horne',
-  'Josephine Baker',
-  'Bessie Smith',
-  'Billie Holiday',
-
-  // Mid-century stage + screen
-  'Sidney Poitier',
-  'Harry Belafonte',
-  'Ossie Davis',
-  'Ruby Dee',
-  'Dorothy Dandridge',
-  'Eartha Kitt',
-  'James Baldwin',
-  'Lorraine Hansberry',
-  'Maya Angelou',
-  'Toni Morrison',
-  'Ralph Ellison',
-  'Gwendolyn Brooks',
-
-  // Civil rights movement
-  'Martin Luther King Jr.',
-  'Coretta Scott King',
-  'Malcolm X',
-  'Stokely Carmichael',
-  'Huey P. Newton',
-  'Bobby Seale',
-  'Angela Davis',
-  'Fannie Lou Hamer',
-  'Bayard Rustin',
-  'Jesse Jackson',
-  'Shirley Chisholm',
-  'Ella Baker',
-
-  // Soul + R&B style
-  'Sam Cooke',
-  'Otis Redding',
-  'Marvin Gaye',
-  'Curtis Mayfield',
-  'Bill Withers',
-  'Donny Hathaway',
-  'Roberta Flack',
-  'Aretha Franklin',
-  'Diana Ross',
-  'Stevie Wonder',
-  'Smokey Robinson',
-  'Teddy Pendergrass',
-  'Lou Rawls',
-  'Al Green',
-  'Isaac Hayes',
-  'Barry White',
-
-  // Funk + dandy excess
-  'James Brown',
-  'Sly Stone',
-  'George Clinton',
-  'Bootsy Collins',
-  'Rick James',
-  'Prince',
-  'Lenny Kravitz',
-  'D\u2019Angelo',
-  'Maxwell',
-  'Erykah Badu',
-  'Lauryn Hill',
-  'Solange Knowles',
-  'Janelle Mon\u00e1e',
-  'Beyonc\u00e9 Knowles-Carter',
-
-  // Hip-hop + streetwear architects
-  'Russell Simmons',
-  'Sean "Diddy" Combs',
-  'Kanye West',
-  'Jay-Z',
-  'Pharrell Williams',
-  'A$AP Rocky',
-  'A$AP Yams',
-  'Tyler, the Creator',
-  'Andr\u00e9 3000',
-  'Erick Sermon',
-  'Slick Rick',
-  'Dapper Dan',
-  'Virgil Abloh',
-  'Kerby Jean-Raymond',
-  'Telfar Clemens',
-  'Aurora James',
-  'Olivier Rousteing',
-  'Romeo Hunte',
-  'Lazaro Hernandez',
-  'Edward Enninful',
-  'Andr\u00e9 Leon Talley',
-
-  // Athletes-as-dandies
-  'Lewis Hamilton',
-  'LeBron James',
-  'Russell Westbrook',
-  'James Harden',
-  'Cam Newton',
-  'Dwyane Wade',
-  'Allen Iverson',
-  'Serena Williams',
-  'Naomi Osaka',
-  'Jackie Robinson',
-  'Muhammad Ali',
-  'Arthur Ashe',
-  'Florence Griffith Joyner',
-
-  // Contemporary actors
-  'Denzel Washington',
-  'Will Smith',
-  'Idris Elba',
-  'Mahershala Ali',
-  'Lakeith Stanfield',
-  'Daniel Kaluuya',
-  'Colman Domingo',
-  'Donald Glover',
-  'Jamie Foxx',
-  'Chadwick Boseman',
-  'Michael B. Jordan',
-  'Sterling K. Brown',
-  'Andre Holland',
-  'Trevante Rhodes',
-  'Lupita Nyong\u2019o',
-  'Viola Davis',
-  'Regina King',
-  'Cicely Tyson',
-  'Tracee Ellis Ross',
-
-  // Visual artists + photographers
-  'Romare Bearden',
-  'Jacob Lawrence',
-  'Gordon Parks',
-  'Roy DeCarava',
-  'Carrie Mae Weems',
-  'Kara Walker',
-  'Kehinde Wiley',
-  'Mickalene Thomas',
-  'Lorna Simpson',
-  'Theaster Gates',
-  'Mark Bradford',
-  'Henry Taylor',
-
-  // West African diasporic style
-  'Malick Sidib\u00e9',
-  'Seydou Ke\u00efta',
-  'Mama Casset',
-  'Solange Azagury-Partridge',
-  'Duro Olowu',
-  'Iman Abdulmajid',
-  'Naomi Campbell',
-  'Alek Wek',
-
-  // Designers / Vogue era
-  'Ann Lowe',
-  'Patrick Kelly',
-  'Stephen Burrows',
-  'Tracy Reese',
-  'Carly Cushnie',
-  'Brandon Maxwell',
-  'Christopher John Rogers',
-  'Recho Omondi',
-
-  // Producers + DJs (Sunday-OS adjacent — the catalog rhyme)
-  'Frankie Knuckles',
-  'Larry Levan',
-  'Larry Heard',
-  'Theo Parrish',
-  'Moodymann',
-  'Honey Dijon',
-  'Kerri Chandler',
-  'Marshall Jefferson',
-  'Ron Hardy',
-  'Lil Louis',
+const CURATED_NAMES_RAW: CuratedName[] = [
+  { name: "Aaron Douglas" },
+  { name: "A$AP Rocky" },
+  { name: "Abbey Lincoln" },
+  { name: "Abdias do Nascimento" },
+  { name: "Aimé Césaire" },
+  { name: "Alain LeRoy Locke" },
+  { name: "Alberta Hunter" },
+  { name: "Alexander Crummell" },
+  { name: "Alton Mason" },
+  { name: "André 3000" },
+  { name: "André Leon Talley" },
+  { name: "Archibald Motley" },
+  { name: "Arthur Ashe" },
+  { name: "Baloji" },
+  { name: "Bayard Rustin" },
+  { name: "Bessie Smith" },
+  { name: "Bill Bojangles Robinson" },
+  { name: "Billie Holiday" },
+  { name: "Billy Eckstine" },
+  { name: "Black Herman" },
+  { name: "Cab Calloway" },
+  { name: "Cam Newton" },
+  { name: "Celia Cruz" },
+  { name: "Charles White" },
+  { name: "Claude McKay" },
+  { name: "Coleman Hawkins" },
+  { name: "Colman Domingo" },
+  { name: "Countee Cullen" },
+  { name: "Dapper Dan" },
+  { name: "David Adjaye" },
+  { name: "Diana Ross" },
+  { name: "Dizzy Gillespie" },
+  { name: "Don Cornelius" },
+  { name: "Donald Byrd" },
+  { name: "Duke Ellington" },
+  { name: "Edward Enninful" },
+  { name: "Elizabeth Keckley" },
+  { name: "Essex Hemphill" },
+  { name: "Ethel Waters" },
+  { name: "Fela Kuti" },
+  { name: "Floyd Patterson" },
+  { name: "Frederick Douglass" },
+  { name: "George Bridgetower" },
+  { name: "Grace Jones" },
+  { name: "Gregory Hines" },
+  { name: "Harold Jackman" },
+  { name: "Harry Belafonte" },
+  { name: "Hazel Scott" },
+  { name: "Iman" },
+  { name: "Ira Aldridge" },
+  { name: "Isaac Hayes" },
+  { name: "James Baldwin" },
+  { name: "James Brown" },
+  { name: "James Van Der Zee" },
+  { name: "Janelle Monáe" },
+  { name: "Jay-Z" },
+  { name: "Jean-Michel Basquiat" },
+  { name: "Jidenna" },
+  { name: "Josephine Baker" },
+  { name: "Julius Soubise" },
+  { name: "Kelela" },
+  { name: "Kofi Siriboe" },
+  { name: "Kwame Brathwaite" },
+  { name: "Langston Hughes" },
+  { name: "Lena Horne" },
+  { name: "Lewis Hamilton" },
+  { name: "Little Richard" },
+  { name: "Lloyd Richards" },
+  { name: "Louis Armstrong" },
+  { name: "Madam C. J. Walker" },
+  { name: "Malcolm X" },
+  { name: "Marian Anderson" },
+  { name: "Marsha P. Johnson" },
+  { name: "Marvin Gaye" },
+  { name: "Mary Church Terrell" },
+  { name: "Miles Davis" },
+  { name: "Moses Sumney" },
+  { name: "Muhammad Ali" },
+  { name: "Nina Mae McKinney" },
+  { name: "Nina Simone" },
+  { name: "Noble Sissle" },
+  { name: "Olaudah Equiano" },
+  { name: "Oscar Micheaux" },
+  { name: "Ozwald Boateng" },
+  { name: "Paul Robeson" },
+  { name: "Pharrell Williams" },
+  { name: "Prince" },
+  { name: "Questlove" },
+  { name: "Quincy Jones" },
+  { name: "Richard Bruce Nugent" },
+  { name: "Richard Roundtree" },
+  { name: "Romare Bearden" },
+  { name: "RuPaul" },
+  { name: "Sammy Davis Jr." },
+  { name: "Sidney Poitier" },
+  { name: "Solange Knowles" },
+  { name: "Stokely Carmichael" },
+  { name: "Sun Ra" },
+  { name: "Teddy Pendergrass" },
+  { name: "The Nicholas Brothers" },
+  { name: "Theaster Gates" },
+  { name: "Thelonious Monk" },
+  { name: "Tommie Smith" },
+  { name: "Toussaint Louverture" },
+  { name: "Tyler, the Creator" },
+  { name: "Usher" },
+  { name: "Virgil Abloh" },
+  { name: "W. E. B. Du Bois" },
+  { name: "Wynton Marsalis" },
+  { name: "Yasiin Bey" },
+  { name: "Yinka Shonibare" },
+  { name: "Zora Neale Hurston" },
+  { name: "Amiri Baraka" },
+  { name: "Bobby Short" },
+  { name: "Charles Mingus" },
+  { name: "Cornel West" },
+  { name: "Donny Hathaway" },
+  { name: "Dorothy Dandridge" },
+  { name: "Earl Grant" },
+  { name: "Eartha Kitt" },
+  { name: "Eddie Kendricks" },
+  { name: "Ernie Barnes" },
+  { name: "Eugene Bullard" },
+  { name: "Gil Scott-Heron" },
+  { name: "Gordon Parks" },
+  { name: "Herbie Hancock" },
+  { name: "Huey P. Newton" },
+  { name: "Jack Johnson" },
+  { name: "Jackie Wilson" },
+  { name: "John Coltrane" },
+  { name: "Johnny Hartman" },
+  { name: "Jules Lion" },
+  { name: "Leontyne Price" },
+  { name: "Lorraine Hansberry" },
+  { name: "Mahershala Ali" },
+  { name: "Masego" },
+  { name: "Maxwell" },
+  { name: "Nat King Cole" },
+  { name: "Nicholas Daley" },
+  { name: "Nipsey Hussle" },
+  { name: "Otis Redding" },
+  { name: "Patrick Kelly" },
+  { name: "Ralph Ellison" },
+  { name: "Ray Charles" },
+  { name: "Sam Cooke" },
+  { name: "Sly Stone" },
+  { name: "Smokey Robinson" },
+  { name: "Stevie Wonder" },
+  { name: "Telfar Clemens" },
+  { name: "Willi Smith" }
 ];
 
-// Sort once at module load. Strip leading articles for sort key.
-function sortKey(name: string): string {
-  return name.replace(/^the\s+/i, '').toLowerCase();
-}
-
-export const CURATED_NAMES = [...RAW_NAMES].sort((a, b) =>
-  sortKey(a).localeCompare(sortKey(b))
+export const CURATED_NAMES = [...CURATED_NAMES_RAW].sort((left, right) =>
+  toSortKey(left.name).localeCompare(toSortKey(right.name), "en", {
+    sensitivity: "base"
+  })
 );
-
-/** Tier of a list entry. */
-export type Tier = 'seat' | 'ribbon' | 'patron';
-
-export interface ListEntry {
-  name: string;
-  /** ms epoch timestamp; 0 for curated entries */
-  addedAt: number;
-  /** true if this entry came from a paid user add */
-  paid: boolean;
-  /** purchase tier; curated entries don't have a tier */
-  tier?: Tier;
-  /** dedication line; only on patron tier */
-  dedication?: string;
-}
-
-export const CURATED_ENTRIES: ListEntry[] = CURATED_NAMES.map((name) => ({
-  name,
-  addedAt: 0,
-  paid: false,
-}));

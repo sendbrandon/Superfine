@@ -1,145 +1,197 @@
-/**
- * SUPERFINE · server-side list operations
- *
- * Reads paid additions from Vercel KV (Upstash Redis backend) and
- * merges with the curated seed. Without KV env vars set, the action
- * gracefully degrades — paid additions exist only in memory for the
- * lifetime of the serverless invocation. Production requires KV.
- */
+import { CURATED_NAMES, toSortKey } from "./curated-names";
 
-import { createClient } from '@vercel/kv';
-import { CURATED_ENTRIES, type ListEntry, type Tier } from './curated-names';
+export type Tier = "seat" | "ribbon" | "patron";
 
-const KV_KEY = 'superfine:guest-list';
+export type PaidEntry = {
+  id: string;
+  name: string;
+  sortName: string;
+  tier: Tier;
+  dedication?: string;
+  createdAt: string;
+  sessionId?: string;
+};
 
-function hasKvCredentials(): boolean {
-  return !!(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
+export type GuestEntry = {
+  id: string;
+  name: string;
+  sortName: string;
+  tier: "curated" | Tier;
+  source: "curated" | "paid";
+  dedication?: string;
+  createdAt?: string;
+};
+
+type Count = {
+  paid: number;
+  total: number;
+};
+
+type VercelKv = typeof import("@vercel/kv").kv;
+
+const KV_KEY = "superfine:guest-list";
+const MEMORY_SYMBOL = Symbol.for("superfine.guest-list.memory");
+
+export function isTier(value: unknown): value is Tier {
+  return value === "seat" || value === "ribbon" || value === "patron";
 }
 
-function kvClient() {
-  if (!hasKvCredentials()) return null;
-  return createClient({
-    url: process.env.KV_REST_API_URL!,
-    token: process.env.KV_REST_API_TOKEN!,
-  });
-}
-
-/** In-memory dev fallback — only persists for one serverless lifetime */
-let memoryAdds: ListEntry[] = [];
-
-export async function getPaidEntries(): Promise<ListEntry[]> {
-  const client = kvClient();
-  if (!client) return memoryAdds;
-
-  try {
-    const raw = await client.lrange<string>(KV_KEY, 0, -1);
-    return raw
-      .map((item) => {
-        try {
-          return JSON.parse(item) as ListEntry;
-        } catch {
-          return null;
-        }
-      })
-      .filter((x): x is ListEntry => x !== null);
-  } catch (err) {
-    console.error('[superfine] kv read error:', err);
-    return memoryAdds;
+export async function getPaidEntries(): Promise<PaidEntry[]> {
+  const kv = await getKv();
+  if (!kv) {
+    return memoryStore();
   }
+
+  const entries = await kv.lrange<PaidEntry>(KV_KEY, 0, -1);
+  return entries.filter(isPaidEntry);
 }
 
-export interface AddEntryArgs {
+export async function addPaidEntry(input: {
   name: string;
   tier: Tier;
   dedication?: string;
-}
+  sessionId?: string;
+}): Promise<PaidEntry> {
+  const paidEntries = await getPaidEntries();
+  const duplicate = input.sessionId
+    ? paidEntries.find((entry) => entry.sessionId === input.sessionId)
+    : undefined;
 
-export async function addPaidEntry({ name, tier, dedication }: AddEntryArgs): Promise<void> {
-  const entry: ListEntry = {
-    name: name.trim().slice(0, 80),
-    addedAt: Date.now(),
-    paid: true,
-    tier,
-    dedication: dedication ? dedication.trim().slice(0, 240) : undefined,
+  if (duplicate) {
+    return duplicate;
+  }
+
+  const entry: PaidEntry = {
+    id: input.sessionId || crypto.randomUUID(),
+    name: input.name,
+    sortName: toSortKey(input.name),
+    tier: input.tier,
+    dedication: input.dedication || undefined,
+    createdAt: new Date().toISOString(),
+    sessionId: input.sessionId
   };
 
-  const client = kvClient();
-  if (!client) {
-    memoryAdds.push(entry);
-    console.log(`[superfine] (no KV env) added: ${entry.name} (${tier})`);
-    return;
+  const kv = await getKv();
+  if (!kv) {
+    memoryStore().push(entry);
+    return entry;
   }
 
-  try {
-    await client.rpush(KV_KEY, JSON.stringify(entry));
-  } catch (err) {
-    console.error('[superfine] kv write error:', err);
-    memoryAdds.push(entry);
+  await kv.rpush(KV_KEY, entry);
+  return entry;
+}
+
+export async function getMergedList(): Promise<GuestEntry[]> {
+  const paidEntries = await getPaidEntries();
+  const curatedEntries: GuestEntry[] = CURATED_NAMES.map((entry) => ({
+    id: `curated:${entry.name}`,
+    name: entry.name,
+    sortName: toSortKey(entry.name),
+    tier: "curated",
+    source: "curated"
+  }));
+
+  return sortEntries([
+    ...curatedEntries,
+    ...paidEntries.map((entry) => ({
+      ...entry,
+      source: "paid" as const
+    }))
+  ]);
+}
+
+export async function getPatrons(): Promise<PaidEntry[]> {
+  const paidEntries = await getPaidEntries();
+  return paidEntries
+    .filter((entry) => entry.tier === "patron")
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt));
+}
+
+export async function getCount(): Promise<Count> {
+  const paidEntries = await getPaidEntries();
+  return {
+    paid: paidEntries.length,
+    total: CURATED_NAMES.length + paidEntries.length
+  };
+}
+
+export async function getNeighbors(name: string): Promise<{
+  previous?: GuestEntry;
+  current?: GuestEntry;
+  next?: GuestEntry;
+}> {
+  const mergedList = await getMergedList();
+  const normalizedName = name.trim().toLocaleLowerCase("en-US");
+  const exactIndex = mergedList.findIndex(
+    (entry) => entry.name.toLocaleLowerCase("en-US") === normalizedName
+  );
+
+  if (exactIndex >= 0) {
+    return {
+      previous: mergedList[exactIndex - 1],
+      current: mergedList[exactIndex],
+      next: mergedList[exactIndex + 1]
+    };
   }
+
+  const inserted: GuestEntry = {
+    id: "pending",
+    name,
+    sortName: toSortKey(name),
+    tier: "seat",
+    source: "paid"
+  };
+  const withInserted = sortEntries([...mergedList, inserted]);
+  const insertedIndex = withInserted.findIndex((entry) => entry.id === "pending");
+
+  return {
+    previous: withInserted[insertedIndex - 1],
+    current: inserted,
+    next: withInserted[insertedIndex + 1]
+  };
 }
 
-function sortKey(name: string): string {
-  return name.replace(/^the\s+/i, '').toLowerCase();
-}
-
-export interface MergedList {
-  patrons: ListEntry[];
-  alphabetical: ListEntry[];
-  totalCount: number;
-}
-
-/** Returns the merged, sorted, deduplicated guest list, split by tier. */
-export async function getMergedList(): Promise<MergedList> {
-  const paid = await getPaidEntries();
-
-  // Patrons appear in their own block at the top. Most-recent first
-  // (so the highest-status, most recent commitment is most visible).
-  const patrons = paid
-    .filter((e) => e.tier === 'patron')
-    .sort((a, b) => b.addedAt - a.addedAt);
-
-  // Everyone else (seats, ribbons, curated) goes alphabetical.
-  const seen = new Set<string>(CURATED_ENTRIES.map((e) => e.name.toLowerCase()));
-  const seenPatrons = new Set<string>(patrons.map((e) => e.name.toLowerCase()));
-
-  const uniquePaid = paid.filter((e) => {
-    if (e.tier === 'patron') return false; // already in patrons block
-    const key = e.name.toLowerCase();
-    if (seen.has(key) || seenPatrons.has(key)) return false;
-    seen.add(key);
-    return true;
+function sortEntries<T extends { sortName: string; name: string }>(entries: T[]) {
+  return [...entries].sort((left, right) => {
+    const sortResult = left.sortName.localeCompare(right.sortName, "en", {
+      sensitivity: "base"
+    });
+    if (sortResult !== 0) {
+      return sortResult;
+    }
+    return left.name.localeCompare(right.name, "en", { sensitivity: "base" });
   });
-
-  const alphabetical = [...CURATED_ENTRIES, ...uniquePaid].sort((a, b) =>
-    sortKey(a.name).localeCompare(sortKey(b.name))
-  );
-
-  return {
-    patrons,
-    alphabetical,
-    totalCount: alphabetical.length + patrons.length,
-  };
 }
 
-/** Returns just the count of paid additions (curated + paid). */
-export async function getCount(): Promise<{ paid: number; total: number }> {
-  const paid = await getPaidEntries();
-  return {
-    paid: paid.length,
-    total: CURATED_ENTRIES.length + paid.length,
-  };
+async function getKv(): Promise<VercelKv | null> {
+  if (!process.env.KV_REST_API_URL || !process.env.KV_REST_API_TOKEN) {
+    return null;
+  }
+
+  const { kv } = await import("@vercel/kv");
+  return kv;
 }
 
-/** Find a name's neighbors in the alphabetical list (for ticket lineage). */
-export async function getNeighbors(name: string): Promise<{ before?: string; after?: string; position: number }> {
-  const merged = await getMergedList();
-  const idx = merged.alphabetical.findIndex(
-    (e) => e.name.toLowerCase() === name.toLowerCase()
-  );
-  if (idx === -1) return { position: -1 };
-  return {
-    before: merged.alphabetical[idx - 1]?.name,
-    after: merged.alphabetical[idx + 1]?.name,
-    position: idx + 1,
+function memoryStore(): PaidEntry[] {
+  const store = globalThis as typeof globalThis & {
+    [MEMORY_SYMBOL]?: PaidEntry[];
   };
+
+  store[MEMORY_SYMBOL] ||= [];
+  return store[MEMORY_SYMBOL];
+}
+
+function isPaidEntry(value: unknown): value is PaidEntry {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+
+  const entry = value as Partial<PaidEntry>;
+  return (
+    typeof entry.id === "string" &&
+    typeof entry.name === "string" &&
+    typeof entry.sortName === "string" &&
+    isTier(entry.tier) &&
+    typeof entry.createdAt === "string"
+  );
 }

@@ -1,34 +1,55 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-interface Props {
-  initialCount: number;
-}
+type CountPayload = {
+  paid: number;
+  total: number;
+};
 
-export function LiveCounter({ initialCount }: Props) {
-  const [count, setCount] = useState(initialCount);
+type LiveCounterProps = {
+  initialPaid: number;
+  initialTotal: number;
+};
+
+export default function LiveCounter({
+  initialPaid,
+  initialTotal
+}: LiveCounterProps) {
+  const [count, setCount] = useState<CountPayload>({
+    paid: initialPaid,
+    total: initialTotal
+  });
 
   useEffect(() => {
-    const tick = async () => {
-      try {
-        const res = await fetch('/api/count', { cache: 'no-store' });
-        if (!res.ok) return;
-        const json = (await res.json()) as { total: number };
-        if (typeof json.total === 'number') setCount(json.total);
-      } catch {
-        /* ignore — keep last good count */
-      }
-    };
+    let live = true;
 
-    const id = setInterval(tick, 30000);
-    return () => clearInterval(id);
+    async function poll() {
+      try {
+        const response = await fetch("/api/count", { cache: "no-store" });
+        if (!response.ok) {
+          return;
+        }
+        const nextCount = (await response.json()) as CountPayload;
+        if (live) {
+          setCount(nextCount);
+        }
+      } catch {
+        return;
+      }
+    }
+
+    const interval = window.setInterval(poll, 30000);
+    return () => {
+      live = false;
+      window.clearInterval(interval);
+    };
   }, []);
 
   return (
-    <p className="counter">
-      <span className="counter-num">{count.toLocaleString()}</span>
-      <span className="counter-text"> names on the list · the door is open.</span>
-    </p>
+    <div className="live-counter" aria-live="polite">
+      <span>{count.total.toLocaleString("en-US")} NAMES</span>
+      <span>{count.paid.toLocaleString("en-US")} PAID</span>
+    </div>
   );
 }
