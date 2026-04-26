@@ -1,0 +1,267 @@
+/* ── SUPERFINE · The Guest List ─────────────────────────────
+   Drop #002 of the VNMSFX MSCHF-style portfolio.
+   Aesthetic: ivory parchment + black ink + oxblood ribbon.
+   Typeface: Times New Roman, italic for body, caps for the mark.
+   References: 19th-century Black-lodge ledger, Stax Gospel Truth
+   sleeve type, Catholic prayer-card layout, tailoring tags.
+   ───────────────────────────────────────────────────────── */
+
+:root {
+  --paper: #F5EDD8;
+  --paper-deep: #EBE0BF;
+  --ink: #000000;
+  --ink-soft: rgba(0, 0, 0, 0.55);
+  --hairline: rgba(0, 0, 0, 0.14);
+  --oxblood: #8B1A2F;
+  --oxblood-deep: #6B0E1F;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Times New Roman', Times, serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+/* ── Page wrapper ─────────────────────────────────────────── */
+.superfine {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 28px 120px;
+  position: relative;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
+.head {
+  text-align: center;
+  margin-bottom: 72px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--ink);
+  position: relative;
+}
+.head::after {
+  /* a thin oxblood ribbon under the title block */
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  width: 56px;
+  height: 4px;
+  background: var(--oxblood);
+  transform: translateX(-50%);
+}
+
+.wordmark {
+  font-weight: 900;
+  font-size: clamp(48px, 14vw, 120px);
+  letter-spacing: -0.025em;
+  line-height: 0.9;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.kicker {
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink);
+  opacity: 0.7;
+  margin-top: 12px;
+  letter-spacing: 0.01em;
+}
+
+.lede {
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  opacity: 0.8;
+  margin-top: 28px;
+  max-width: 32em;
+  margin-left: auto;
+  margin-right: auto;
+}
+.lede em {
+  color: var(--oxblood);
+  font-style: italic;
+  font-weight: 700;
+}
+
+/* ── Add-yourself form ───────────────────────────────────── */
+.add {
+  margin-bottom: 60px;
+  padding: 24px 0 32px;
+  border-bottom: 1px solid var(--hairline);
+}
+.add-form {
+  display: flex;
+  flex-direction: column;
+}
+.add-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink);
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+.add-row {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+.add-input {
+  flex: 1;
+  padding: 14px 16px;
+  background: transparent;
+  border: none;
+  font-family: 'Times New Roman', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--ink);
+  outline: none;
+}
+.add-input::placeholder {
+  color: var(--ink);
+  opacity: 0.4;
+}
+.add-input:disabled { opacity: 0.5; }
+.add-submit {
+  padding: 14px 24px;
+  background: var(--ink);
+  border: none;
+  border-left: 1px solid var(--ink);
+  color: var(--paper);
+  font-family: 'Times New Roman', serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.add-submit:hover:not(:disabled) {
+  background: var(--oxblood);
+  color: var(--paper);
+}
+.add-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.add-error {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: rgba(139, 26, 47, 0.08);
+  border: 1px solid var(--oxblood);
+  font-size: 13px;
+  font-style: italic;
+  color: var(--oxblood);
+}
+.add-fineprint {
+  margin-top: 12px;
+  font-size: 12px;
+  font-style: italic;
+  opacity: 0.55;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+}
+
+/* ── The Guest List itself ───────────────────────────────── */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--hairline);
+}
+.item {
+  font-style: italic;
+  font-size: 22px;
+  line-height: 1.4;
+  padding: 14px 0;
+  color: var(--ink);
+  border-bottom: 1px solid var(--hairline);
+  letter-spacing: 0.005em;
+  position: relative;
+}
+.item.paid {
+  position: relative;
+}
+.item.paid::before {
+  /* oxblood ribbon dot — the marker that distinguishes user-paid from curated */
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  background: var(--oxblood);
+  transform: translateY(-50%);
+}
+.item.highlight {
+  background: rgba(139, 26, 47, 0.06);
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  animation: ribbon-flash 1.6s ease-out;
+}
+@keyframes ribbon-flash {
+  0% {
+    background: rgba(139, 26, 47, 0.32);
+  }
+  100% {
+    background: rgba(139, 26, 47, 0.06);
+  }
+}
+
+/* ── Footer ──────────────────────────────────────────────── */
+.foot {
+  margin-top: 72px;
+  padding-top: 40px;
+  border-top: 1px solid var(--ink);
+  text-align: center;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--ink);
+  opacity: 0.6;
+  line-height: 1.6;
+}
+.foot a {
+  color: var(--oxblood);
+  text-decoration: none;
+  border-bottom: 1px solid var(--oxblood);
+}
+.foot a:hover { color: var(--oxblood-deep); border-bottom-color: var(--oxblood-deep); }
+.foot .micro {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-style: normal;
+  margin-top: 8px;
+  opacity: 0.7;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 540px) {
+  .superfine { padding: 56px 20px 80px; }
+  .head { margin-bottom: 48px; padding-bottom: 32px; }
+  .wordmark { font-size: 22vw; }
+  .lede { font-size: 15px; }
+  .add-row { flex-direction: column; }
+  .add-submit {
+    border-left: none;
+    border-top: 1px solid var(--ink);
+  }
+  .item { font-size: 19px; padding: 12px 0; }
+  .item.paid::before { left: -16px; }
+}
