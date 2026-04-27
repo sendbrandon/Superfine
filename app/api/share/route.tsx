@@ -27,12 +27,16 @@ const TIER_LABEL: Record<Tier, string> = {
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const name = normalizeSubmittedName(url.searchParams.get("name") || "");
+  const seatedByParam = normalizeSubmittedName(
+    url.searchParams.get("seatedBy") || ""
+  );
   const tierValue = url.searchParams.get("tier") || "seat";
   const tier: Tier = isTier(tierValue) ? tierValue : "seat";
   const count = await getCount();
   const neighbors = name ? await getNeighbors(name) : null;
 
   const displayName = neighbors?.current?.name || name;
+  const seatedBy = neighbors?.current?.seatedBy || seatedByParam;
   const previous = neighbors?.previous?.name || "FREDERICK DOUGLASS";
   const next = neighbors?.next?.name || "LEWIS HAMILTON";
   const entryNumber = formatEntryNumber(neighbors?.current?.entryNumber);
@@ -40,7 +44,7 @@ export async function GET(request: Request) {
     ? entryNumber
       ? `${entryNumber} — ${TIER_LABEL[tier]}`
       : TIER_LABEL[tier]
-    : "ADD YOURSELF, $1";
+    : "BUY A SEAT, $1";
 
   return new ImageResponse(
     (
@@ -122,6 +126,22 @@ export async function GET(request: Request) {
                 {displayName}
               </span>
               <span style={{ fontSize: 16, fontStyle: "italic" }}>{next}</span>
+              {seatedBy ? (
+                <span
+                  style={{
+                    marginTop: 6,
+                    color: "#FF6B00",
+                    lineHeight: 1.1,
+                    fontSize: 12,
+                    fontWeight: 700,
+                    letterSpacing: 2.2,
+                    textTransform: "uppercase",
+                    overflowWrap: "anywhere"
+                  }}
+                >
+                  SEATED BY {seatedBy}
+                </span>
+              ) : null}
             </div>
           ) : (
             <div

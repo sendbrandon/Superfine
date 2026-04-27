@@ -9,6 +9,7 @@ import type { GuestEntry, PaidEntry, Tier } from "@/lib/list";
 type GuestListProps = {
   entries: GuestEntry[];
   patrons: PaidEntry[];
+  recentEntries: PaidEntry[];
   initialPaid: number;
   initialTotal: number;
   addedName: string;
@@ -43,10 +44,12 @@ const TIERS: Array<{
   }
 ];
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const LIVING_SEAT_LIMIT = 400;
 
 export default function GuestList({
   entries,
   patrons,
+  recentEntries,
   initialPaid,
   initialTotal,
   addedName,
@@ -55,6 +58,7 @@ export default function GuestList({
   error
 }: GuestListProps) {
   const [tier, setTier] = useState<Tier>(addedTier || "seat");
+  const [seatMode, setSeatMode] = useState<"self" | "gift">("self");
   const [nameValue, setNameValue] = useState("");
   const [message, setMessage] = useState(error ? errorForCode(error) : "");
   const [isPending, startTransition] = useTransition();
@@ -73,6 +77,7 @@ export default function GuestList({
   const activeLetterIndex = Math.max(0, ALPHABET.indexOf(activeLetter));
   const activeEntryNumber =
     activeEntry?.entryNumber ? formatEntryNumber(activeEntry.entryNumber) : "INDEX";
+  const livingSeatsLeft = Math.max(0, LIVING_SEAT_LIMIT - initialPaid);
   const addedEntry = useMemo(() => {
     if (!highlightedKey) {
       return null;
@@ -251,14 +256,25 @@ export default function GuestList({
 
         <div className="lede-row">
           <p>
-            The only invitation list more exclusive than the one Anna keeps —
-            this one already includes the dead.
+            <span>Seat yourself.</span> <span>Seat someone else.</span>{" "}
+            <span>The receipt becomes public.</span>
           </p>
           <LiveCounter initialPaid={initialPaid} initialTotal={initialTotal} />
         </div>
       </header>
 
-      <section className="entry-panel" aria-label="Add yourself">
+      <section className="seat-counter" aria-label="Living seat count">
+        <span>400 LIVING SEATS</span>
+        <strong>{livingSeatsLeft.toLocaleString("en-US")}</strong>
+        <em>
+          {livingSeatsLeft
+            ? "LEFT BEFORE STANDING ROOM"
+            : "STANDING ROOM IS OPEN"}
+        </em>
+        <p>THE DEAD DO NOT COUNT.</p>
+      </section>
+
+      <section id="entry" className="entry-panel" aria-label="Buy a seat">
         <form
           ref={formRef}
           action={submit}
@@ -266,9 +282,29 @@ export default function GuestList({
           aria-describedby={message ? "form-message" : undefined}
         >
           <input type="hidden" name="tier" value={tier} />
+          <input type="hidden" name="seatMode" value={seatMode} />
+
+          <div className="seat-mode" aria-label="Seat mode">
+            <button
+              className={seatMode === "self" ? "selected" : ""}
+              type="button"
+              onClick={() => setSeatMode("self")}
+              aria-pressed={seatMode === "self"}
+            >
+              SEAT YOURSELF
+            </button>
+            <button
+              className={seatMode === "gift" ? "selected" : ""}
+              type="button"
+              onClick={() => setSeatMode("gift")}
+              aria-pressed={seatMode === "gift"}
+            >
+              SEAT SOMEONE ELSE
+            </button>
+          </div>
 
           <label className="field-label" htmlFor="name">
-            ADD YOURSELF, $1
+            {seatMode === "gift" ? "WHO GETS SEATED, $1" : "BUY A SEAT, $1"}
           </label>
           <div className="name-line">
             <input
@@ -276,7 +312,7 @@ export default function GuestList({
               name="name"
               type="text"
               autoComplete="name"
-              placeholder="YOUR NAME"
+              placeholder={seatMode === "gift" ? "THEIR NAME" : "YOUR NAME"}
               required
               minLength={2}
               maxLength={80}
@@ -287,6 +323,19 @@ export default function GuestList({
               {isPending ? "OPENING" : "ENTER"}
             </button>
           </div>
+
+          {seatMode === "gift" ? (
+            <input
+              className="seated-by-input"
+              name="seatedBy"
+              type="text"
+              autoComplete="name"
+              placeholder="SEATED BY YOUR NAME"
+              required
+              minLength={2}
+              maxLength={80}
+            />
+          ) : null}
 
           {lineagePreview ? (
             <div className="lineage-preview" aria-live="polite">
@@ -339,13 +388,38 @@ export default function GuestList({
 
       {addedName ? (
         <section className="index-stamp" aria-label="Index stamp">
-          <span>CUT INTO THE INDEX</span>
+          <span>{addedEntry?.seatedBy ? "PUBLICLY SEATED" : "CUT INTO THE INDEX"}</span>
           <strong>{addedName}</strong>
           <em>
             {addedEntry?.entryNumber
               ? formatEntryNumber(addedEntry.entryNumber)
               : "AWAITING LEDGER"}
           </em>
+          {addedEntry?.seatedBy ? (
+            <small>SEATED BY {addedEntry.seatedBy}</small>
+          ) : null}
+        </section>
+      ) : null}
+
+      {recentEntries.length ? (
+        <section className="public-ledger" aria-labelledby="ledger-title">
+          <div className="section-rule">
+            <h2 id="ledger-title">PUBLIC LEDGER</h2>
+            <span>RECENT SEATS</span>
+          </div>
+          <ol>
+            {recentEntries.map((entry) => (
+              <li key={entry.id}>
+                <span>
+                  {entry.entryNumber ? formatEntryNumber(entry.entryNumber) : "PENDING"}
+                </span>
+                <a href={`/n/${entry.slug || ""}`}>{entry.name}</a>
+                <em>
+                  {entry.seatedBy ? `SEATED BY ${entry.seatedBy}` : "SELF-SEATED"}
+                </em>
+              </li>
+            ))}
+          </ol>
         </section>
       ) : null}
 
@@ -411,6 +485,7 @@ export default function GuestList({
         onClose={() => setTicketOpen(false)}
         name={addedName}
         tier={addedTier}
+        seatedBy={addedEntry?.seatedBy}
       />
     </main>
   );

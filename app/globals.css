@@ -19,6 +19,7 @@ body {
   min-height: 100vh;
   margin: 0;
   background: var(--ground);
+  overflow-x: hidden;
 }
 
 button,
@@ -157,6 +158,11 @@ button {
 .patron-mark,
 .rotary-index,
 .index-stamp,
+.index-stamp small,
+.seat-counter,
+.seat-mode,
+.section-rule,
+.public-ledger,
 .fineprint,
 .form-message {
   font-style: normal;
@@ -205,6 +211,7 @@ button {
   font-size: clamp(31px, 4.2vw, 74px);
   font-style: italic;
   line-height: 0.98;
+  overflow-wrap: anywhere;
 }
 
 .live-counter {
@@ -215,8 +222,33 @@ button {
   white-space: nowrap;
 }
 
+.seat-counter {
+  display: grid;
+  grid-template-columns: minmax(0, 0.62fr) auto minmax(0, 0.8fr) minmax(0, 0.62fr);
+  align-items: end;
+  gap: 26px;
+  border-top: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 22px 0 18px;
+}
+
+.seat-counter span,
+.seat-counter em,
+.seat-counter p {
+  margin: 0;
+  font-size: clamp(13px, 1.15vw, 18px);
+  line-height: 1;
+}
+
+.seat-counter strong {
+  font-size: clamp(86px, 14vw, 238px);
+  font-weight: 700;
+  line-height: 0.72;
+}
+
 .entry-panel {
-  margin-top: 22px;
+  margin-top: 34px;
   border-top: 2px solid var(--ink);
   border-bottom: 2px solid var(--ink);
   display: grid;
@@ -231,6 +263,31 @@ button {
   gap: 16px;
 }
 
+.seat-mode {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.seat-mode button {
+  min-height: 44px;
+  border: 1px solid var(--ink);
+  border-right: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.seat-mode button:last-child {
+  border-right: 1px solid var(--ink);
+}
+
+.seat-mode button.selected {
+  background: var(--ink);
+  color: var(--ground);
+}
+
 .field-label,
 .form-message,
 .fineprint {
@@ -243,10 +300,10 @@ button {
 }
 
 .name-line input,
-.dedication-input {
+.dedication-input,
+.seated-by-input {
   min-width: 0;
   border: 1px solid var(--ink);
-  border-right: 0;
   border-radius: 0;
   background: transparent;
   color: var(--ink);
@@ -256,7 +313,16 @@ button {
   line-height: 1;
 }
 
+.name-line input {
+  border-right: 0;
+}
+
 .dedication-input {
+  border-right: 1px solid var(--ink);
+  font-size: clamp(18px, 2vw, 30px);
+}
+
+.seated-by-input {
   border-right: 1px solid var(--ink);
   font-size: clamp(18px, 2vw, 30px);
 }
@@ -293,7 +359,8 @@ button {
 }
 
 .name-line input::placeholder,
-.dedication-input::placeholder {
+.dedication-input::placeholder,
+.seated-by-input::placeholder {
   color: rgba(0, 0, 0, 0.55);
   opacity: 1;
 }
@@ -389,6 +456,79 @@ button {
   font-weight: 400;
   line-height: 0.9;
   text-transform: none;
+}
+
+.index-stamp small {
+  grid-column: 2 / -1;
+  color: var(--ink);
+  font-size: clamp(13px, 1.1vw, 16px);
+  line-height: 1;
+}
+
+.public-ledger {
+  margin: 78px 0 34px;
+  border-top: 2px solid var(--ink);
+  padding-top: 16px;
+}
+
+.section-rule {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 12px;
+  font-size: clamp(13px, 1vw, 16px);
+}
+
+.section-rule h2 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 400;
+}
+
+.public-ledger ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.public-ledger li {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) minmax(210px, 0.4fr);
+  align-items: baseline;
+  gap: 24px;
+  border-bottom: 1px solid var(--ink);
+  padding: 16px 0 14px;
+}
+
+.public-ledger li > span {
+  color: var(--accent);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.public-ledger a {
+  min-width: 0;
+  color: inherit;
+  font-size: clamp(29px, 4.2vw, 72px);
+  font-style: italic;
+  line-height: 0.94;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.public-ledger a:hover {
+  color: var(--accent);
+}
+
+.public-ledger em {
+  min-width: 0;
+  color: var(--accent);
+  font-size: clamp(12px, 1vw, 15px);
+  font-style: normal;
+  line-height: 1.05;
+  text-align: right;
+  overflow-wrap: anywhere;
 }
 
 .patrons {
@@ -654,8 +794,25 @@ button {
     gap: 22px;
   }
 
+  .lede-row p {
+    font-size: clamp(28px, 8.5vw, 46px);
+  }
+
+  .lede-row p span {
+    display: block;
+  }
+
   .live-counter {
     justify-items: start;
+  }
+
+  .seat-counter {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .seat-counter strong {
+    font-size: clamp(92px, 32vw, 190px);
   }
 
   .entry-panel {
@@ -687,9 +844,35 @@ button {
     grid-template-columns: 1fr;
     gap: 8px;
   }
+
+  .index-stamp small {
+    grid-column: auto;
+  }
+
+  .public-ledger li {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .public-ledger em {
+    text-align: left;
+  }
 }
 
 @media (max-width: 620px) {
+  .seat-mode {
+    grid-template-columns: 1fr;
+  }
+
+  .seat-mode button,
+  .seat-mode button:last-child {
+    border-right: 1px solid var(--ink);
+  }
+
+  .seat-mode button:first-child {
+    border-bottom: 0;
+  }
+
   .name-line {
     grid-template-columns: 1fr;
   }

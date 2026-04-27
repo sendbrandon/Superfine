@@ -9,20 +9,25 @@ type TicketRevealProps = {
   onClose: () => void;
   name: string;
   tier: Tier;
+  seatedBy?: string;
 };
 
 export default function TicketReveal({
   open,
   onClose,
   name,
-  tier
+  tier,
+  seatedBy = ""
 }: TicketRevealProps) {
   const [copied, setCopied] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
   const ticketUrl = useMemo(() => {
     const params = new URLSearchParams({ name, tier });
+    if (seatedBy) {
+      params.set("seatedBy", seatedBy);
+    }
     return `/api/ticket?${params.toString()}`;
-  }, [name, tier]);
+  }, [name, seatedBy, tier]);
 
   useEffect(() => {
     setShareUrl(window.location.href);
@@ -59,12 +64,12 @@ export default function TicketReveal({
 
     await navigator.share({
       title: "THE GUEST LIST",
-      text: `${name} entered THE GUEST LIST.`,
+      text: shareCopy(name, seatedBy),
       url: shareUrl || window.location.href
     });
   }
 
-  const shareText = encodeURIComponent(`${name} entered THE GUEST LIST.`);
+  const shareText = encodeURIComponent(shareCopy(name, seatedBy));
   const encodedShareUrl = encodeURIComponent(shareUrl);
 
   return (
@@ -109,4 +114,10 @@ export default function TicketReveal({
       </div>
     </div>
   );
+}
+
+function shareCopy(name: string, seatedBy: string) {
+  return seatedBy
+    ? `${name} was seated in THE GUEST LIST by ${seatedBy}.`
+    : `${name} was seated in THE GUEST LIST.`;
 }

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { addPaidEntry, isTier } from "@/lib/list";
+import { addPaidEntry, isSeatMode, isTier } from "@/lib/list";
 import { moderateName, normalizeSubmittedName } from "@/lib/moderate";
 
 export const dynamic = "force-dynamic";
@@ -22,6 +22,10 @@ export async function GET(request: Request) {
 
   const name = normalizeSubmittedName(session.metadata?.name || "");
   const tier = isTier(session.metadata?.tier) ? session.metadata.tier : "seat";
+  const seatMode = isSeatMode(session.metadata?.seatMode)
+    ? session.metadata.seatMode
+    : "self";
+  const seatedBy = normalizeSubmittedName(session.metadata?.seatedBy || "");
   const dedication =
     tier === "patron"
       ? normalizeSubmittedName(session.metadata?.dedication || "").slice(0, 120)
@@ -32,9 +36,18 @@ export async function GET(request: Request) {
     return redirectHome(request.url, "rejected");
   }
 
+  if (seatMode === "gift") {
+    const seatedByModeration = moderateName(seatedBy);
+    if (!seatedByModeration.ok) {
+      return redirectHome(request.url, "rejected");
+    }
+  }
+
   const entry = await addPaidEntry({
     name,
     tier,
+    seatMode,
+    seatedBy: seatMode === "gift" ? seatedBy : undefined,
     dedication,
     sessionId
   });

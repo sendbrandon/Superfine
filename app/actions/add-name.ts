@@ -1,7 +1,7 @@
 "use server";
 
 import Stripe from "stripe";
-import { addPaidEntry, isTier, type Tier } from "@/lib/list";
+import { addPaidEntry, isSeatMode, isTier, type Tier } from "@/lib/list";
 import { moderateName, normalizeSubmittedName } from "@/lib/moderate";
 
 type AddNameResult = {
@@ -18,6 +18,9 @@ const TIER_PRICE: Record<Tier, { label: string; cents: number }> = {
 export async function addNameAction(formData: FormData): Promise<AddNameResult> {
   const name = normalizeSubmittedName(String(formData.get("name") || ""));
   const tierValue = String(formData.get("tier") || "seat");
+  const seatModeValue = String(formData.get("seatMode") || "self");
+  const seatMode = isSeatMode(seatModeValue) ? seatModeValue : "self";
+  const seatedBy = normalizeSubmittedName(String(formData.get("seatedBy") || ""));
   const dedicationRaw = String(formData.get("dedication") || "");
   const dedication = normalizeSubmittedName(dedicationRaw).slice(0, 120);
   const tier: Tier = isTier(tierValue) ? tierValue : "seat";
@@ -27,6 +30,13 @@ export async function addNameAction(formData: FormData): Promise<AddNameResult> 
     return { error: moderation.reason };
   }
 
+  if (seatMode === "gift") {
+    const seatedByModeration = moderateName(seatedBy);
+    if (!seatedByModeration.ok) {
+      return { error: `SEATED BY: ${seatedByModeration.reason}` };
+    }
+  }
+
   const stripeKey = process.env.STRIPE_SECRET_KEY;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -34,11 +44,22 @@ export async function addNameAction(formData: FormData): Promise<AddNameResult> 
     await addPaidEntry({
       name,
       tier,
+      seatMode,
+      seatedBy: seatMode === "gift" ? seatedBy : undefined,
       dedication: tier === "patron" ? dedication : undefined
     });
 
+    const params = new URLSearchParams({
+      added: name,
+      tier,
+      mock: "1"
+    });
+    if (seatMode === "gift") {
+      params.set("seatedBy", seatedBy);
+    }
+
     return {
-      redirectTo: `/?added=${encodeURIComponent(name)}&tier=${tier}&mock=1`
+      redirectTo: `/?${params.toString()}`
     };
   }
 
@@ -61,6 +82,8 @@ export async function addNameAction(formData: FormData): Promise<AddNameResult> 
     metadata: {
       name,
       tier,
+      seatMode,
+      seatedBy: seatMode === "gift" ? seatedBy : "",
       dedication: tier === "patron" ? dedication : ""
     },
     success_url: `${baseUrl}/api/confirm?session_id={CHECKOUT_SESSION_ID}`,

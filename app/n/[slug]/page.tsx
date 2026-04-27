@@ -5,7 +5,8 @@ import {
   getCount,
   getMergedList,
   getPaidEntryBySlug,
-  getPatrons
+  getPatrons,
+  getRecentPaidEntries
 } from "@/lib/list";
 
 type NamePageProps = {
@@ -30,11 +31,14 @@ export async function generateMetadata({
     };
   }
 
-  const title = `${entry.name} entered THE GUEST LIST`;
+  const title = `${entry.name} was seated in THE GUEST LIST`;
   const imageParams = new URLSearchParams({
     name: entry.name,
     tier: entry.tier
   });
+  if (entry.seatedBy) {
+    imageParams.set("seatedBy", entry.seatedBy);
+  }
 
   return {
     title,
@@ -68,16 +72,18 @@ export default async function NamePage({ params }: NamePageProps) {
     notFound();
   }
 
-  const [entries, patrons, count] = await Promise.all([
+  const [entries, patrons, count, recentEntries] = await Promise.all([
     getMergedList(),
     getPatrons(),
-    getCount()
+    getCount(),
+    getRecentPaidEntries()
   ]);
 
   return (
     <GuestList
       entries={entries}
       patrons={patrons}
+      recentEntries={recentEntries}
       initialPaid={count.paid}
       initialTotal={count.total}
       addedName={entry.name}

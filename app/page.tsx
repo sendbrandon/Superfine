@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
 import GuestList from "./components/GuestList";
-import { getCount, getMergedList, getPatrons, isTier, type Tier } from "@/lib/list";
+import {
+  getCount,
+  getMergedList,
+  getPatrons,
+  getRecentPaidEntries,
+  isTier,
+  type Tier
+} from "@/lib/list";
 
 type PageProps = {
   searchParams?: {
     added?: string;
     tier?: string;
+    seatedBy?: string;
     mock?: string;
     error?: string;
   };
@@ -19,19 +27,28 @@ const SHARE_DESCRIPTION =
 export function generateMetadata({ searchParams }: PageProps): Metadata {
   const addedName = searchParams?.added || "";
   const addedTier: Tier = isTier(searchParams?.tier) ? searchParams.tier : "seat";
+  const seatedBy = searchParams?.seatedBy || "";
   const title = addedName
-    ? `${addedName} entered THE GUEST LIST`
+    ? seatedBy
+      ? `${addedName} was seated in THE GUEST LIST by ${seatedBy}`
+      : `${addedName} was seated in THE GUEST LIST`
     : "THE GUEST LIST — SUPERFINE";
   const shareParams = new URLSearchParams();
   if (addedName) {
     shareParams.set("name", addedName);
     shareParams.set("tier", addedTier);
+    if (seatedBy) {
+      shareParams.set("seatedBy", seatedBy);
+    }
   }
   const imageUrl = `/api/share${shareParams.toString() ? `?${shareParams}` : ""}`;
   const pageParams = new URLSearchParams();
   if (addedName) {
     pageParams.set("added", addedName);
     pageParams.set("tier", addedTier);
+    if (seatedBy) {
+      pageParams.set("seatedBy", seatedBy);
+    }
   }
   const pageUrl = `/${pageParams.toString() ? `?${pageParams}` : ""}`;
 
@@ -62,10 +79,11 @@ export function generateMetadata({ searchParams }: PageProps): Metadata {
 }
 
 export default async function Page({ searchParams }: PageProps) {
-  const [entries, patrons, count] = await Promise.all([
+  const [entries, patrons, count, recentEntries] = await Promise.all([
     getMergedList(),
     getPatrons(),
-    getCount()
+    getCount(),
+    getRecentPaidEntries()
   ]);
 
   const addedName = searchParams?.added || "";
@@ -75,6 +93,7 @@ export default async function Page({ searchParams }: PageProps) {
     <GuestList
       entries={entries}
       patrons={patrons}
+      recentEntries={recentEntries}
       initialPaid={count.paid}
       initialTotal={count.total}
       addedName={addedName}

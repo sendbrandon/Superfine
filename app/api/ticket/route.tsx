@@ -21,11 +21,15 @@ const TIER_LABEL: Record<Tier, string> = {
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const name = normalizeSubmittedName(url.searchParams.get("name") || "");
+  const seatedByParam = normalizeSubmittedName(
+    url.searchParams.get("seatedBy") || ""
+  );
   const tierValue = url.searchParams.get("tier") || "seat";
   const tier: Tier = isTier(tierValue) ? tierValue : "seat";
   const neighbors = await getNeighbors(name);
 
   const displayName = neighbors.current?.name || name || "UNNAMED";
+  const seatedBy = neighbors.current?.seatedBy || seatedByParam;
   const previous = neighbors.previous?.name || "FREDERICK DOUGLASS";
   const next = neighbors.next?.name || "LEWIS HAMILTON";
   const entryNumber = formatEntryNumber(neighbors.current?.entryNumber);
@@ -96,6 +100,25 @@ export async function GET(request: Request) {
           </span>
           <span style={{ fontSize: 46, fontStyle: "italic" }}>{next}</span>
         </div>
+        {seatedBy ? (
+          <div
+            style={{
+              marginTop: 52,
+              display: "flex",
+              flexDirection: "column",
+              gap: 10,
+              lineHeight: 1,
+              fontSize: 32,
+              fontWeight: 700,
+              letterSpacing: 5,
+              textTransform: "uppercase",
+              overflowWrap: "anywhere"
+            }}
+          >
+            <span style={{ color: "#FF6B00" }}>SEATED BY</span>
+            <span>{seatedBy}</span>
+          </div>
+        ) : null}
         <div style={{ flex: 1 }} />
         <div
           style={{

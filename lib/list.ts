@@ -1,6 +1,7 @@
 import { CURATED_NAMES, toSortKey } from "./curated-names";
 
 export type Tier = "seat" | "ribbon" | "patron";
+export type SeatMode = "self" | "gift";
 
 export type PaidEntry = {
   id: string;
@@ -8,6 +9,8 @@ export type PaidEntry = {
   sortName: string;
   slug?: string;
   tier: Tier;
+  seatMode?: SeatMode;
+  seatedBy?: string;
   entryNumber?: number;
   dedication?: string;
   createdAt: string;
@@ -21,6 +24,8 @@ export type GuestEntry = {
   slug?: string;
   tier: "curated" | Tier;
   source: "curated" | "paid";
+  seatMode?: SeatMode;
+  seatedBy?: string;
   entryNumber?: number;
   dedication?: string;
   createdAt?: string;
@@ -38,6 +43,10 @@ const MEMORY_SYMBOL = Symbol.for("superfine.guest-list.memory");
 
 export function isTier(value: unknown): value is Tier {
   return value === "seat" || value === "ribbon" || value === "patron";
+}
+
+export function isSeatMode(value: unknown): value is SeatMode {
+  return value === "self" || value === "gift";
 }
 
 export function toNameSlug(name: string) {
@@ -70,6 +79,8 @@ export async function getPaidEntries(): Promise<PaidEntry[]> {
 export async function addPaidEntry(input: {
   name: string;
   tier: Tier;
+  seatMode?: SeatMode;
+  seatedBy?: string;
   dedication?: string;
   sessionId?: string;
 }): Promise<PaidEntry> {
@@ -88,6 +99,8 @@ export async function addPaidEntry(input: {
     sortName: toSortKey(input.name),
     slug: toNameSlug(input.name),
     tier: input.tier,
+    seatMode: input.seatMode || "self",
+    seatedBy: input.seatedBy || undefined,
     entryNumber: CURATED_NAMES.length + paidEntries.length + 1,
     dedication: input.dedication || undefined,
     createdAt: new Date().toISOString(),
@@ -128,6 +141,13 @@ export async function getPatrons(): Promise<PaidEntry[]> {
   return numberPaidEntries(paidEntries)
     .filter((entry) => entry.tier === "patron")
     .sort((left, right) => right.createdAt.localeCompare(left.createdAt));
+}
+
+export async function getRecentPaidEntries(limit = 12): Promise<PaidEntry[]> {
+  const paidEntries = numberPaidEntries(await getPaidEntries());
+  return [...paidEntries]
+    .sort((left, right) => right.createdAt.localeCompare(left.createdAt))
+    .slice(0, limit);
 }
 
 export async function getCount(): Promise<Count> {
