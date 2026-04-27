@@ -191,7 +191,7 @@ function createScene({
     camera.position.z = width < 640 ? 10 : 9.6;
     root.scale.setScalar(width < 640 ? 0.92 : 1.1);
     root.position.x = 0;
-    root.position.y = width < 640 ? -0.35 : -0.25;
+    root.position.y = width < 640 ? 1.05 : -0.25;
     camera.updateProjectionMatrix();
   }
 
