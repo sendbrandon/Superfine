@@ -61,9 +61,11 @@ export default function GuestList({
   const [tier, setTier] = useState<Tier>(addedTier || "seat");
   const [seatMode, setSeatMode] = useState<"self" | "gift">("self");
   const [nameValue, setNameValue] = useState("");
+  const [seatedByValue, setSeatedByValue] = useState("");
   const [message, setMessage] = useState(error ? errorForCode(error) : "");
   const [isPending, startTransition] = useTransition();
   const [ticketOpen, setTicketOpen] = useState(Boolean(addedName));
+  const [previewOpen, setPreviewOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -194,10 +196,34 @@ export default function GuestList({
 
   function submit(formData: FormData) {
     setMessage("");
+    const trimmed = String(formData.get("name") || "").trim();
+    if (trimmed.replace(/[^\p{L}\p{N}]/gu, "").length < 2) {
+      setMessage("ENTER A NAME.");
+      return;
+    }
+    if (seatMode === "gift") {
+      const giftedBy = String(formData.get("seatedBy") || "").trim();
+      if (giftedBy.replace(/[^\p{L}\p{N}]/gu, "").length < 2) {
+        setMessage("ADD WHO IS SEATING THEM.");
+        return;
+      }
+      setSeatedByValue(giftedBy);
+    } else {
+      setSeatedByValue("");
+    }
+    setNameValue(trimmed);
+    setPreviewOpen(true);
+  }
+
+  function confirmPay() {
+    if (!formRef.current) return;
+    setMessage("");
+    const formData = new FormData(formRef.current);
     startTransition(async () => {
       const result = await addNameAction(formData);
       if (result.error) {
         setMessage(result.error);
+        setPreviewOpen(false);
         return;
       }
 
@@ -492,6 +518,18 @@ export default function GuestList({
         name={addedName}
         tier={addedTier}
         seatedBy={addedEntry?.seatedBy}
+        mode="official"
+      />
+
+      <TicketReveal
+        open={previewOpen}
+        onClose={() => setPreviewOpen(false)}
+        name={nameValue}
+        tier={tier}
+        seatedBy={seatedByValue}
+        mode="preview"
+        onConfirmPay={confirmPay}
+        isPending={isPending}
       />
     </main>
   );

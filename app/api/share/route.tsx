@@ -65,7 +65,7 @@ export async function GET(request: Request) {
             width: 306,
             height: 544,
             background: "#FFFFFF",
-            border: "12px solid #FF6B00",
+            border: "12px solid #5a1a20",
             display: "flex",
             flexDirection: "column",
             padding: 28
@@ -116,7 +116,7 @@ export async function GET(request: Request) {
               </span>
               <span
                 style={{
-                  color: "#FF6B00",
+                  color: "#5a1a20",
                   fontSize: 34,
                   lineHeight: 0.9,
                   fontWeight: 700,
@@ -130,7 +130,7 @@ export async function GET(request: Request) {
                 <span
                   style={{
                     marginTop: 6,
-                    color: "#FF6B00",
+                    color: "#5a1a20",
                     lineHeight: 1.1,
                     fontSize: 12,
                     fontWeight: 700,
@@ -154,7 +154,7 @@ export async function GET(request: Request) {
             >
               <span
                 style={{
-                  color: "#FF6B00",
+                  color: "#5a1a20",
                   fontSize: 44,
                   lineHeight: 0.82,
                   fontWeight: 700,

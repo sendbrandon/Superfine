@@ -46,7 +46,7 @@ export async function GET(request: Request) {
           flexDirection: "column",
           padding: "88px",
           fontFamily: "Tinos",
-          border: "20px solid #FF6B00"
+          border: "20px solid #5a1a20"
         }}
       >
         <div
@@ -89,7 +89,7 @@ export async function GET(request: Request) {
           <span style={{ fontSize: 46, fontStyle: "italic" }}>{previous}</span>
           <span
             style={{
-              color: "#FF6B00",
+              color: "#5a1a20",
               fontSize: 112,
               lineHeight: 0.95,
               fontWeight: 700,
@@ -115,7 +115,7 @@ export async function GET(request: Request) {
               overflowWrap: "anywhere"
             }}
           >
-            <span style={{ color: "#FF6B00" }}>SEATED BY</span>
+            <span style={{ color: "#5a1a20" }}>SEATED BY</span>
             <span>{seatedBy}</span>
           </div>
         ) : null}

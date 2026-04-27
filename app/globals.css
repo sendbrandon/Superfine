@@ -1091,6 +1091,45 @@ button {
   border-right: 1px solid var(--ink);
 }
 
+.ticket-preview-banner {
+  margin: 0;
+  padding: 8px 12px;
+  background: var(--accent);
+  color: var(--ground);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+}
+
+.ticket-actions-preview {
+  grid-template-columns: 2fr 1fr;
+}
+
+.ticket-actions-preview button {
+  min-height: 56px;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+.ticket-actions-preview .ticket-pay {
+  background: var(--accent);
+  color: var(--ground);
+  border: 1px solid var(--accent);
+  font-weight: 700;
+}
+
+.ticket-actions-preview .ticket-pay:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.ticket-actions-preview .ticket-pay:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
 @keyframes highlight-fade {
   0% {
     background: var(--accent);
