@@ -222,6 +222,7 @@ button {
   width: 100%;
   height: clamp(420px, 64vh, 680px);
   flex: 0 0 auto;
+  overflow: hidden;
   cursor: grab;
 }
 
@@ -349,10 +350,11 @@ button {
   position: absolute;
   inset: 0;
   z-index: 2;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
   pointer-events: none;
   text-align: center;
   color: var(--accent);
@@ -360,7 +362,7 @@ button {
 
 .hero-stat strong {
   display: block;
-  font-size: clamp(120px, 24vw, 380px);
+  font-size: clamp(110px, 18vw, 260px);
   font-weight: 700;
   line-height: 1;
   letter-spacing: -0.05em;
@@ -370,10 +372,13 @@ button {
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
   transform: scaleY(1.7);
   transform-origin: center;
-  margin: clamp(60px, 9vw, 140px) 0;
+  padding: 0.35em 0;
+  margin: 0;
 }
 
 .hero-stat em {
+  display: inline-block;
+  margin-top: 4px;
   font-size: clamp(11px, 1.2vw, 16px);
   font-style: normal;
   font-weight: 400;
@@ -1207,7 +1212,7 @@ button {
   }
 
   .hero-stat strong {
-    font-size: clamp(120px, 36vw, 200px);
+    font-size: clamp(80px, 22vw, 140px);
   }
 
   .hero-stat em {
