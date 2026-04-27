@@ -249,20 +249,29 @@ button {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  filter: contrast(1.08) brightness(0.96) sepia(0.12);
+  filter: contrast(1.18) brightness(0.92) sepia(0.18);
+  transition: opacity 80ms steps(2, end);
 }
 
 .hero-montage video.is-active {
-  opacity: 0.7;
+  opacity: 0.78;
 }
 
 .hero-montage-grain {
   position: absolute;
   inset: 0;
   background-image: url("/hermes-grain.png");
-  background-size: 320px 320px;
-  opacity: 0.08;
+  background-size: 240px 240px;
+  opacity: 0.18;
   mix-blend-mode: multiply;
+  animation: hero-montage-jitter 0.18s steps(3) infinite;
+}
+
+@keyframes hero-montage-jitter {
+  0%   { transform: translate(0, 0); }
+  33%  { transform: translate(-1px, 1px); }
+  66%  { transform: translate(1px, -1px); }
+  100% { transform: translate(0, 0); }
 }
 
 .hero-montage-veil {
