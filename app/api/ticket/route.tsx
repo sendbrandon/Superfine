@@ -53,12 +53,13 @@ export async function GET(request: Request) {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            fontSize: 34,
+            fontSize: 30,
             fontWeight: 700,
-            letterSpacing: 8
+            letterSpacing: 6
           }}
         >
           <span>SUPERFINE</span>
+          <span>MET GALA 2026</span>
           <span>DROP 002</span>
         </div>
         <div
@@ -133,7 +134,7 @@ export async function GET(request: Request) {
           }}
         >
           <span>{entryNumber || TIER_LABEL[tier]}</span>
-          <span>MET GALA 2026</span>
+          <span>{TIER_LABEL[tier]}</span>
         </div>
       </div>
     ),
