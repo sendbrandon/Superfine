@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { addNameAction } from "../actions/add-name";
 import GatekeeperBobblehead from "./GatekeeperBobblehead";
-import LiveCounter from "./LiveCounter";
 import TicketReveal from "./TicketReveal";
 import type { GuestEntry, PaidEntry, Tier } from "@/lib/list";
 
@@ -256,7 +255,6 @@ export default function GuestList({
             <GatekeeperBobblehead
               activeName={nameValue}
               isStamping={isPending}
-              seatMode={seatMode}
             />
           </div>
           <div className="hero-copy">
@@ -276,7 +274,6 @@ export default function GuestList({
                   <a href="#entry">ADD A NAME, $1</a>
                   <a href="#guest-list">SEE THE LIST</a>
                 </div>
-                <LiveCounter initialPaid={initialPaid} initialTotal={initialTotal} />
               </div>
             </div>
           </div>
