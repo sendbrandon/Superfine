@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { addNameAction } from "../actions/add-name";
-import GatekeeperBobblehead from "./GatekeeperBobblehead";
+import FilmLeader from "./FilmLeader";
 import HeroMontage from "./HeroMontage";
 import TicketReveal from "./TicketReveal";
 import type { GuestEntry, PaidEntry, Tier } from "@/lib/list";
@@ -45,6 +45,7 @@ const TIERS: Array<{
   }
 ];
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const LIVING_SEAT_LIMIT = 400;
 
 export default function GuestList({
   entries,
@@ -77,6 +78,7 @@ export default function GuestList({
   const activeLetterIndex = Math.max(0, ALPHABET.indexOf(activeLetter));
   const activeEntryNumber =
     activeEntry?.entryNumber ? formatEntryNumber(activeEntry.entryNumber) : "INDEX";
+  const livingSeatsLeft = Math.max(0, LIVING_SEAT_LIMIT - initialPaid);
   const addedEntry = useMemo(() => {
     if (!highlightedKey) {
       return null;
@@ -252,10 +254,11 @@ export default function GuestList({
         <div className="hero-stage">
           <div className="hero-visual">
             <HeroMontage />
-            <GatekeeperBobblehead
-              activeName={nameValue}
-              isStamping={isPending}
-            />
+            <FilmLeader />
+            <div className="hero-stat" aria-label="Living seats remaining">
+              <strong>{livingSeatsLeft.toString().padStart(3, "0")}</strong>
+              <em>LIVING SEATS REMAINING</em>
+            </div>
           </div>
           <div className="hero-copy">
             <div className="hero-title-lockup">

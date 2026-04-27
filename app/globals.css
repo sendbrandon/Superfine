@@ -279,11 +279,106 @@ button {
   inset: 0;
   background:
     radial-gradient(
-      ellipse 38% 52% at 50% 38%,
-      rgba(255, 255, 255, 0.78) 0%,
-      rgba(255, 255, 255, 0.42) 55%,
-      rgba(255, 255, 255, 0) 95%
+      ellipse 70% 70% at 50% 50%,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.18) 70%,
+      rgba(0, 0, 0, 0.45) 100%
     );
+}
+
+.film-leader {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  mix-blend-mode: screen;
+}
+
+.film-sprockets {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 18px;
+  background-image:
+    radial-gradient(
+      circle at center,
+      rgba(0, 0, 0, 0.92) 0 4.5px,
+      transparent 4.5px
+    );
+  background-size: 28px 18px;
+  background-repeat: repeat-x;
+  opacity: 0.62;
+  mix-blend-mode: multiply;
+}
+
+.film-sprockets-top {
+  top: 0;
+}
+
+.film-sprockets-bottom {
+  bottom: 0;
+}
+
+.film-leader-tag {
+  position: absolute;
+  top: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.film-leader-tag-tl {
+  left: 24px;
+}
+
+.film-leader-tag-tr {
+  right: 24px;
+  text-align: right;
+}
+
+.hero-stat {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 14px;
+  pointer-events: none;
+  text-align: center;
+  color: var(--accent);
+}
+
+.hero-stat strong {
+  display: block;
+  font-size: clamp(160px, 32vw, 520px);
+  font-weight: 700;
+  line-height: 0.78;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  -webkit-text-stroke: 0;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+}
+
+.hero-stat em {
+  font-size: clamp(11px, 1.2vw, 16px);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.86);
+  padding: 6px 14px;
+  border: 1px solid var(--ink);
 }
 
 .bobble-stage {
@@ -1086,6 +1181,35 @@ button {
     letter-spacing: 0.04em;
     padding-bottom: 8px;
     gap: 8px;
+  }
+
+  .film-leader {
+    font-size: 9px;
+  }
+
+  .film-leader-tag {
+    top: 22px;
+    padding: 3px 6px;
+  }
+
+  .film-leader-tag-tl {
+    left: 12px;
+    max-width: 38vw;
+  }
+
+  .film-leader-tag-tr {
+    right: 12px;
+    max-width: 50vw;
+  }
+
+  .hero-stat strong {
+    font-size: clamp(120px, 36vw, 200px);
+  }
+
+  .hero-stat em {
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    padding: 5px 10px;
   }
 
   .hero-stage {
