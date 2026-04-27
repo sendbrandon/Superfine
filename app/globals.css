@@ -213,7 +213,7 @@ button {
 .hero-stage {
   position: relative;
   width: 100vw;
-  min-height: clamp(720px, 88vh, 1000px);
+  min-height: clamp(420px, 62vh, 680px);
   margin-right: calc(50% - 50vw);
   margin-left: calc(50% - 50vw);
   overflow: hidden;
@@ -389,8 +389,8 @@ button {
 .hero-door {
   display: grid;
   place-items: center;
-  min-height: clamp(120px, 17vh, 200px);
-  font-size: clamp(28px, 4.4vw, 72px);
+  min-height: clamp(96px, 13vh, 160px);
+  font-size: clamp(26px, 3.8vw, 60px);
   font-weight: 700;
   font-style: italic;
   line-height: 1;
@@ -427,6 +427,11 @@ button {
 
 .hero-door-secondary:hover {
   background: var(--ink);
+  color: var(--ground);
+}
+
+.hero-doors:has(.hero-door-secondary:hover) .hero-door-primary {
+  background: var(--accent);
   color: var(--ground);
 }
 

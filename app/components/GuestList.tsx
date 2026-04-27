@@ -44,7 +44,6 @@ const TIERS: Array<{
   }
 ];
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-const LIVING_SEAT_LIMIT = 400;
 
 export default function GuestList({
   entries,
@@ -77,7 +76,6 @@ export default function GuestList({
   const activeLetterIndex = Math.max(0, ALPHABET.indexOf(activeLetter));
   const activeEntryNumber =
     activeEntry?.entryNumber ? formatEntryNumber(activeEntry.entryNumber) : "INDEX";
-  const livingSeatsLeft = Math.max(0, LIVING_SEAT_LIMIT - initialPaid);
   const addedEntry = useMemo(() => {
     if (!highlightedKey) {
       return null;
@@ -276,17 +274,6 @@ export default function GuestList({
           </a>
         </nav>
       </header>
-
-      <section className="seat-counter" aria-label="Living seat count">
-        <span>400 LIVING SEATS</span>
-        <strong>{livingSeatsLeft.toLocaleString("en-US")}</strong>
-        <em>
-          {livingSeatsLeft
-            ? "LEFT BEFORE STANDING ROOM"
-            : "STANDING ROOM IS OPEN"}
-        </em>
-        <p>THE DEAD DO NOT COUNT.</p>
-      </section>
 
       <section id="entry" className="entry-panel" aria-label="Buy a seat">
         <form
