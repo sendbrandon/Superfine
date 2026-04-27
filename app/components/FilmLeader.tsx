@@ -9,7 +9,7 @@ type FilmLeaderProps = {
 
 export default function FilmLeader({
   reel = "REEL 002 · SUPERFINE · 24 FPS · GATE 04",
-  cam = "NORTH ENTRANCE · CAM 02"
+  cam = "WINTOUR FOYER · CAM 02"
 }: FilmLeaderProps) {
   const [now, setNow] = useState<string>("");
 
