@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { addNameAction } from "../actions/add-name";
 import GatekeeperBobblehead from "./GatekeeperBobblehead";
+import HeroMontage from "./HeroMontage";
 import TicketReveal from "./TicketReveal";
 import type { GuestEntry, PaidEntry, Tier } from "@/lib/list";
 
@@ -250,6 +251,7 @@ export default function GuestList({
 
         <div className="hero-stage">
           <div className="hero-visual">
+            <HeroMontage />
             <GatekeeperBobblehead
               activeName={nameValue}
               isStamping={isPending}
