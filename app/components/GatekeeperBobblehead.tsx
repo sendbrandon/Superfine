@@ -18,7 +18,7 @@ type SceneState = {
   dispose: () => void;
 };
 
-const ACCENT = 0xff6b00;
+const ACCENT = 0xe06a2c;
 const COBALT = 0x1248ff;
 const MODEL_URL = "/anna.glb";
 
@@ -183,10 +183,10 @@ function createScene({
     const height = Math.max(1, parent.clientHeight);
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
-    camera.position.z = width < 640 ? 11.5 : 11;
-    root.scale.setScalar(width < 640 ? 0.84 : 1);
-    root.position.x = width < 640 ? 0.1 : 0.4;
-    root.position.y = width < 640 ? -0.3 : -0.2;
+    camera.position.z = width < 640 ? 10.7 : 11;
+    root.scale.setScalar(width < 640 ? 0.82 : 1);
+    root.position.x = width < 640 ? 0 : 0.4;
+    root.position.y = width < 640 ? -0.42 : -0.2;
     camera.updateProjectionMatrix();
   }
 
@@ -205,12 +205,13 @@ function createScene({
       const figure = bobble.figure;
       const attention = typed ? 1 : 0;
       const stampPulse = stamping ? Math.sin(elapsed * 18) * 0.025 : 0;
-      const idleNod = Math.sin(elapsed * 0.9) * 0.008;
-      const idleTilt = Math.sin(elapsed * 0.6) * 0.006;
+      const idleLook = Math.sin(elapsed * 0.42) * 0.085;
+      const idleNod = Math.sin(elapsed * 0.78) * 0.012;
+      const idleTilt = Math.sin(elapsed * 0.52) * 0.008;
 
       figure.rotation.y = THREE.MathUtils.lerp(
         figure.rotation.y,
-        target.x * 0.22 + attention * 0.05,
+        target.x * 0.18 + idleLook + attention * 0.04,
         0.05
       );
       figure.rotation.x = THREE.MathUtils.lerp(
@@ -223,6 +224,7 @@ function createScene({
         target.x * -0.04 + idleTilt,
         0.05
       );
+      bobble.group.position.y = -0.85 + Math.sin(elapsed * 0.7) * 0.018 + stampPulse;
     }
 
     root.rotation.y = Math.sin(elapsed * 0.55) * 0.025;

@@ -258,12 +258,14 @@ export default function GuestList({
             />
           </div>
           <div className="hero-copy">
-            <h1 id="page-title" className="wordmark">
-              THE GUEST LIST
-            </h1>
+            <div className="hero-title-lockup">
+              <h1 id="page-title" className="wordmark">
+                THE GUEST LIST
+              </h1>
+              <p className="hero-question">WHO SHOULD HAVE BEEN INVITED?</p>
+            </div>
 
             <div className="hero-copy-main">
-              <p className="hero-question">WHO SHOULD HAVE BEEN INVITED?</p>
               <p className="hero-instructions">
                 <span>Add a name for $1.</span>
                 <span>We make the ticket.</span>
