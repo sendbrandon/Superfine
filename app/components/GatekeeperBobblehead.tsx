@@ -139,17 +139,24 @@ function createScene({
   const pointer = new THREE.Vector2(0.08, 0.02);
 
   function handlePointerMove(event: PointerEvent) {
-    const rect = canvas.getBoundingClientRect();
-    pointer.x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-    pointer.y = -(((event.clientY - rect.top) / rect.height - 0.5) * 2);
+    pointer.x = (event.clientX / window.innerWidth - 0.5) * 2;
+    pointer.y = -((event.clientY / window.innerHeight - 0.5) * 2);
   }
 
-  function handlePointerLeave() {
+  function handlePointerLeaveWindow() {
     pointer.set(0.08, 0.02);
   }
 
-  canvas.addEventListener("pointermove", handlePointerMove, { passive: true });
-  canvas.addEventListener("pointerleave", handlePointerLeave);
+  function handleOrientation(event: DeviceOrientationEvent) {
+    const beta = event.beta ?? 0;
+    const gamma = event.gamma ?? 0;
+    pointer.x = THREE.MathUtils.clamp(gamma / 35, -1, 1);
+    pointer.y = THREE.MathUtils.clamp((beta - 45) / 35, -1, 1);
+  }
+
+  window.addEventListener("pointermove", handlePointerMove, { passive: true });
+  document.addEventListener("pointerleave", handlePointerLeaveWindow);
+  window.addEventListener("deviceorientation", handleOrientation, { passive: true });
 
   const startTime = performance.now();
   let bobble: Bobble | null = null;
@@ -188,10 +195,10 @@ function createScene({
     lastHeight = height;
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
-    camera.position.z = width < 640 ? 10 : 9.6;
-    root.scale.setScalar(width < 640 ? 0.92 : 1.1);
+    camera.position.z = width < 640 ? 10 : 9.4;
+    root.scale.setScalar(width < 640 ? 0.92 : 1.0);
     root.position.x = 0;
-    root.position.y = width < 640 ? 1.05 : -0.25;
+    root.position.y = width < 640 ? 1.05 : 1.05;
     camera.updateProjectionMatrix();
   }
 
@@ -217,18 +224,18 @@ function createScene({
 
       figure.rotation.y = THREE.MathUtils.lerp(
         figure.rotation.y,
-        target.x * 0.18 + idleLook + attention * 0.04,
-        0.05
+        target.x * 0.32 + idleLook + attention * 0.04,
+        0.045
       );
       figure.rotation.x = THREE.MathUtils.lerp(
         figure.rotation.x,
-        -target.y * 0.09 + idleNod + stampPulse,
-        0.05
+        -target.y * 0.18 + idleNod + stampPulse,
+        0.045
       );
       figure.rotation.z = THREE.MathUtils.lerp(
         figure.rotation.z,
-        target.x * -0.04 + idleTilt,
-        0.05
+        target.x * -0.06 + idleTilt,
+        0.045
       );
       bobble.group.position.y = -0.85 + Math.sin(elapsed * 0.7) * 0.018 + stampPulse;
     }
@@ -246,8 +253,9 @@ function createScene({
       cancelled = true;
       window.cancelAnimationFrame(frame);
       resizeObserver.disconnect();
-      canvas.removeEventListener("pointermove", handlePointerMove);
-      canvas.removeEventListener("pointerleave", handlePointerLeave);
+      window.removeEventListener("pointermove", handlePointerMove);
+      document.removeEventListener("pointerleave", handlePointerLeaveWindow);
+      window.removeEventListener("deviceorientation", handleOrientation);
       scene.traverse(disposeNode);
       renderer.dispose();
     }
