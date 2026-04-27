@@ -186,11 +186,6 @@ button {
   max-width: none;
   margin: 0;
   color: var(--accent);
-  background-image: url("/hermes-grain.png"), linear-gradient(var(--accent), var(--accent));
-  background-position: center;
-  background-size: 720px 240px, auto;
-  background-blend-mode: multiply;
-  background-clip: text;
   font-size: clamp(64px, 9.6vw, 178px);
   font-weight: 700;
   line-height: 0.82;
@@ -198,9 +193,6 @@ button {
   text-transform: uppercase;
   text-align: center;
   white-space: nowrap;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  mix-blend-mode: multiply;
 }
 
 .hero-title-lockup {
