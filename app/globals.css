@@ -359,14 +359,17 @@ button {
 
 .hero-stat strong {
   display: block;
-  font-size: clamp(160px, 32vw, 520px);
+  font-size: clamp(120px, 24vw, 380px);
   font-weight: 700;
-  line-height: 0.78;
-  letter-spacing: -0.04em;
+  line-height: 1;
+  letter-spacing: -0.05em;
   font-variant-numeric: tabular-nums;
   color: var(--accent);
   -webkit-text-stroke: 0;
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+  transform: scaleY(1.7);
+  transform-origin: center;
+  margin: clamp(60px, 9vw, 140px) 0;
 }
 
 .hero-stat em {
