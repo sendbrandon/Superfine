@@ -249,11 +249,11 @@ button {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  filter: grayscale(0.35) contrast(1.05) brightness(0.95) saturate(0.7);
+  filter: contrast(1.08) brightness(0.96) sepia(0.12);
 }
 
 .hero-montage video.is-active {
-  opacity: 0.62;
+  opacity: 0.7;
 }
 
 .hero-montage-grain {

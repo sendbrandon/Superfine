@@ -1,39 +1,34 @@
 # Hero Montage Clips
 
-Drop 6–8 short MP4 clips here named `01.mp4` through `08.mp4`. The hero hard-cuts through them every ~520ms behind Anna.
+8 short MP4s (`01.mp4`–`08.mp4`) hard-cut at ~1.6s intervals behind Anna.
 
-## Sourcing (all CC0, free for commercial use)
+## Current source
 
-- **Pexels** — https://www.pexels.com/videos/ (search: doorman, velvet rope, champagne, taxi, subway)
-- **Mixkit** — https://mixkit.co/free-stock-video/ (download → host locally)
-- **Coverr** — https://coverr.co (download → host locally)
-- **Pixabay** — https://pixabay.com/videos/
+Public-domain archival footage from the Internet Archive, on theme with **Black Dandyism / Met Gala 2026: Superfine**:
 
-## Picking clips
+- `01–04.mp4` — **Hi-De-Ho** (1947), Cab Calloway musical — `https://archive.org/details/hi_de_ho`
+- `05–08.mp4` — **Harlem Is Heaven** (1932), Bill Robinson Harlem nightclub — `https://archive.org/details/harlem-is-heaven-1932`
 
-Door imagery beats street imagery. Look for:
+Both films are public domain. Clips are 2.6s, scaled to 1280×720, H.264 baseline, no audio, faststart, ~150–250KB each.
 
-1. Doorman gloves opening a door
-2. Velvet rope close-up
-3. Black town car door slamming
-4. Hand stamping a wrist
-5. Champagne pour into a flute
-6. Taxi meter ticking
-7. NYC subway tile / mosaic
-8. Marquee bulbs flickering
-
-Vertical motion + tight framing > establishing shots. The viewer sees these for ~½ second each.
-
-## Encoding
-
-Compress hard — these play under heavy filtering at 18% opacity, so quality matters less than file size:
+## Re-clipping
 
 ```sh
-ffmpeg -i input.mov -t 3 -vf "scale=1280:-2,crop=ih*0.75:ih" -c:v libx264 -crf 28 -preset slow -an -movflags +faststart 01.mp4
+ffmpeg -y -ss 00:08:30 -t 2.6 \
+  -i "https://archive.org/download/hi_de_ho/Hi-De-Ho_512kb.mp4" \
+  -vf "scale=1280:720:force_original_aspect_ratio=increase,crop=1280:720,fps=24" \
+  -c:v libx264 -crf 30 -preset fast -profile:v baseline -level 3.1 -pix_fmt yuv420p \
+  -an -movflags +faststart 01.mp4
 ```
 
-Target: **<400 KB per clip**, 2–3 sec, no audio, H.264.
+Adjust `-ss` to find better moments. Aim for: well-dressed faces in close-up, dance hall moments, hands tying ties, mirror shots, doormen / coat-checks.
 
-## Customizing
+## Other on-theme PD sources
 
-Pass your own list to `<HeroMontage clips={[...]} beatMs={520} />` in `app/components/GuestList.tsx`. Beat = milliseconds per cut.
+- **Miracle in Harlem** (1948) — `archive.org/details/miracle-in-harlem-1948`
+- **Cab Calloway shorts** — `archive.org/search?query=Cab+Calloway+AND+mediatype:movies`
+- **Prelinger NYC** — `archive.org/details/prelinger` (filter for "Harlem", "fashion", "1940s")
+
+## Customizing in code
+
+Pass your own list to `<HeroMontage clips={[...]} beatMs={1600} />` in `app/components/GuestList.tsx`.
