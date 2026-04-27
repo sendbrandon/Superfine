@@ -961,7 +961,11 @@ button {
 
 @media (max-width: 900px) {
   .page-shell {
-    padding: 48px 20px 148px;
+    padding: 18px 16px 148px;
+  }
+
+  .artifact-header {
+    gap: 0;
   }
 
   .rotary-index {
@@ -1020,65 +1024,66 @@ button {
     font-size: 17px;
   }
 
-  .technical-row,
   .site-footer {
     display: grid;
     justify-content: stretch;
   }
 
+  .technical-row {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    padding-bottom: 8px;
+    gap: 8px;
+  }
+
   .hero-stage {
-    min-height: auto;
+    min-height: calc(100vh - 56px);
     display: grid;
     padding-top: 0;
   }
 
   .hero-stage::after {
-    bottom: auto;
-    height: min(44vw, 174px);
-    background: linear-gradient(
-      90deg,
-      #ffffff 0%,
-      rgba(255, 255, 255, 0.76) 34%,
-      rgba(255, 255, 255, 0) 78%
-    );
+    display: none;
   }
 
   .hero-visual {
-    position: relative;
-    width: 100%;
-    height: min(44vw, 174px);
-  }
-
-  .hero-visual::before {
     position: absolute;
-    right: 50%;
-    bottom: 9px;
-    z-index: 1;
-    width: 76px;
-    height: 1px;
-    content: "";
-    background: rgba(0, 0, 0, 0.2);
-    transform: translateX(50%);
+    inset: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .hero-copy {
-    width: calc(100% - 40px);
-    min-height: auto;
-    margin-left: 20px;
-    padding: 12px 0 24px;
+    width: 100%;
+    min-height: inherit;
+    margin: 0;
+    padding: 14px 16px 100px;
+    justify-content: flex-end;
   }
 
   .wordmark {
-    font-size: clamp(46px, 12.6vw, 82px);
+    font-size: clamp(36px, 10.4vw, 64px);
+    line-height: 0.9;
   }
 
   .hero-title-lockup {
-    gap: 8px;
+    gap: 6px;
+    padding: 0;
   }
 
   .hero-question {
     width: min(100%, 330px);
-    font-size: clamp(12px, 3.2vw, 15px);
+    font-size: clamp(11px, 3vw, 14px);
+  }
+
+  .hero-doors {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-door {
+    min-height: 64px;
+    font-size: clamp(15px, 4.2vw, 22px);
+    letter-spacing: 0;
   }
 
   .hero-instructions {
