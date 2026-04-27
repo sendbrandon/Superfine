@@ -5,14 +5,14 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "THE GUEST LIST — SUPERFINE",
   description:
-    "A one-dollar counter-institution for the Black dandyism lineage.",
+    "Add a name to the public guest list for $1. We make the ticket. You share the proof.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
   ),
   openGraph: {
     title: "THE GUEST LIST — SUPERFINE",
     description:
-      "The only invitation list more exclusive than the one Anna keeps — this one already includes the dead.",
+      "Add a name to the public guest list for $1. We make the ticket. You share the proof.",
     type: "website",
     url: "/",
     siteName: "SUPERFINE",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "THE GUEST LIST — SUPERFINE",
     description:
-      "The only invitation list more exclusive than the one Anna keeps — this one already includes the dead.",
+      "Add a name to the public guest list for $1. We make the ticket. You share the proof.",
     images: ["/api/share"]
   }
 };

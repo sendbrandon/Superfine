@@ -44,7 +44,7 @@ export async function GET(request: Request) {
     ? entryNumber
       ? `${entryNumber} — ${TIER_LABEL[tier]}`
       : TIER_LABEL[tier]
-    : "BUY A SEAT, $1";
+    : "ADD A NAME, $1";
 
   return new ImageResponse(
     (

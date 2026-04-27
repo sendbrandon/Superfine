@@ -16,7 +16,7 @@ type NamePageProps = {
 };
 
 const SHARE_DESCRIPTION =
-  "The only invitation list more exclusive than the one Anna keeps — this one already includes the dead.";
+  "Add a name to the public guest list for $1. We make the ticket. You share the proof.";
 
 export const dynamic = "force-dynamic";
 

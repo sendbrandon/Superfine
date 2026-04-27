@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { addNameAction } from "../actions/add-name";
+import GatekeeperBobblehead from "./GatekeeperBobblehead";
 import LiveCounter from "./LiveCounter";
 import TicketReveal from "./TicketReveal";
 import type { GuestEntry, PaidEntry, Tier } from "@/lib/list";
@@ -250,16 +251,35 @@ export default function GuestList({
           <span>MET GALA 2026</span>
         </div>
 
-        <h1 id="page-title" className="wordmark">
-          THE GUEST LIST
-        </h1>
+        <div className="hero-stage">
+          <div className="hero-visual">
+            <GatekeeperBobblehead
+              activeName={nameValue}
+              isStamping={isPending}
+              seatMode={seatMode}
+            />
+          </div>
+          <div className="hero-copy">
+            <h1 id="page-title" className="wordmark">
+              THE GUEST LIST
+            </h1>
 
-        <div className="lede-row">
-          <p>
-            <span>Seat yourself.</span> <span>Seat someone else.</span>{" "}
-            <span>The receipt becomes public.</span>
-          </p>
-          <LiveCounter initialPaid={initialPaid} initialTotal={initialTotal} />
+            <div className="hero-copy-main">
+              <p className="hero-question">WHO SHOULD HAVE BEEN INVITED?</p>
+              <p className="hero-instructions">
+                <span>Add a name for $1.</span>
+                <span>We make the ticket.</span>
+                <span>You share the proof.</span>
+              </p>
+              <div className="hero-bottom">
+                <div className="hero-actions" aria-label="Hero actions">
+                  <a href="#entry">ADD A NAME, $1</a>
+                  <a href="#guest-list">SEE THE LIST</a>
+                </div>
+                <LiveCounter initialPaid={initialPaid} initialTotal={initialTotal} />
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -304,7 +324,7 @@ export default function GuestList({
           </div>
 
           <label className="field-label" htmlFor="name">
-            {seatMode === "gift" ? "WHO GETS SEATED, $1" : "BUY A SEAT, $1"}
+            {seatMode === "gift" ? "WHO SHOULD BE ON THE LIST, $1" : "ADD A NAME, $1"}
           </label>
           <div className="name-line">
             <input
@@ -320,7 +340,7 @@ export default function GuestList({
               onChange={(event) => setNameValue(event.target.value)}
             />
             <button type="submit" disabled={isPending}>
-              {isPending ? "OPENING" : "ENTER"}
+              {isPending ? "OPENING" : "ADD NAME"}
             </button>
           </div>
 
@@ -393,7 +413,7 @@ export default function GuestList({
           <em>
             {addedEntry?.entryNumber
               ? formatEntryNumber(addedEntry.entryNumber)
-              : "AWAITING LEDGER"}
+              : "AWAITING TICKET"}
           </em>
           {addedEntry?.seatedBy ? (
             <small>SEATED BY {addedEntry.seatedBy}</small>
@@ -404,8 +424,8 @@ export default function GuestList({
       {recentEntries.length ? (
         <section className="public-ledger" aria-labelledby="ledger-title">
           <div className="section-rule">
-            <h2 id="ledger-title">PUBLIC LEDGER</h2>
-            <span>RECENT SEATS</span>
+            <h2 id="ledger-title">RECENTLY SEATED</h2>
+            <span>PUBLIC TICKETS</span>
           </div>
           <ol>
             {recentEntries.map((entry) => (
@@ -437,7 +457,7 @@ export default function GuestList({
         </section>
       ) : null}
 
-      <ol className="guest-list" aria-label="Alphabetical guest list">
+      <ol id="guest-list" className="guest-list" aria-label="Alphabetical guest list">
         {entries.map((entry, index) => {
           const key = entry.name.toLocaleLowerCase("en-US");
           const isHighlighted = highlightedKey && key === highlightedKey;

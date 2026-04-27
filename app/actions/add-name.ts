@@ -10,7 +10,7 @@ type AddNameResult = {
 };
 
 const TIER_PRICE: Record<Tier, { label: string; cents: number }> = {
-  seat: { label: "Take a seat", cents: 100 },
+  seat: { label: "Add a name", cents: 100 },
   ribbon: { label: "The Ribbon", cents: 2500 },
   patron: { label: "Patron", cents: 10000 }
 };

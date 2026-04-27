@@ -14,14 +14,17 @@
     "next": "^14.2.35",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "stripe": "^17.5.0"
+    "stripe": "^17.5.0",
+    "three": "^0.184.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
+    "@types/three": "^0.184.0",
     "eslint": "^8.57.1",
     "eslint-config-next": "^14.2.35",
+    "playwright-core": "^1.59.1",
     "typescript": "^5.7.2"
   }
 }
