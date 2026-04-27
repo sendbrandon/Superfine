@@ -53,6 +53,100 @@ button {
   flex-direction: column;
 }
 
+.rotary-index {
+  position: fixed;
+  top: 50%;
+  right: 22px;
+  z-index: 8;
+  width: 164px;
+  display: grid;
+  gap: 12px;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.rotary-dial-shell {
+  position: relative;
+  width: 132px;
+  height: 132px;
+  margin-left: auto;
+}
+
+.rotary-dial {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  transition: transform 150ms steps(5, end);
+}
+
+.rotary-dial span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 11px;
+  line-height: 1;
+}
+
+.rotary-aperture {
+  position: absolute;
+  inset: 43px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--accent);
+  background: var(--ground);
+  color: var(--accent);
+  font-size: 34px;
+  line-height: 1;
+}
+
+.rotary-readout {
+  border: 1px solid var(--ink);
+  background: var(--ground);
+  padding: 10px;
+}
+
+.rotary-readout > span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.rotary-slot {
+  max-height: 78px;
+  display: grid;
+  gap: 5px;
+  overflow: hidden;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 7px 0;
+}
+
+.rotary-slot em,
+.rotary-slot strong {
+  min-width: 0;
+  overflow: hidden;
+  line-height: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rotary-slot em {
+  font-size: 13px;
+  font-style: italic;
+  text-transform: none;
+}
+
+.rotary-slot strong {
+  color: var(--accent);
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+}
+
 .technical-row,
 .live-counter,
 .site-footer,
@@ -61,6 +155,8 @@ button {
 .ticket-actions,
 .modal-close,
 .patron-mark,
+.rotary-index,
+.index-stamp,
 .fineprint,
 .form-message {
   font-style: normal;
@@ -267,6 +363,34 @@ button {
   margin: 0;
 }
 
+.index-stamp {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.5fr) minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 24px;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 18px 20px 15px;
+  animation: stamp-hit 520ms ease-out 1;
+}
+
+.index-stamp span,
+.index-stamp em {
+  font-size: clamp(13px, 1.2vw, 18px);
+  line-height: 1;
+}
+
+.index-stamp strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: clamp(32px, 5vw, 86px);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 0.9;
+  text-transform: none;
+}
+
 .patrons {
   margin: 96px 0 34px;
   border-top: 2px solid var(--accent);
@@ -436,9 +560,77 @@ button {
   }
 }
 
+@keyframes stamp-hit {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 900px) {
   .page-shell {
-    padding: 48px 20px 72px;
+    padding: 48px 20px 148px;
+  }
+
+  .rotary-index {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    grid-template-columns: 58px minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    border-top: 2px solid var(--ink);
+    background: var(--ground);
+    padding: 9px 12px 10px;
+    transform: none;
+  }
+
+  .rotary-dial-shell {
+    width: 52px;
+    height: 52px;
+    margin: 0;
+  }
+
+  .rotary-dial span {
+    display: none;
+  }
+
+  .rotary-aperture {
+    inset: 0;
+    font-size: 28px;
+  }
+
+  .rotary-readout {
+    min-width: 0;
+    border: 0;
+    padding: 0;
+  }
+
+  .rotary-readout > span {
+    margin-bottom: 4px;
+  }
+
+  .rotary-slot {
+    max-height: none;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr) minmax(0, 0.7fr);
+    align-items: baseline;
+    gap: 10px;
+    padding: 6px 0;
+  }
+
+  .rotary-slot em {
+    font-size: 11px;
+  }
+
+  .rotary-slot strong {
+    font-size: 17px;
   }
 
   .artifact-header {
@@ -490,6 +682,11 @@ button {
     grid-template-columns: 1fr;
     gap: 8px;
   }
+
+  .index-stamp {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
 }
 
 @media (max-width: 620px) {
@@ -522,5 +719,14 @@ button {
 
   .ticket-actions button:last-child {
     border-bottom: 1px solid var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rotary-dial,
+  .guest-row.highlight,
+  .index-stamp {
+    animation: none;
+    transition: none;
   }
 }

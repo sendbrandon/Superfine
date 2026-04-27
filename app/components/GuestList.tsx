@@ -42,6 +42,7 @@ const TIERS: Array<{
     detail: "PATRONS BLOCK"
   }
 ];
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export default function GuestList({
   entries,
@@ -58,12 +59,33 @@ export default function GuestList({
   const [message, setMessage] = useState(error ? errorForCode(error) : "");
   const [isPending, startTransition] = useTransition();
   const [ticketOpen, setTicketOpen] = useState(Boolean(addedName));
+  const [activeIndex, setActiveIndex] = useState(0);
   const formRef = useRef<HTMLFormElement>(null);
 
   const highlightedKey = useMemo(
     () => addedName.trim().toLocaleLowerCase("en-US"),
     [addedName]
   );
+  const activeEntry = entries[activeIndex] || entries[0];
+  const previousActiveEntry = entries[activeIndex - 1];
+  const nextActiveEntry = entries[activeIndex + 1];
+  const activeLetter = getIndexLetter(activeEntry?.sortName || activeEntry?.name);
+  const activeLetterIndex = Math.max(0, ALPHABET.indexOf(activeLetter));
+  const activeEntryNumber =
+    activeEntry?.entryNumber ? formatEntryNumber(activeEntry.entryNumber) : "INDEX";
+  const addedEntry = useMemo(() => {
+    if (!highlightedKey) {
+      return null;
+    }
+
+    return (
+      entries.find(
+        (entry) =>
+          entry.source === "paid" &&
+          entry.name.toLocaleLowerCase("en-US") === highlightedKey
+      ) || null
+    );
+  }, [entries, highlightedKey]);
   const lineagePreview = useMemo(() => {
     const name = nameValue.trim();
     if (name.replace(/[^\p{L}\p{N}]/gu, "").length < 2) {
@@ -113,6 +135,57 @@ export default function GuestList({
     target?.scrollIntoView({ block: "center" });
   }, [highlightedKey]);
 
+  useEffect(() => {
+    let frame = 0;
+
+    function updateActiveIndex() {
+      frame = 0;
+      const rows = Array.from(
+        document.querySelectorAll<HTMLElement>("[data-guest-index]")
+      );
+      if (!rows.length) {
+        return;
+      }
+
+      const targetLine = window.innerHeight * 0.42;
+      let closestIndex = 0;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      rows.forEach((row) => {
+        const rect = row.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const distance = Math.abs(center - targetLine);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = Number(row.dataset.guestIndex || 0);
+        }
+      });
+
+      setActiveIndex((currentIndex) =>
+        currentIndex === closestIndex ? currentIndex : closestIndex
+      );
+    }
+
+    function scheduleUpdate() {
+      if (frame) {
+        return;
+      }
+      frame = window.requestAnimationFrame(updateActiveIndex);
+    }
+
+    updateActiveIndex();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+      }
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+    };
+  }, [entries.length]);
+
   function submit(formData: FormData) {
     setMessage("");
     startTransition(async () => {
@@ -130,6 +203,41 @@ export default function GuestList({
 
   return (
     <main className="page-shell">
+      {activeEntry ? (
+        <aside className="rotary-index" aria-hidden="true">
+          <div className="rotary-dial-shell">
+            <div
+              className="rotary-dial"
+              style={{
+                transform: `rotate(${-activeLetterIndex * (360 / ALPHABET.length)}deg)`
+              }}
+            >
+              {ALPHABET.map((letter, index) => (
+                <span
+                  key={letter}
+                  style={{
+                    transform: `translate(-50%, -50%) rotate(${
+                      index * (360 / ALPHABET.length)
+                    }deg) translateY(-55px)`
+                  }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </div>
+            <div className="rotary-aperture">{activeLetter}</div>
+          </div>
+          <div className="rotary-readout">
+            <span>{activeEntryNumber}</span>
+            <div className="rotary-slot">
+              <em>{previousActiveEntry?.name || "THE DOOR"}</em>
+              <strong>{activeEntry.name}</strong>
+              <em>{nextActiveEntry?.name || "THE END"}</em>
+            </div>
+          </div>
+        </aside>
+      ) : null}
+
       <header className="artifact-header" aria-labelledby="page-title">
         <div className="technical-row">
           <span>SUPERFINE</span>
@@ -229,6 +337,18 @@ export default function GuestList({
         </div>
       </section>
 
+      {addedName ? (
+        <section className="index-stamp" aria-label="Index stamp">
+          <span>CUT INTO THE INDEX</span>
+          <strong>{addedName}</strong>
+          <em>
+            {addedEntry?.entryNumber
+              ? formatEntryNumber(addedEntry.entryNumber)
+              : "AWAITING LEDGER"}
+          </em>
+        </section>
+      ) : null}
+
       {patrons.length ? (
         <section className="patrons" aria-labelledby="patrons-title">
           <h2 id="patrons-title">PATRONS</h2>
@@ -244,7 +364,7 @@ export default function GuestList({
       ) : null}
 
       <ol className="guest-list" aria-label="Alphabetical guest list">
-        {entries.map((entry) => {
+        {entries.map((entry, index) => {
           const key = entry.name.toLocaleLowerCase("en-US");
           const isHighlighted = highlightedKey && key === highlightedKey;
           return (
@@ -252,6 +372,7 @@ export default function GuestList({
               key={entry.id}
               className={isHighlighted ? "guest-row highlight" : "guest-row"}
               data-name-key={key}
+              data-guest-index={index}
             >
               {entry.source === "paid" && entry.slug ? (
                 <a className="guest-name" href={`/n/${entry.slug}`}>
@@ -318,4 +439,14 @@ function sortKeyForClient(name: string) {
 
 function formatEntryNumber(entryNumber: number) {
   return `N° ${entryNumber.toString().padStart(6, "0")}`;
+}
+
+function getIndexLetter(value = "") {
+  const letter = value
+    .replace(/^(a|an|the)\s+/i, "")
+    .trim()
+    .charAt(0)
+    .toLocaleUpperCase("en-US");
+
+  return /^[A-Z]$/.test(letter) ? letter : "A";
 }
