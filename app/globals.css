@@ -1,8 +1,8 @@
 :root {
   --ground: #ffffff;
   --ink: #000000;
-  --accent: #e06a2c;
-  --accent-soft: #f1b58a;
+  --accent: #5a1a20;
+  --accent-soft: #b07a82;
 }
 
 * {
@@ -186,9 +186,10 @@ button {
   max-width: none;
   margin: 0;
   color: var(--accent);
-  background-image: url("/hermes-grain.png");
+  background-image: url("/hermes-grain.png"), linear-gradient(var(--accent), var(--accent));
   background-position: center;
-  background-size: 720px 240px;
+  background-size: 720px 240px, auto;
+  background-blend-mode: multiply;
   background-clip: text;
   font-size: clamp(64px, 9.6vw, 178px);
   font-weight: 700;
@@ -256,32 +257,32 @@ button {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  filter: grayscale(0.6) contrast(1.18) brightness(0.92) saturate(0.55);
-  mix-blend-mode: multiply;
+  filter: grayscale(0.35) contrast(1.05) brightness(0.95) saturate(0.7);
 }
 
 .hero-montage video.is-active {
-  opacity: 0.18;
+  opacity: 0.62;
 }
 
 .hero-montage-grain {
   position: absolute;
   inset: 0;
   background-image: url("/hermes-grain.png");
-  background-size: 240px 240px;
-  opacity: 0.12;
+  background-size: 320px 320px;
+  opacity: 0.08;
   mix-blend-mode: multiply;
 }
 
 .hero-montage-veil {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    ellipse at center,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.55) 70%,
-    rgba(255, 255, 255, 0.85) 100%
-  );
+  background:
+    radial-gradient(
+      ellipse 38% 52% at 50% 38%,
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(255, 255, 255, 0.42) 55%,
+      rgba(255, 255, 255, 0) 95%
+    );
 }
 
 .bobble-stage {
@@ -541,7 +542,7 @@ button {
   line-height: 0.72;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1px rgba(224, 106, 44, 0.22);
+  -webkit-text-stroke: 1px rgba(90, 26, 32, 0.22);
 }
 
 .entry-panel {

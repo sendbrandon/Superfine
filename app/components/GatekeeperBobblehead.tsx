@@ -18,7 +18,7 @@ type SceneState = {
   dispose: () => void;
 };
 
-const ACCENT = 0xe06a2c;
+const ACCENT = 0x5a1a20;
 const COBALT = 0x1248ff;
 const MODEL_URL = "/anna.glb";
 

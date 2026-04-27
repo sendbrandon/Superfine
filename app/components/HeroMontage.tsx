@@ -20,7 +20,7 @@ const DEFAULT_CLIPS = [
 
 export default function HeroMontage({
   clips = DEFAULT_CLIPS,
-  beatMs = 520
+  beatMs = 1600
 }: HeroMontageProps) {
   const list = useMemo(() => clips.filter(Boolean), [clips]);
   const [active, setActive] = useState(0);
