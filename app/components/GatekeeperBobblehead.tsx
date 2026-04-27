@@ -178,15 +178,20 @@ function createScene({
     }
   );
 
+  let lastWidth = 0;
+  let lastHeight = 0;
   function resize() {
     const width = Math.max(1, parent.clientWidth);
     const height = Math.max(1, parent.clientHeight);
+    if (width === lastWidth && height === lastHeight) return;
+    lastWidth = width;
+    lastHeight = height;
     renderer.setSize(width, height, false);
     camera.aspect = width / height;
-    camera.position.z = width < 640 ? 10.7 : 11;
-    root.scale.setScalar(width < 640 ? 0.82 : 1);
-    root.position.x = width < 640 ? 0 : 0.4;
-    root.position.y = width < 640 ? -0.42 : -0.2;
+    camera.position.z = width < 640 ? 10 : 9.6;
+    root.scale.setScalar(width < 640 ? 0.92 : 1.1);
+    root.position.x = 0;
+    root.position.y = width < 640 ? -0.35 : -0.25;
     camera.updateProjectionMatrix();
   }
 
@@ -195,6 +200,7 @@ function createScene({
   resize();
 
   function animate() {
+    resize();
     const elapsed = (performance.now() - startTime) / 1000;
     const typed = activeNameRef.current.trim().length > 0;
     const stamping = isStampingRef.current;

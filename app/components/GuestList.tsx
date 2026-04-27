@@ -264,22 +264,17 @@ export default function GuestList({
               </h1>
               <p className="hero-question">WHO SHOULD HAVE BEEN INVITED?</p>
             </div>
-
-            <div className="hero-copy-main">
-              <p className="hero-instructions">
-                <span>Add a name for $1.</span>
-                <span>We make the ticket.</span>
-                <span>You share the proof.</span>
-              </p>
-              <div className="hero-bottom">
-                <div className="hero-actions" aria-label="Hero actions">
-                  <a href="#entry">ADD A NAME, $1</a>
-                  <a href="#guest-list">SEE THE LIST</a>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
+
+        <nav className="hero-doors" aria-label="Primary actions">
+          <a href="#entry" className="hero-door hero-door-primary">
+            ADD A NAME, $1
+          </a>
+          <a href="#guest-list" className="hero-door hero-door-secondary">
+            SEE THE LIST
+          </a>
+        </nav>
       </header>
 
       <section className="seat-counter" aria-label="Living seat count">
