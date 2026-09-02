@@ -67,7 +67,8 @@ Every prompt written. Status: untested / generated / kept / killed.
 - **Button count:** DOT 6, DAGGER 5, CANVAS 4, FLEECE 2, guests 3. FLEECE is under-served. The next two buttons go to FLEECE.
 - **Retire "mouth open, nothing comes out."** Used twice (E1.2, A2). Find a new DOT stillness.
 - **Endings in black:** E1.6, E2.2. Don't use a third in a row.
-- **Big elements used:** car through a screen, bullet-time riot, octopus transformation. Next one should not be a vehicle or a creature. Candidates: weather indoors, scale (something huge or tiny), time (a jump cut that skips a year).
+- **Big elements used:** car through a screen, bullet-time riot, octopus transformation. The register is action spectacle: a creature, a threat, or a disaster comes into a familiar public place, bystanders run or get eaten, the four don't move. Rotate the type of spectacle (creature, police, cosmic, disaster, chase), not the register.
+- **Killed:** surreal or architectural concepts (a shrinking elevator, a rotating hallway, aging in a waiting room, duplicates, a flooding kitchen). Clever, wrong show. Gondry, not Men in Black. Logged so we don't drift there again.
 - **Light sources used:** pendant bulb, phone screens, streetlight, hallway fluorescent, cooler glow, saint candles, lava lamp, open fridge, grey daylight, laundromat, clamp work light, projector, EXIT sign, phone glow, flashlight, headlights, subway fluorescent, DMV fluorescent. Unused and good: a welding arc, a TV, a police light through a window, a match, a neon sign with no letters.
 - **Locations used:** kitchen (7), living room (2), fire escape (2), bodega, laundromat, theater (6), subway, DMV. Unused from the bible: bathroom, landlord's office, the bus.
 - **Techniques used:** Crash Zoom (2), Whip Pan (2), Transformation, Split Diopter, Speed Ramp, Bullet Time, Crash Cut, Cut-In, Pass Through. Picks not yet used: Dolly Zoom, Snorricam, Object POV, Freeze Frame, Dutch Angle, Worms-Eye, Match Cut, Scale Shift, Duplication.
@@ -84,14 +85,14 @@ Every prompt written. Status: untested / generated / kept / killed.
 
 ## 5. Concept bank (pitched, not written)
 
-Five pitched after B2. Rotation applied: no vehicle, no creature, FLEECE
-buttons, unused techniques and lights.
+First five (flood, elevator, hallway, wait, sublet) killed as off-brand,
+see rotation notes. Second five, action-spectacle register:
 
-- **C1. THE FLOOD.** Kitchen fills with water to the ceiling from the fridge line over 20 seconds while they argue about who left it. They keep arguing underwater. Clamp work light glowing and sparking under the surface is the one light. Underwater, Slow Motion, Fourth Wall. Button FLEECE: "It's not a flood. It's a pool."
-- **C2. THE ELEVATOR.** Riding up to the landlord's floor, the elevator shrinks 10 percent per floor until four bodies are pressed into one cubic meter. Doors open on a normal-sized hallway. One fluorescent panel. Scale Shift, Dutch Angle escalating per floor. Argument: elevator etiquette, face the doors, no talking. Button CANVAS, compressed, mid-eruption, cut off by the doors.
-- **C3. THE HALLWAY.** Walking to the landlord's door, the building hallway rotates 90 degrees over 6 seconds; they end up walking on the wall with the doors as hatches above them. The landlord opens his door from above and looks down at them like a manhole. First landlord appearance. Hallway fluorescent, now vertical. Camera Roll, Locked-On, Worms-Eye. Argument: which side of the hallway you walk on. Button: the landlord.
-- **C4. THE WAIT.** Landlord's waiting room, four chairs, a window. Every cut skips a season: hair grows, the window goes summer to snow, the plant dies, DAGGER's mustache becomes a beard, they never stand up, same $40 argument. The window's changing daylight is the one light. Jump Cut, Match Cut, Fixed Cam. Button FLEECE, old, white curls: "He said five minutes."
-- **C5. THE SUBLET.** FLEECE's plan to cover the rate is a subletter. She arrives and she is DOT, identical, same neckerchief. Then another. By the end five DOTs are prosecuting one CANVAS and he has to say which one is real. Kitchen, clamp work light. Duplication, Snorricam on CANVAS walking the line of DOTs. Button: CANVAS picks the wrong one; ends on the real DOT's face.
+- **C1. THE RAID.** SWAT breaches the wrong apartment: theirs. Door off the hinges, flashbang, red laser dots on four chests, a helicopter searchlight through the window as the one light. The four keep arguing about whether they're 4B or 4D. Light Flash, Spotlight, First-Person down a rifle. Button FLEECE, hands up, calm: "Is this about the cord?"
+- **C2. THE BEAM.** A blue-white tractor beam comes through the ceiling of the living room and starts lifting everything at half a meter per second: chips, the lava lamp, the couch, then them. The beam is the one light. Argument: whether the couch is theirs or the landlord's, and DOT wants the tote. Levitation, Worms-Eye up the beam, Dolly Zoom on DOT. Button FLEECE, rising, upside down: "It's not an abduction. It's relocation."
+- **C3. THE KAIJU.** A three-hundred-foot creature walks up their street. The building shakes 10 centimeters per step, the street empties, its eye fills the kitchen window. Its footsteps are the light: helicopter searchlights sweeping through the window. The four argue about the light bill while it passes. It steps on the laundromat. Cut-Ins on objects walking off shelves, Scale Shift through the window, Dutch Angle. Button CANVAS, at the window, quiet: "That's the cord."
+- **C4. THE LAUNDROMAT.** Zombie outbreak, and the four are mid-load. The dead press against the glass, one gets in and climbs into a dryer, the owner never stops folding. Argument: whether a zombie can take a dryer that has three minutes left on it. Dryer glow and fluorescent. Whip Pan, Speed Ramp on the dryer, Freeze Frame. Button: the owner, folding, "Twelve minutes."
+- **C5. THE BUS.** Night bus, granny cart in the aisle, and the driver's been shot with a tranquilizer dart through the window. The bus can't stop, police chase, helicopter, the four argue about who gives up their seat to steer. Interior strip lights and police strobes through the windows. Tracking alongside the bus, Snorricam on whoever's driving, Crash Cut. Button DOT, at the wheel, not slowing: "This is my stop."
 
 ## 6. Open
 
