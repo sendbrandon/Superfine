@@ -24,7 +24,8 @@ physics). This file is the memory across all three.
 - **No text in frame. No brand logos in image refs.**
 - **The prompt is one paragraph in the director's voice.** Situation first, effect and camera as physics, argument, button, tone tail last, verbatim.
 - **Two-part storylines from here.** Two 15-second prompts, setup and payoff, environment can change between them. Same refs in the same order for both, last frame of part one attached as first-frame reference for part two. Part one ends on a face.
-- **Vibe form by default, the length of the car-chase reference.** About 150 words of direction plus the tail. No numbers, no blocking, no lines, no props. Situation, the big thing, camera energy, the subject of the argument, the ending, pitched out loud. Carry forward only what a run proved has to be said, in a few words. Go long only to repair a beat that drifted.
+- **Vibe form by default, the length of the car-chase reference.** About 150 words of direction plus the tail. Energy, not a set. The setting is an adjective or two, never an inventory: no fixtures, no light sources, no furniture, no blocking, no numbers, no lines, no props beyond the one the concept is about. Action as beats of energy, camera as energy words, then the argument's subject and the ending image. Carry forward only what a run proved has to be said, in a few words. Go long only to repair a beat that drifted.
+- **Caught drifting twice.** The DMV vibe version still inventoried the room (green ceiling, bolted chairs, number boards, stanchions) and the entrance still had a swinging fluorescent tube and tag-team blocking. If a sentence could be a set-dresser's note, cut it.
 
 ## 2. Findings (what generation has taught us)
 
@@ -47,6 +48,13 @@ physics). This file is the memory across all three.
   - The model invents good business. It put CANVAS on the floor mid-riot with tickets landing on him. Adopt inventions that fit into the next version instead of prompting them away.
   - "Green-white fluorescent" produced green ceiling tiles. It looks great and it's now the DMV's look; written into v2 explicitly.
   - Audio and dialogue not evaluated from frames.
+- **From C2b, the entrance part two, first generation (15 s):**
+  - A named fixture becomes the art direction. "A fluorescent tube swinging overhead" turned the whole hallway into a concrete bunker corridor under one tube. Name a fixture and the model builds the room around it.
+  - A specific slow-motion target eats the clip. "Slow motion on the landlord unclipping the belt" produced about four seconds of belt close-ups out of fifteen.
+  - Energy that wasn't named didn't happen. No neighbors, no crowd, no arena. The model rendered what was specified (tube, belt, blocking) and dropped what was implied (the pay-per-view feeling). In vibe form, say the energy and nothing else.
+  - The landlord ref read as a real, funny man: bald, tanned, chain, open shirt, tinted glasses. The first editorial prompt was enough; the Martin Parr version is a refinement, not a fix.
+  - Low-angle group shot with all five looking down into the lens worked. The ending image, the landlord with his hand out, landed.
+  - The four walked toward camera as a group instead of coming out of a door. Without the pickup frame doing its job, the model restaged the entrance.
 
 ## 3. Rotation ledger
 
@@ -80,7 +88,7 @@ Every prompt written. Status: untested / generated / kept / killed.
 | C1a | The trainer, part one (15s) | CANVAS, DAGGER + trainer | gym | fluorescent | Low Angle, High Angle | the trainer picks CANVAS | CANVAS's face | untested |
 | C1b | The trainer, part two (15s) | CANVAS, DAGGER + trainer | gym | fluorescent | Slow Motion, Low Angle | DAGGER | upside down mid-rep | untested |
 | C2a | The entrance, part one (15s) | all four + landlord | hallway | pyro, strobes | Tracking, Low Angle | the landlord | fist raised to knock | untested |
-| C2b | The entrance, part two (15s) | all four + landlord | hallway | swinging fluorescent | Slow Motion, Low Angle | the landlord | hand out for the rent | untested |
+| C2b | The entrance, part two (15s) | all four + landlord | hallway | swinging fluorescent | Slow Motion, Low Angle | the landlord | hand out for the rent | generated, too specific, rewritten as energy only |
 
 ### Rotation notes
 

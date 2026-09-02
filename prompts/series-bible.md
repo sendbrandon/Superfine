@@ -374,16 +374,20 @@ The landlord's first appearance is a wrestling entrance down the building hallwa
 Attach, part one: 1 DOT, 2 FLEECE, 3 CANVAS, 4 DAGGER, 5 the landlord.
 Attach, part two: 1 DOT, 2 FLEECE, 3 CANVAS, 4 DAGGER, 5 the landlord, 6 the last frame of part one.
 
+First versions (generated once) had set dressing and blocking in them: a
+swinging fluorescent tube, "two in front, two behind," slow motion on a
+specific action. Too specific for vibe form. Rewritten below as energy only.
+
 Part one:
 
 ```
-All four of them, @Image1 DOT, @Image2 FLEECE, @Image3 CANVAS, @Image4 DAGGER, are in their apartment when the hallway outside goes off like an arena: glass-shatter, pyro going up in a fucking apartment hallway, smoke, strobes, and the landlord, @Image5, a tiny tanned man in his sixties with a comb-over and a gold chain, walks the whole length of the hallway to their door like it's a wrestling entrance, a title belt over his shoulder, taking his time, neighbors in every doorway like a crowd, and he's here to collect. Quick-cut, dynamic camera, low angle tracking backwards in front of him down the hallway so he looks enormous, faces straight into the lens. It starts with a one-second establishing shot of the four of them hearing it through the door and jumps right into it. The four of them crowded at the peephole, arguing about whether you can have pyro in a hallway and who's answering the door. It ends on the landlord's face at their door, fist raised to knock. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
+All four of them, @Image1 DOT, @Image2 FLEECE, @Image3 CANVAS, @Image4 DAGGER, are in their shitty apartment when the hallway outside goes off like a fucking arena: entrance-music energy, pyro, smoke, strobes, and the landlord, @Image5, a tiny tanned man with a comb-over and a gold chain, makes his way down the hallway to their door like a wrestler walking to the ring, title belt on his shoulder, taking his sweet time, the whole building out watching like a crowd, and he's here to collect. Quick-cut, dynamic camera following him, faces straight into the lens. It starts with a one-second establishing shot of the four of them hearing it through the door and jumps right into it. Reaction shots of the four of them at the door arguing about who's answering it and whether you can even have pyro in a hallway. It ends on the landlord at their door, fist up to knock. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
 ```
 
 Part two:
 
 ```
-Same hallway, picking up from @Image6. The door opens and the four of them, @Image1 DOT, @Image2 FLEECE, @Image3 CANVAS, @Image4 DAGGER, come out as a tag team, two in front, two behind, and the hallway turns into a ring: neighbors pounding on the walls, a fluorescent tube swinging overhead like an arena light, the landlord, @Image5, circling with the belt, dead serious, nobody winks. It's a standoff, not a fight, chest to chest with a man half their size, and they argue about the rent like it's a title match: he wants it, they don't have it, FLEECE tries to negotiate a rate. Quick-cut, low angles, slow motion on the landlord unclipping the belt, faces straight into the lens. It ends on the landlord, unbothered, one hand out for the rent. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
+Same hallway, picking up from @Image6. The door opens and the four of them, @Image1 DOT, @Image2 FLEECE, @Image3 CANVAS, @Image4 DAGGER, come out to face the landlord, @Image5, like it's a fucking title match. He's got the belt, he's half their size, and he's not backing up an inch. The whole hallway turns into an arena, the neighbors going crazy, pay-per-view main event energy in a shitty apartment building, and it's a standoff, not a fight, chest to chest, dead serious, nobody winks. They argue about the rent like a championship is on the line: he wants it, they don't have it, they try to negotiate. Quick-cut, dynamic camera, low angles, faces straight into the lens, slow motion on the big moments. It ends on the landlord, unbothered, hand out for the rent. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
 ```
 
 ## Appendix B. Director-style VFX prompting
@@ -404,12 +408,15 @@ that the effect is described as physics, not named.
 ### Two lengths
 
 **Vibe form, the default.** The length of the original car-chase prompt:
-about 150 words of direction plus the tone tail. No numbers, no blocking, no
-lines, no props. Situation, the big thing that happens, the camera energy
-(one-second establishing shot that jumps right into it, quick cuts, faces
-into the lens), the subject of the argument, the ending. Written the way
-you'd pitch it out loud. The model assembles the rest, and it assembles
-well: the first clip's dialogue was improvised.
+about 150 words of direction plus the tone tail. It describes energy, not a
+set. The setting is an adjective or two ("dimly lit, broken-down
+apartment"), never an inventory: no fixtures, no light sources, no furniture,
+no blocking, no numbers, no lines. The action is described as beats of
+energy the way you'd pitch it out loud (cops hanging out the window, reaction
+shots on the sidewalk, POV down a scope). The camera is energy words: quick-cut,
+dynamic camera following, faces straight into the lens, slow motion on the
+big moments. Then the subject of the argument and the ending image. The model
+builds the room, the light, and the lines, and it builds them well.
 
 Carry forward only what a run proved has to be said, in a few words each:
 slow motion instead of a freeze, "without looking up" for a flat character,
