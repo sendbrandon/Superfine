@@ -356,17 +356,21 @@ that the effect is described as physics, not named.
 
 ### Two lengths
 
-**Short form, the default.** About 220 words of direction plus the tone
-tail. No scripted lines. Five anchors, a few words each: who and where with
-the starting state, the big element as one sentence of physics, the camera
-grammar (cut count, faces into the lens, one wide), the subject of the
-argument, and the ending image. Keep one spatial anchor wherever a run has
-shown drift (which side of the glass). The model assembles the rest, and it
-assembles well: the first clip's dialogue was improvised.
+**Vibe form, the default.** The length of the original car-chase prompt:
+about 150 words of direction plus the tone tail. No numbers, no blocking, no
+lines, no props. Situation, the big thing that happens, the camera energy
+(one-second establishing shot that jumps right into it, quick cuts, faces
+into the lens), the subject of the argument, the ending. Written the way
+you'd pitch it out loud. The model assembles the rest, and it assembles
+well: the first clip's dialogue was improvised.
 
-**Long form, when needed.** The before-and-after chain from rules 8 and 9,
-for a scene where one effect has to land exactly, or after a short-form run
-drifts on a specific beat. Fix the beat that drifted, not the whole prompt.
+Carry forward only what a run proved has to be said, in a few words each:
+slow motion instead of a freeze, "without looking up" for a flat character,
+"faces straight into the lens."
+
+**Long form, the repair.** The before-and-after chain from rules 8 and 9,
+used only after a vibe-form run drifts on a specific beat. Fix that beat,
+not the whole prompt.
 
 Never script lines unless the line is the joke.
 
@@ -392,12 +396,12 @@ Attach, in order: 1 DOT lookbook, 2 CANVAS lookbook.
 These two people, @Image1, DOT, the blonde with the polka-dot neckerchief, and @Image2, CANVAS, the buzzed redhead in the tan work jacket, are three hours deep in a DMV waiting room. Starting state: a green ceiling grid of fluorescent panels, flat green-white light, the only light, rows of grey plastic chairs bolted together in lines of eight, forty people sitting holding paper tickets, red number boards above six service windows, retractable-belt stanchions zigzagging an empty queue, a beige eye-test machine on a counter, and a clerk behind the glass at window four in a cardigan with a stamp in her hand who has not looked up since 1994. Nothing moves. DOT is third row center holding her ticket up at eye level like a hand of cards. CANVAS is next to her, slumped, arms crossed, legs out, eyes half shut. Hold the establishing wide for one second only, then cut. The board dings, a man in a tracksuit walks straight past the queue to window four with no ticket, a man in a suit gets up out of the front row, and they're chest to chest. Crash cut: the suit shoves him, the tracksuit goes backward into a stanchion, the belt rips out and whips two meters across the aisle at head height and tears the tickets out of the front row's hands, and now the air is full of paper tickets falling like confetti. State change: a still room to a room where everyone is standing and paper is in the air. Someone rips a bolted chair off the floor and throws it. One whip pan, four frames long, that lands on the two of them, then a crash zoom onto CANVAS: before the zoom he's slack, thirty percent of the frame, mouth closed; it lands in three frames and he's eighty percent of the frame, eyes wide open, jaw open. From that face he turns to her: "We're leaving." DOT lowers the ticket to her chest, turns her head to the camera, and looks straight down the lens: "They're two away from us." Cut between their faces on every line, one second each. "There's a chair in the air." "That's not our window." A stanchion pole knocks CANVAS out of his seat and he's on the floor on his back with tickets landing on him. Then the big one: everyone in the room except DOT drops to five percent speed. The thrown chair hangs a meter in the air and sinks two centimeters per second, the tickets drift down at five centimeters per second, a man's punch takes four seconds to land, forty bodies moving like they're underwater, nobody in the background changes pose faster than she can walk past them. DOT stands up at normal speed because the board just dinged her number, and the camera arcs a full 180 degrees around her on a two and a half meter radius at one meter per second while she walks six meters through the slow-motion fight to window four, ducks under the taut belt, steps over CANVAS on the floor, ticket held out in front of her. The second her ticket touches the counter, cut-in on the ticket landing, everyone snaps back to full speed at once: the chair lands, the tickets hit the floor, the punch connects, the noise comes back. The clerk is on the far side of the glass. She brings the stamp down, looks at the ticket, looks at DOT's form, and never raises her head or her eyebrows, flat: "Wrong form." CANVAS gets up off the floor and arrives next to DOT on the customer side of the glass with tickets stuck to his jacket. It ends on DOT's face, completely still, then she walks to the ticket dispenser and pulls a new number. It's a high-energy, high-paced, quick-cut, 30-second clip, twelve to fifteen cuts, no shot held longer than three seconds, that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
 ```
 
-### B2 short. THE DMV, short form, about 220 words plus tail
+### B2 vibe. THE DMV, vibe form, the default length
 
-Same fixes as v2, direction only, no lines. Attach: 1 DOT, 2 CANVAS.
+Direction only, the length of the car-chase reference. Attach: 1 DOT, 2 CANVAS.
 
 ```
-These two people, @Image1, DOT, the blonde with the polka-dot neckerchief, and @Image2, CANVAS, the buzzed redhead in the tan work jacket, are three hours deep in a packed DMV, green fluorescent ceiling, bolted grey chairs, red number boards over six windows, belt stanchions. She's holding her ticket up at eye level. He's slumped, eyes half shut. A guy cuts the line at window four, a guy in a suit gets up, and the whole fucking room goes: a stanchion belt whips across the aisle, tickets go up like confetti, a chair gets thrown, CANVAS gets knocked to the floor. One-second wide, then quick cuts, faces straight into the lens, crash zoom on CANVAS waking up, the two of them arguing about leaving while the riot happens around them, because she is not leaving before her number. The board dings her number and everyone except her drops to five percent speed, tickets drifting down, the chair hanging in the air, a punch taking four seconds to land, and she walks through it at normal speed to window four, camera arcing all the way around her, ducks under the belt, steps over CANVAS. Her ticket hits the counter and the room snaps back to full speed. The clerk behind the glass stamps it without looking up: wrong form. CANVAS joins her on the customer side, tickets stuck to his jacket. Ends on her face, dead still, then she pulls a new number. It's a high-energy, high-paced, quick-cut, 30-second clip, twelve to fifteen cuts, that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
+These two people, @Image1 DOT and @Image2 CANVAS, are stuck at the DMV, three hours deep, packed room, and a fight breaks out at the window because some guy cuts the line, and the whole fucking place goes off. Chairs flying, tickets in the air like confetti, people on the floor, a full DMV riot. Quick-cut, dynamic camera, faces straight into the lens. It starts with a one-second establishing shot of the room, dead quiet, everybody miserable, and jumps right into it. Reaction shots of people climbing over chairs. The two of them don't move. They're in a heated argument about leaving, and she is not leaving before her number gets called. Then her number gets called, and the whole riot drops into slow motion around her while she walks through it at normal speed to the window, camera swinging all the way around her, and the clerk stamps her form without looking up: wrong form. Ends on her face. It's a high-energy, high-paced, quick-cut, 30-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
 ```
 
 ### B1. THE OCTOPUS (DOT and CANVAS, subway, 15 seconds)
