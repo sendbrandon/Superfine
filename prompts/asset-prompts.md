@@ -105,3 +105,14 @@ A red 1960s Corvette Stingray, pop-up headlights up and on, chrome bumpers, side
 
 The theater plate above covers the location. The crowd comes from the
 video prompt.
+
+---
+
+# The trainer (recurring guest, C1 and any gym scene)
+
+Single image, editorial light, same photographic recipe that fixed
+Bigfoot. Attach as @Image3 in both parts of C1.
+
+```
+Editorial full-body portrait photograph of an enormous Black man in his late thirties, six foot five, bodybuilder physique, shoulders twice the width of his waist, shaved head, clean-shaven, black wraparound sport sunglasses, no expression. Wardrobe, 1985: a red-and-black striped spandex singlet, a wide black leather weightlifting belt, white terry headband, white tube socks pulled to the knee, white leather high-top sneakers, a coach's whistle on a cord around his neck. Standing square to camera, arms folded, feet wide. Plain seamless light-grey studio backdrop, one large soft key light from camera left, real falling shadow on the floor and backdrop, medium format film, Kodak Portra 400, fine grain, natural skin texture, no retouching, no text, no logos. 3:4.
+```

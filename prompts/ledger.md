@@ -23,6 +23,7 @@ physics). This file is the memory across all three.
 - **Numbers, not adjectives.** Before-state, action, after-state, then chain the next beat from the after-state. Say what does not move.
 - **No text in frame. No brand logos in image refs.**
 - **The prompt is one paragraph in the director's voice.** Situation first, effect and camera as physics, argument, button, tone tail last, verbatim.
+- **Two-part storylines from here.** Two 15-second prompts, setup and payoff, environment can change between them. Same refs in the same order for both, last frame of part one attached as first-frame reference for part two. Part one ends on a face.
 - **Vibe form by default, the length of the car-chase reference.** About 150 words of direction plus the tail. No numbers, no blocking, no lines, no props. Situation, the big thing, camera energy, the subject of the argument, the ending, pitched out loud. Carry forward only what a run proved has to be said, in a few words. Go long only to repair a beat that drifted.
 
 ## 2. Findings (what generation has taught us)
@@ -76,6 +77,8 @@ Every prompt written. Status: untested / generated / kept / killed.
 | B2 v2 | The DMV, fixed | DOT, CANVAS | DMV | same | same, freeze replaced by 5 percent speed | DOT | same | untested |
 | B2 vibe | The DMV, vibe form | DOT, CANVAS | DMV | same | slow motion, one-second establishing | DOT | her face | untested |
 | B3 | The raid (30s, vibe form) | all four + SWAT | apartment | clamp light, then helicopter searchlight | Light Flash, Spotlight, First-Person scope | FLEECE | "is this about the cord" | untested |
+| C1a | The trainer, part one (15s) | CANVAS, DAGGER + trainer | gym | fluorescent | Low Angle, High Angle | the trainer picks CANVAS | CANVAS's face | untested |
+| C1b | The trainer, part two (15s) | CANVAS, DAGGER + trainer | gym | fluorescent | Slow Motion, Low Angle | DAGGER | upside down mid-rep | untested |
 
 ### Rotation notes
 

@@ -339,6 +339,34 @@ Picks up on the last frame of the first clip, @Image8, DAGGER handing the bottle
 
 (see above)
 
+## Appendix C. Two-part storylines (the default format from here)
+
+Two 15-second prompts that tell one story. Part one is the setup, part two
+is the payoff, and the environment can change between them. Both in vibe
+form. Same refs in the same order for both parts, and the last frame of
+part one is attached as the first-frame reference for part two so the
+place and any guest character hold. Part one ends on a face: that is the
+cut.
+
+### C1. THE TRAINER (CANVAS and DAGGER, plus the trainer)
+
+DAGGER has decided he wants a personal trainer. CANVAS is there to pay. The trainer is enormous, 1985 spandex, black shades, and he interrogates them. Part two: the workouts, weirdly intimate, played dead serious. The trainer's image prompt is in `asset-prompts.md`.
+
+Attach, part one: 1 CANVAS lookbook, 2 DAGGER lookbook, 3 the trainer.
+Attach, part two: 1 CANVAS, 2 DAGGER, 3 the trainer, 4 the last frame of part one.
+
+Part one:
+
+```
+These two, @Image1 CANVAS and @Image2 DAGGER, walk into a rundown 24-hour gym, mirrors, rubber floors, fluorescent light, because DAGGER has decided he wants a personal trainer, and the trainer, @Image3, is the most enormous human being either of them has ever seen, a jacked-to-the-gods Black guy in tight 1985 spandex, black wraparound shades, weight belt, whistle, and he doesn't say hi, he interrogates them. What do they eat. When did they last sweat. Why is one of them wearing a cap indoors. Whose idea was this. He circles them like a drill sergeant. Quick-cut, dynamic camera, faces straight into the lens, low angle on the trainer so he fills the frame, high angle on the two of them so they look small. It starts with a one-second establishing shot of the gym and jumps right into it. DAGGER answers everything honestly. CANVAS is only there to pay and says so, and the trainer decides CANVAS is the one who needs him. It ends on CANVAS's face. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
+```
+
+Part two:
+
+```
+Same gym, same three, picking up from @Image4. The trainer, @Image3, has @Image1 CANVAS and @Image2 DAGGER doing the most insane partner workouts, weirdly intimate, played dead fucking serious: CANVAS holding DAGGER's ankles for sit-ups nose to nose, the wheelbarrow across the rubber floor, partner hip thrusts, the trainer counting reps way too close to their faces, spotting them with his whole body, blowing the whistle, spray bottle. Everyone else in the gym stops to watch. Quick cuts, low angles, slow motion on the worst one, faces straight into the lens. The two of them argue the whole time about whose idea this was and who's paying, and neither of them stops doing the exercise. It ends on DAGGER's face, upside down, mid-rep, having the best day of his life. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
+```
+
 ## Appendix B. Director-style VFX prompting
 
 For scenes where an effect has to land. The tone tail stays. What changes is
