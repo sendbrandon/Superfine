@@ -30,13 +30,20 @@ The living room of the same broken-down apartment at night. A sagging brown couc
 Looking up from a narrow alley at a rusted iron fire escape and an open second-floor apartment window. A bright orange extension cord hangs from the window down the fire escape and stops short above a grey outdoor outlet box on the brick wall. Brick, rust, wet asphalt, a dumpster, a back door. The only light is green-white fluorescent spilling out of the open window from a hallway inside. Empty set, no people, no text, no legible signage, labels, posters, or photos. Three-quarter angle, low, slightly wide lens. Photoreal, 35mm film, one light source only, deep falloff, cold over teal-green shadows, muted color, fine grain, slight halation on the source. 3:4.
 ```
 
+## Plate rule, learned the hard way
+
+The first apartment plate stacked fifteen art-directed details and came
+back looking like a set. Describe the kind of photograph, not the room.
+Run-down apartments are one of the most photographed things online
+(listings, roommate ads, complaints to landlords) and the model has seen
+millions. Name that category of photo, give the layout in three nouns, two
+adjectives, and stop. Under sixty words. "Looks like a real place, not a
+movie set" does more than any inventory.
+
 ## 3b. Apartment plate, the main room with the front door (home base)
 
-One plate that covers the kitchen fights, the couch, and the door. Attach
-as the last image on any scene set at home.
-
 ```
-A small, broken-down railroad apartment seen from a three-quarter angle, two walls and the floor in frame, eye level, slightly wide lens. The kitchen corner on the left: peeling teal-grey paint over brown plaster, a filthy white enamel sink, grimy cream cabinets, stacks of unopened envelopes on the counter, a chip bag on the cracked tile. The living area on the right: a sagging brown couch, a milk crate for a coffee table, a nest of extension cords, bare walls with nail holes, one window with dirty glass. At the back, the front door with a chain lock and a peephole, papers taped to it with illegible print. The only light is a frosted-glass dome pendant bulb hanging over the kitchen side, warm tungsten, everything past its pool falling into teal-green shadow. Empty set, no people, no text, no legible signage, labels, posters, or photos. Photoreal, 35mm film, deep falloff, warm over teal-green shadows, muted color, fine grain, slight halation on the bulb. 3:4.
+A photo of a small, run-down apartment in the city, taken on a phone from the corner of the main room, three-quarter view, the kind of picture someone posts when they need a roommate. Kitchen on one side, couch on the other, front door at the back. Dimly lit, nobody home, no text anywhere. Looks like a real apartment, not a movie set. 3:4.
 ```
 
 The truest version of this plate already exists: the wide shot in the
@@ -46,8 +53,11 @@ attached as the plate instead of, or alongside, this generation.
 ## 3c. Hallway plate (the entrance, the raid, the cord)
 
 ```
-A narrow, run-down apartment-building hallway seen from a three-quarter angle looking down its length, eye level, slightly wide lens. Beige paint gone grey, a scuffed rubber floor, apartment doors on both sides with chain locks, one door with papers taped to it, illegible print, a cracked window at the far end. Lived in: a bike chained to a radiator, a stroller, a bag of trash outside one door. Warm, tired light from a few ceiling fixtures down the hall, not a bunker, not a corridor, a place where people live and hear each other through the walls. Empty set, no people, no text, no legible signage, labels, posters, or photos. Photoreal, 35mm film, deep falloff, warm over teal-green shadows, muted color, fine grain. 3:4.
+A photo of a hallway in an old, run-down apartment building in the city, taken on a phone from one end looking down it, the kind of picture attached to a complaint to the landlord. Doors on both sides, tired light, nobody in it, no text anywhere. Looks like a real building, not a movie set. 3:4.
 ```
+
+The kitchen, living room, and fire escape plates above are written the
+old way. Rewrite them to this rule before generating them.
 
 ## 4. The laundromat owner (recurring, no ref yet)
 

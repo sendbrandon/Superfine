@@ -25,6 +25,7 @@ physics). This file is the memory across all three.
 - **The prompt is one paragraph in the director's voice.** Situation first, effect and camera as physics, argument, button, tone tail last, verbatim.
 - **Two-part storylines from here.** Two 15-second prompts, setup and payoff, environment can change between them. Same refs in the same order for both, last frame of part one attached as first-frame reference for part two. Part one ends on a face.
 - **Vibe form by default, the length of the car-chase reference.** About 150 words of direction plus the tail. Energy, not a set. The setting is an adjective or two, never an inventory: no fixtures, no light sources, no furniture, no blocking, no numbers, no lines, no props beyond the one the concept is about. Action as beats of energy, camera as energy words, then the argument's subject and the ending image. Carry forward only what a run proved has to be said, in a few words. Go long only to repair a beat that drifted.
+- **Image prompts are directional too.** Name the kind of photograph (a roommate-ad phone photo, a complaint to the landlord, a driver's license photo, a Martin Parr) and the kind of place, two adjectives, and stop. An inventory of details builds a set; a category of photo pulls a real one out of the training data.
 - **Caught drifting twice.** The DMV vibe version still inventoried the room (green ceiling, bolted chairs, number boards, stanchions) and the entrance still had a swinging fluorescent tube and tag-team blocking. If a sentence could be a set-dresser's note, cut it.
 
 ## 2. Findings (what generation has taught us)
@@ -48,6 +49,7 @@ physics). This file is the memory across all three.
   - The model invents good business. It put CANVAS on the floor mid-riot with tickets landing on him. Adopt inventions that fit into the next version instead of prompting them away.
   - "Green-white fluorescent" produced green ceiling tiles. It looks great and it's now the DMV's look; written into v2 explicitly.
   - Audio and dialogue not evaluated from frames.
+- **From the apartment plate, first generation:** it looked fake. Fifteen art-directed details (peeling teal paint, enamel sink, milk crate, nail holes, chain lock, pendant bulb, halation) composed into a dressed set. Rewritten as "a phone photo of a run-down apartment, the kind someone posts when they need a roommate," under sixty words. The category of photo is the direction; the room comes from the data.
 - **From C2b, the entrance part two, first generation (15 s):**
   - A named fixture becomes the art direction. "A fluorescent tube swinging overhead" turned the whole hallway into a concrete bunker corridor under one tube. Name a fixture and the model builds the room around it.
   - A specific slow-motion target eats the clip. "Slow motion on the landlord unclipping the belt" produced about four seconds of belt close-ups out of fifteen.
