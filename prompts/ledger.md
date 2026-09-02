@@ -82,7 +82,18 @@ Every prompt written. Status: untested / generated / kept / killed.
 - Method: `series-bible.md` Appendix B, rules 1 to 9
 - Techniques: `eyecandy-vocabulary.md`
 
-## 5. Open
+## 5. Concept bank (pitched, not written)
+
+Five pitched after B2. Rotation applied: no vehicle, no creature, FLEECE
+buttons, unused techniques and lights.
+
+- **C1. THE FLOOD.** Kitchen fills with water to the ceiling from the fridge line over 20 seconds while they argue about who left it. They keep arguing underwater. Clamp work light glowing and sparking under the surface is the one light. Underwater, Slow Motion, Fourth Wall. Button FLEECE: "It's not a flood. It's a pool."
+- **C2. THE ELEVATOR.** Riding up to the landlord's floor, the elevator shrinks 10 percent per floor until four bodies are pressed into one cubic meter. Doors open on a normal-sized hallway. One fluorescent panel. Scale Shift, Dutch Angle escalating per floor. Argument: elevator etiquette, face the doors, no talking. Button CANVAS, compressed, mid-eruption, cut off by the doors.
+- **C3. THE HALLWAY.** Walking to the landlord's door, the building hallway rotates 90 degrees over 6 seconds; they end up walking on the wall with the doors as hatches above them. The landlord opens his door from above and looks down at them like a manhole. First landlord appearance. Hallway fluorescent, now vertical. Camera Roll, Locked-On, Worms-Eye. Argument: which side of the hallway you walk on. Button: the landlord.
+- **C4. THE WAIT.** Landlord's waiting room, four chairs, a window. Every cut skips a season: hair grows, the window goes summer to snow, the plant dies, DAGGER's mustache becomes a beard, they never stand up, same $40 argument. The window's changing daylight is the one light. Jump Cut, Match Cut, Fixed Cam. Button FLEECE, old, white curls: "He said five minutes."
+- **C5. THE SUBLET.** FLEECE's plan to cover the rate is a subletter. She arrives and she is DOT, identical, same neckerchief. Then another. By the end five DOTs are prosecuting one CANVAS and he has to say which one is real. Kitchen, clamp work light. Duplication, Snorricam on CANVAS walking the line of DOTs. Button: CANVAS picks the wrong one; ends on the real DOT's face.
+
+## 6. Open
 
 - Names for the four. Handles are placeholders.
 - Which Bigfoot image version held up (studio vs in-world).
