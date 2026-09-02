@@ -23,6 +23,7 @@ physics). This file is the memory across all three.
 - **Numbers, not adjectives.** Before-state, action, after-state, then chain the next beat from the after-state. Say what does not move.
 - **No text in frame. No brand logos in image refs.**
 - **The prompt is one paragraph in the director's voice.** Situation first, effect and camera as physics, argument, button, tone tail last, verbatim.
+- **Short form by default, about 220 words plus the tail.** Five anchors: who and where with starting state, the big element as one sentence of physics, camera grammar with a cut count, the subject of the argument, the ending image. No scripted lines unless the line is the joke. Go long only to fix a beat that drifted.
 
 ## 2. Findings (what generation has taught us)
 
