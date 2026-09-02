@@ -374,20 +374,19 @@ The landlord's first appearance is a wrestling entrance down the building hallwa
 Attach, part one: 1 DOT, 2 FLEECE, 3 CANVAS, 4 DAGGER, 5 the landlord.
 Attach, part two: 1 DOT, 2 FLEECE, 3 CANVAS, 4 DAGGER, 5 the landlord, 6 the last frame of part one.
 
-First versions (generated once) had set dressing and blocking in them: a
-swinging fluorescent tube, "two in front, two behind," slow motion on a
-specific action. Too specific for vibe form. Rewritten below as energy only.
+Earlier versions (one generated) carried set dressing, blocking, and
+descriptions of the landlord. Rebuilt on the car-chase skeleton.
 
 Part one:
 
 ```
-All four of them, @Image1 DOT, @Image2 FLEECE, @Image3 CANVAS, @Image4 DAGGER, are in their shitty apartment when the hallway outside goes off like a fucking arena: entrance-music energy, pyro, smoke, strobes, and the landlord, @Image5, a tiny tanned man with a comb-over and a gold chain, makes his way down the hallway to their door like a wrestler walking to the ring, title belt on his shoulder, taking his sweet time, the whole building out watching like a crowd, and he's here to collect. Quick-cut, dynamic camera following him, faces straight into the lens. It starts with a one-second establishing shot of the four of them hearing it through the door and jumps right into it. Reaction shots of the four of them at the door arguing about who's answering it and whether you can even have pyro in a hallway. It ends on the landlord at their door, fist up to knock. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
+All four of them, @Image1 DOT, @Image2 FLEECE, @Image3 CANVAS, @Image4 DAGGER, are in their apartment when the landlord, @Image5, comes down the hallway to collect the rent like a fucking wrestler making his entrance to the ring. Quick-cut camera motion, dynamic movement, dynamic camera following him. It starts with a really high-intense establishing shot for one or two seconds max that jumps right into it: pyro going off, smoke, strobes, entrance music energy, the landlord walking slow with a title belt over his shoulder, neighbors coming out of their doors going crazy like a crowd. We cut to reaction shots of the four of them inside at the door, "oh my God, oh my God," arguing about who's answering it and whether you can even have pyro in a hallway. He gets to the door and knocks. It's just high-intense, and it feels like a cinematic movie. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
 ```
 
 Part two:
 
 ```
-Same hallway, picking up from @Image6. The door opens and the four of them, @Image1 DOT, @Image2 FLEECE, @Image3 CANVAS, @Image4 DAGGER, come out to face the landlord, @Image5, like it's a fucking title match. He's got the belt, he's half their size, and he's not backing up an inch. The whole hallway turns into an arena, the neighbors going crazy, pay-per-view main event energy in a shitty apartment building, and it's a standoff, not a fight, chest to chest, dead serious, nobody winks. They argue about the rent like a championship is on the line: he wants it, they don't have it, they try to negotiate. Quick-cut, dynamic camera, low angles, faces straight into the lens, slow motion on the big moments. It ends on the landlord, unbothered, hand out for the rent. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
+Same hallway, picking up from @Image6. The four of them, @Image1 DOT, @Image2 FLEECE, @Image3 CANVAS, @Image4 DAGGER, open the door and step out to face the landlord, @Image5, like it's a fucking title match. Quick-cut camera motion, dynamic movement, dynamic camera. It starts with a really high-intense establishing shot for one or two seconds max that jumps right into it: the landlord with the belt not backing up, the four of them chest to chest with him, neighbors going crazy in the hallway like a crowd at a main event, slow motion on the big moments. We cut to reaction shots of the neighbors, "oh my God, oh my God." The four of them and the landlord are going back and forth in a heated argument over the rent, because he wants it and they don't have it. It's just high-intense, and it feels like a cinematic movie. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
 ```
 
 ## Appendix B. Director-style VFX prompting
@@ -421,6 +420,23 @@ builds the room, the light, and the lines, and it builds them well.
 Carry forward only what a run proved has to be said, in a few words each:
 slow motion instead of a freeze, "without looking up" for a flat character,
 "faces straight into the lens."
+
+**The skeleton, taken from the car-chase reference.** Fill it, don't
+expand it:
+
+> [Who, by ref] are [situation, one line, with the why]. Quick-cut camera
+> motion, dynamic movement, dynamic camera following. It starts with a
+> really high-intense establishing shot for one or two seconds max that
+> jumps right into the action: [action beat], [action beat], [action beat].
+> We cut to reaction shots of [who], "oh my God, oh my God," [doing what].
+> [Escalation beat]. [POV beat, if there is one]. [The characters] are
+> going back and forth in a heated argument over [subject], because
+> [reason]. It's just high-intense, and it feels like a cinematic movie.
+> [tone tail]
+
+No descriptions of people (the refs carry them), no set, no fixtures, no
+light, no ending image. Action beats are things that happen, never things
+that are there.
 
 **Long form, the repair.** The before-and-after chain from rules 8 and 9,
 used only after a vibe-form run drifts on a specific beat. Fix that beat,
