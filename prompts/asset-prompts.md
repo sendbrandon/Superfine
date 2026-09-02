@@ -110,12 +110,17 @@ video prompt.
 
 # The landlord (recurring, first appears in C2)
 
-Single image, editorial recipe. Clean, no belt, so he's reusable. The
-title belt lives in the video prompt.
+Single image. Funny and real: every detail is something an actual man
+owns, none of it costume, and the light is a direct on-camera flash, the
+Martin Parr look, which reads as a real photograph of a real guy. Clean
+backdrop, no belt, so he's reusable. The title belt lives in the video
+prompt.
 
 ```
-Editorial full-body portrait photograph of a small tanned man in his late sixties, five foot five, a comb-over dyed too dark, a gold chain, teeth too white, the smile of a man who owns eleven buildings and fixes none of them. Wardrobe: a cream short-sleeve dress shirt open one button too many, pleated tan slacks, white loafers with no socks, a chunky gold watch, a fat ring of keys clipped to his belt. Standing with hands on hips, chin up. Plain seamless pale-pink studio backdrop, one large soft key light from camera left, real falling shadow on the floor and backdrop, medium format film, Kodak Portra 400, fine grain, natural skin texture, no retouching, no text, no logos. 3:4.
+Full-body portrait photograph, direct on-camera flash, of a real man in his late sixties, five foot five, a hard round belly on thin legs. A real face, not handsome: jowls, a bulbous nose with broken capillaries, small close-set eyes, a spray tan two shades darker than his neck, sweat on the upper lip, eyebrows dyed to match a comb-over that is losing the battle, teeth too white for the face. Wardrobe he actually wears: a cream short-sleeve dress shirt straining at the belly, top three buttons open on grey chest hair and a thick gold chain, pleated tan slacks hemmed too long and puddling on white leather loafers with no socks, a chunky gold watch, a pinky ring, transition lenses gone half-dark indoors, a phone in a leather holster on his belt, a fat ring of keys on a carabiner. Standing square to camera, arms folded, chin up, closed-mouth smile with the eyebrows raised, the confidence of a man who owns eleven buildings and fixes none of them. Plain seamless pale-pink backdrop, one hard flash from the camera, a sharp shadow thrown behind him on the backdrop, slightly overexposed skin, saturated color, the look of a Martin Parr photograph or a driver's license photo. Shot on 35mm, Kodak Portra 400, fine grain, real skin texture, no retouching, no text, no logos. 3:4.
 ```
+
+If it comes back too clean, add "unflattering, affectionate, candid" after the Martin Parr line. If it comes back too cartoonish, remove "teeth too white" and "eyebrows dyed."
 
 # The trainer (recurring guest, C1 and any gym scene)
 
