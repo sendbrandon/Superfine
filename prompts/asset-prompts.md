@@ -78,3 +78,18 @@ A whole rotisserie chicken in a clear plastic dome container, lid fogged with st
 
 The usher, the ticket stub, and the phone are one-scene items already
 described in the prompts. Generate them fresh.
+
+## 4. Bigfoot, single image (for THE CORVETTE, replaces the lookbook)
+
+```
+A seven-foot Bigfoot, the classic Patterson-Gimlin build, heavy brow, deep-set eyes, sagittal crest, matted dark-brown fur with reddish tips, broad chest, long arms, thick thighs, huge flat feet, completely real, a living animal, no costume seams, no mask edges, the fur reads as real hair. Full body, standing in a relaxed three-quarter stance, looking straight into camera, bored, a fried chicken drumstick in his right hand, a dark cognac bottle with a gold-and-black label in his left, lettering illegible. Plain seamless grey studio backdrop, flat even studio light, no hard shadows, medium format, photoreal, no text, no logos. 3:4.
+```
+
+## 5. The Corvette (THE CORVETTE only)
+
+```
+A red 1960s Corvette Stingray, pop-up headlights up and on, chrome bumpers, side exhaust pipes, a few dents, dust on the hood, no license plate, badges out of focus. Three-quarter front view, full car, on a plain seamless dark grey studio backdrop, flat even studio light with the headlights glowing, photoreal, true colors, no text, no logos, no people. 4:3.
+```
+
+The theater plate above covers the location. The crowd comes from the
+video prompt.
