@@ -81,8 +81,20 @@ described in the prompts. Generate them fresh.
 
 ## 4. Bigfoot, single image (for THE CORVETTE, replaces the lookbook)
 
+The flat-lit seamless version read as a costume. Two fixes: describe him as
+an animal with primate anatomy, and light him like a photograph. Say the
+word Bigfoot once, late, or not at all.
+
+Version A, studio reference, editorial light:
+
 ```
-A seven-foot Bigfoot, the classic Patterson-Gimlin build, heavy brow, deep-set eyes, sagittal crest, matted dark-brown fur with reddish tips, broad chest, long arms, thick thighs, huge flat feet, completely real, a living animal, no costume seams, no mask edges, the fur reads as real hair. Full body, standing in a relaxed three-quarter stance, looking straight into camera, bored, a fried chicken drumstick in his right hand, a dark cognac bottle with a gold-and-black label in his left, lettering illegible. Plain seamless grey studio backdrop, flat even studio light, no hard shadows, medium format, photoreal, no text, no logos. 3:4.
+Editorial portrait photograph of a seven-foot unknown great ape, a real living animal, Patterson-Gimlin proportions: heavy brow ridge, deep-set dark eyes with wet corneas, broad flat nose with visible pores, dark leathery skin showing through on the face, palms, chest and knees, a sagittal crest, massive shoulders, long arms, thick thighs, huge flat feet. Hair, not fur: coarse, dark-brown, uneven lengths, matted in patches, thinning on the chest and forearms, burrs and dirt in it, a few grey strands at the jaw, individual strands catching the light. Standing in a relaxed three-quarter stance looking straight into camera, unimpressed, a fried chicken drumstick in his right hand, a dark cognac bottle with a gold-and-black label in his left, lettering illegible. Full body. Plain seamless mid-grey studio backdrop, one large soft window-style key light from camera left, real falling shadow on the floor and backdrop, slight rim light on the shoulder. Shot on medium format film, 80mm lens, Kodak Portra 400, fine grain, natural color, shallow depth of field, skin and hair texture sharp. A photograph of an animal, not a costume, not a mascot, no seams, no mask edge, no glossy CGI hair, no cartoon proportions. No text, no logos. 3:4.
+```
+
+Version B, in-world still, closer to how he appears in the scene:
+
+```
+Cinematic film still. A seven-foot unknown great ape, a real living animal, Patterson-Gimlin proportions: heavy brow ridge, deep-set dark eyes with wet corneas, broad flat nose with visible pores, dark leathery skin showing through on the face, palms and chest, sagittal crest, massive shoulders, long arms. Hair, not fur: coarse, dark-brown, uneven lengths, matted, dirty, individual strands catching the light. He is standing in the center aisle of a rundown movie theater, worn red velour seats on both sides, dust hanging in the air, lit only by a pair of car headlights from behind him and below, hard rim light on his hair and shoulders, his face half lit by the bounce off the seats, everything else black. A fried chicken drumstick in his right hand, a dark cognac bottle in his left, label illegible. Looking straight into camera, unimpressed. Shot on 35mm anamorphic, Kodak Vision3 500T, heavy grain, halation on the headlights, muted color, teal-green shadows. A photograph of an animal, not a costume, not a mascot, no seams, no mask edge, no glossy CGI hair. No people, no text, no logos. 3:4.
 ```
 
 ## 5. The Corvette (THE CORVETTE only)
