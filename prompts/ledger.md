@@ -74,6 +74,8 @@ Every prompt written. Status: untested / generated / kept / killed.
 | B1 | The octopus (15s) | DOT, CANVAS | subway | subway fluorescent | Crash Zoom, Transformation, Split Diopter, Speed Ramp, Whip Pan | CANVAS | tentacle on the seat | untested |
 | B2 | The DMV (30s) | DOT, CANVAS | DMV | DMV fluorescent, green ceiling | Crash Cut, Whip Pan, Crash Zoom, Bullet Time, Cut-In | DOT | pulls a new number | generated, 70 percent, freeze failed |
 | B2 v2 | The DMV, fixed | DOT, CANVAS | DMV | same | same, freeze replaced by 5 percent speed | DOT | same | untested |
+| B2 vibe | The DMV, vibe form | DOT, CANVAS | DMV | same | slow motion, one-second establishing | DOT | her face | untested |
+| B3 | The raid (30s, vibe form) | all four + SWAT | apartment | clamp light, then helicopter searchlight | Light Flash, Spotlight, First-Person scope | FLEECE | "is this about the cord" | untested |
 
 ### Rotation notes
 
