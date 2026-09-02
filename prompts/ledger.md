@@ -33,7 +33,18 @@ physics). This file is the memory across all three.
 - 30 seconds is available. A crash plus a button needs 30. One argument fits 15.
 - The tone tail works verbatim. Keep it at the end so the model reads the situation before the style.
 - A technique name alone does nothing for the model. Name it for us, then write the physics.
-- (open) Which scenes have been generated, what drifted, what held. Fill in after each run.
+- **From B2, the DMV, first generation (30 s):**
+  - The before-and-after method works on faces. The crash zoom on CANVAS rendered exactly as written: slack and small, then eighty percent of frame, eyes wide, jaw open.
+  - A freeze does not render with a moving camera. "Bullet time" and "forty bodies stopped" produced a riot that kept moving. Ask for five percent speed with measurable drift (tickets at five centimeters per second, a punch that takes four seconds) and keep the camera arc.
+  - "Quick-cut" alone gives five to eight second holds. The establishing wide ran five seconds against "one-second"; the argument two-shot ran eight. State the cut count and a max shot length in the tail, and write "hold for one second, then cut" per beat.
+  - "Eyes straight into the lens" is not enough. Write the physical action: "turns her head to the camera and looks straight down the lens." A prop held at eye level (the ticket) steals the eyeline; lower it first.
+  - A whip pan renders as multi-second blur unless bounded. Write "one whip pan, four frames long, lands on X."
+  - Say which side of the glass or counter each person is on. CANVAS rendered inside the clerk's booth.
+  - "Doesn't look up" gets overridden by the drama of the moment. Write the negative physically: "never raises her head or her eyebrows, flat."
+  - Digits render clean on number boards and tickets. Numbers are fine in frame; words still aren't.
+  - The model invents good business. It put CANVAS on the floor mid-riot with tickets landing on him. Adopt inventions that fit into the next version instead of prompting them away.
+  - "Green-white fluorescent" produced green ceiling tiles. It looks great and it's now the DMV's look; written into v2 explicitly.
+  - Audio and dialogue not evaluated from frames.
 
 ## 3. Rotation ledger
 
@@ -60,7 +71,8 @@ Every prompt written. Status: untested / generated / kept / killed.
 | A5 | Bigfoot, the Corvette (30s) | all four + Bigfoot | theater | projector, then headlights | Crash, Pass Through | DAGGER | "He offered" | untested |
 | A6 | Generator with seats (30s) | all four + Bigfoot + usher | theater | headlights, then flashlight | Pass Through | usher | "Alright" | untested |
 | B1 | The octopus (15s) | DOT, CANVAS | subway | subway fluorescent | Crash Zoom, Transformation, Split Diopter, Speed Ramp, Whip Pan | CANVAS | tentacle on the seat | untested |
-| B2 | The DMV (30s) | DOT, CANVAS | DMV | DMV fluorescent | Crash Cut, Whip Pan, Crash Zoom, Bullet Time, Cut-In | DOT | pulls a new number | untested |
+| B2 | The DMV (30s) | DOT, CANVAS | DMV | DMV fluorescent, green ceiling | Crash Cut, Whip Pan, Crash Zoom, Bullet Time, Cut-In | DOT | pulls a new number | generated, 70 percent, freeze failed |
+| B2 v2 | The DMV, fixed | DOT, CANVAS | DMV | same | same, freeze replaced by 5 percent speed | DOT | same | untested |
 
 ### Rotation notes
 
