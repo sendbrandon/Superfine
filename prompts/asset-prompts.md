@@ -42,9 +42,14 @@ movie set" does more than any inventory.
 
 ## 3b. Apartment plate, the main room with the front door (home base)
 
+Simple and sparse. Clutter is what reads as AI. A real room has three
+things in it and a lot of nothing. Start with the angle, then the place.
+
 ```
-A photo of a small, run-down apartment in the city, taken on a phone from the corner of the main room, three-quarter view, the kind of picture someone posts when they need a roommate. Kitchen on one side, couch on the other, front door at the back. Dimly lit, nobody home, no text anywhere. Looks like a real apartment, not a movie set. 3:4.
+Three-quarter angle view of a small, modest apartment, the main room: a kitchen along one wall, a couch and a window on the other, the front door at the back. Simple and sparse, a few pieces of furniture, nothing on the counters, plain walls, worn but tidy. Natural light from the window. A real photo of a real apartment, nobody home, no text. 3:4.
 ```
+
+For a night version, swap the light sentence for "Night, one lamp on."
 
 The truest version of this plate already exists: the wide shot in the
 first DoorDash clip, around seven seconds in. A frame grab from it can be
