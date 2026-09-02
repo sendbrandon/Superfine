@@ -337,6 +337,31 @@ Picks up on the last frame of the first clip, @Image8, DAGGER handing the bottle
 
 ### A4. THE TICKET (all four)
 
+(see above)
+
+## Appendix B. Director-style VFX prompting
+
+For scenes where an effect has to land. The tone tail stays. What changes is
+that the effect is described as physics, not named.
+
+1. **Name the EyeCandy technique, then say what it does in one sentence of physics.** The name is for us. The sentence is what the model renders. "Split diopter" means nothing to it. "Her in the foreground left, sharp, him across the aisle in the middle, sharp" does.
+2. **Numbers, not adjectives.** Distance in meters, time in seconds, size in centimeters, speed in meters per second. "Fingers stretch thirty centimeters in two seconds," not "fingers grow."
+3. **Orientation before motion.** Where everyone is relative to the camera and each other before anything moves. Left bench, right bench, two and a half meters, dead center.
+4. **Say what does not move.** "He does not stand up. Only the tentacles move." A model fills silence with motion.
+5. **Five questions per effect.** What happens to the subject, the environment, the background, the camera, and the physics. One clause each. If a question has no answer, skip it, don't pad it.
+6. **No text anywhere in the environment.** Blank ad panels, blank signs.
+7. **Length.** Longer than a tone-only prompt, shorter than a shot list. Every sentence carries a number or an orientation or it goes.
+
+EyeCandy techniques confirmed on the site and used so far: Split Diopter, Morphing, Transformation, Crash Zoom, Speed Ramp, Whip Pan, Dolly Zoom, Snorricam, Dutch Angle, Pass Through, Crash Cut.
+
+### B1. THE OCTOPUS (DOT and CANVAS, subway, 15 seconds)
+
+Attach, in order: 1 DOT lookbook, 2 CANVAS lookbook. The subway and the octopus are described, no refs.
+
+```
+These two people, @Image1, DOT, the blonde with the polka-dot neckerchief, and @Image2, CANVAS, the buzzed redhead in the tan work jacket, are sitting side by side on the left bench of a moving New York subway car at night, orange and yellow molded plastic seats, silver poles, flickering fluorescent tubes, black windows with tunnel lights strobing past every half second, the car swaying about five centimeters side to side, six other passengers down the car, blank ad panels, no text anywhere. Directly across the aisle, two and a half meters away, dead center, a man in a grey suit with his hands on his knees is turning into a fucking octopus. One-second establishing wide down the length of the car, then a crash zoom onto his hands: fingers stretch thirty centimeters in two seconds, skin goes from flesh to mottled rust-red in a wave from the fingertips up to the shoulders, quarter-sized suckers pop up in rows along the undersides of his arms like blisters, elbows go boneless, the sleeves split, each arm divides into four tentacles, eight total, and his head stays human until his jaw drops open wider than his skull and there's a black beak in there. He does not stand up. His body stays in the seat, upright and still, the whole time. Only the tentacles move. Split diopter for the whole scene: the two of them foreground left, sharp, him across the aisle in the middle, sharp. A tentacle shoots three meters down the aisle in half a second, speed ramps into slow motion as it coils twice around a standing passenger's waist and lifts him forty centimeters off the floor, snaps back to full speed, and reels him in head first at two meters a second into the beak, a half-second POV from the guy going in, the beak filling the frame, the suit's torso bulging as he goes down, buttons popping. The fluorescents flicker every time he swallows. Whip pans between the passengers screaming and piling up against the locked door at the far end of the car and the two of them, who have not moved, because they're in a heated argument about whether to switch cars. CANVAS wants to switch cars. DOT does not switch cars. "We don't switch cars. Switching cars is how you get noticed." "He's eating people." "He's eating people who looked." Nobody says the word octopus. A second passenger goes in, a woman with headphones, same physics, faster. Then a tentacle comes across the aisle, slow, and lays itself down on the seat between the two of them and rests there. DOT keeps her eyes front. CANVAS looks down at it. It ends on CANVAS's face. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
+```
+
 They snuck in. An usher is checking tickets with a flashlight. Bigfoot walks in, sits down, and has a ticket. They get thrown out. He stays.
 
 ```
