@@ -367,6 +367,25 @@ Part two:
 Same gym, same three, picking up from @Image4. The trainer, @Image3, has @Image1 CANVAS and @Image2 DAGGER doing the most insane partner workouts, weirdly intimate, played dead fucking serious: CANVAS holding DAGGER's ankles for sit-ups nose to nose, the wheelbarrow across the rubber floor, partner hip thrusts, the trainer counting reps way too close to their faces, spotting them with his whole body, blowing the whistle, spray bottle. Everyone else in the gym stops to watch. Quick cuts, low angles, slow motion on the worst one, faces straight into the lens. The two of them argue the whole time about whose idea this was and who's paying, and neither of them stops doing the exercise. It ends on DAGGER's face, upside down, mid-rep, having the best day of his life. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
 ```
 
+### C2. THE ENTRANCE (all four, plus the landlord)
+
+The landlord's first appearance is a wrestling entrance down the building hallway. Sample: a WWE entrance, Rocky walking to the ring. The landlord's image prompt is in `asset-prompts.md`.
+
+Attach, part one: 1 DOT, 2 FLEECE, 3 CANVAS, 4 DAGGER, 5 the landlord.
+Attach, part two: 1 DOT, 2 FLEECE, 3 CANVAS, 4 DAGGER, 5 the landlord, 6 the last frame of part one.
+
+Part one:
+
+```
+All four of them, @Image1 DOT, @Image2 FLEECE, @Image3 CANVAS, @Image4 DAGGER, are in their apartment when the hallway outside goes off like an arena: glass-shatter, pyro going up in a fucking apartment hallway, smoke, strobes, and the landlord, @Image5, a tiny tanned man in his sixties with a comb-over and a gold chain, walks the whole length of the hallway to their door like it's a wrestling entrance, a title belt over his shoulder, taking his time, neighbors in every doorway like a crowd, and he's here to collect. Quick-cut, dynamic camera, low angle tracking backwards in front of him down the hallway so he looks enormous, faces straight into the lens. It starts with a one-second establishing shot of the four of them hearing it through the door and jumps right into it. The four of them crowded at the peephole, arguing about whether you can have pyro in a hallway and who's answering the door. It ends on the landlord's face at their door, fist raised to knock. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
+```
+
+Part two:
+
+```
+Same hallway, picking up from @Image6. The door opens and the four of them, @Image1 DOT, @Image2 FLEECE, @Image3 CANVAS, @Image4 DAGGER, come out as a tag team, two in front, two behind, and the hallway turns into a ring: neighbors pounding on the walls, a fluorescent tube swinging overhead like an arena light, the landlord, @Image5, circling with the belt, dead serious, nobody winks. It's a standoff, not a fight, chest to chest with a man half their size, and they argue about the rent like it's a title match: he wants it, they don't have it, FLEECE tries to negotiate a rate. Quick-cut, low angles, slow motion on the landlord unclipping the belt, faces straight into the lens. It ends on the landlord, unbothered, one hand out for the rent. It's a high-energy, high-paced, quick-cut, 15-second clip that is fucking hilarious. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, with vulgar cutting and each other being done intentionally, not overdone, done with taste, right? This is raw, vulgar comedy that also kind of has an action-packed, hyper-cut cinematic quality to it.
+```
+
 ## Appendix B. Director-style VFX prompting
 
 For scenes where an effect has to land. The tone tail stays. What changes is

@@ -108,6 +108,15 @@ video prompt.
 
 ---
 
+# The landlord (recurring, first appears in C2)
+
+Single image, editorial recipe. Clean, no belt, so he's reusable. The
+title belt lives in the video prompt.
+
+```
+Editorial full-body portrait photograph of a small tanned man in his late sixties, five foot five, a comb-over dyed too dark, a gold chain, teeth too white, the smile of a man who owns eleven buildings and fixes none of them. Wardrobe: a cream short-sleeve dress shirt open one button too many, pleated tan slacks, white loafers with no socks, a chunky gold watch, a fat ring of keys clipped to his belt. Standing with hands on hips, chin up. Plain seamless pale-pink studio backdrop, one large soft key light from camera left, real falling shadow on the floor and backdrop, medium format film, Kodak Portra 400, fine grain, natural skin texture, no retouching, no text, no logos. 3:4.
+```
+
 # The trainer (recurring guest, C1 and any gym scene)
 
 Single image, editorial light, same photographic recipe that fixed

@@ -79,6 +79,8 @@ Every prompt written. Status: untested / generated / kept / killed.
 | B3 | The raid (30s, vibe form) | all four + SWAT | apartment | clamp light, then helicopter searchlight | Light Flash, Spotlight, First-Person scope | FLEECE | "is this about the cord" | untested |
 | C1a | The trainer, part one (15s) | CANVAS, DAGGER + trainer | gym | fluorescent | Low Angle, High Angle | the trainer picks CANVAS | CANVAS's face | untested |
 | C1b | The trainer, part two (15s) | CANVAS, DAGGER + trainer | gym | fluorescent | Slow Motion, Low Angle | DAGGER | upside down mid-rep | untested |
+| C2a | The entrance, part one (15s) | all four + landlord | hallway | pyro, strobes | Tracking, Low Angle | the landlord | fist raised to knock | untested |
+| C2b | The entrance, part two (15s) | all four + landlord | hallway | swinging fluorescent | Slow Motion, Low Angle | the landlord | hand out for the rent | untested |
 
 ### Rotation notes
 
