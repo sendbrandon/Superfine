@@ -42,4 +42,39 @@ Woman in her fifties, sturdy, forearms like she folds for a living, grey-streake
 
 ## Add later, only if it recurs
 
-Laundromat plate, bodega plate, theater plate, Bigfoot lookbook. Not before.
+Laundromat plate, bodega plate. Not before.
+
+---
+
+# Bigfoot at the movies — kit (three images)
+
+For the four theater concepts in the bible's Appendix A. Attach these with
+the character refs for whichever crew members are in the scene.
+
+## 1. Bigfoot
+
+Same three-panel lookbook layout as the four character refs.
+
+```
+A seven-foot Bigfoot, the classic Patterson-Gimlin build, heavy brow, deep-set eyes, sagittal crest, matted dark-brown fur with reddish tips, broad chest, long arms, thick thighs, huge flat feet, completely real, a living animal, no costume seams, no mask edges, the fur reads as real hair. No clothing. Three-panel fashion lookbook, side by side: left panel tight head-and-shoulders portrait looking straight into camera, mouth closed, bored, center panel full-body front view standing relaxed with weight on one leg, right panel full-body back view doing the famous look back over the right shoulder mid-stride. Plain seamless grey studio backdrop, flat even studio light, no hard shadows, medium format, no retouching, no text, no logos. 16:9.
+```
+
+## 2. Theater plate
+
+```
+A rundown second-run movie theater, empty. Rows of worn red velour seats with cracked armrests, a sticky floor with popcorn, a stained screen showing an out-of-focus image with no readable content, the projector beam cutting through dust from the back wall, a side exit door with a red emergency light above it and no letters. The only light is the projector. Empty set, no people, no text, no legible signage, labels, posters, or photos. Three-quarter angle from the aisle showing the seats, the screen, and the side wall, eye level, slightly wide lens. Photoreal, 35mm film, one light source only, deep falloff, cool over teal-green shadows, muted color, fine grain, slight halation on the beam. 3:4.
+```
+
+Variants, swap the light sentence:
+- THE CHICKEN: `The screen is dark. The only light is the red emergency light above the exit door, everything red and black.`
+- THE TICKET: `The screen is dark. The only light is one flashlight beam from offscreen sweeping across a row of seats.`
+- THE WALK and THE PHONE use the base plate.
+
+## 3. The chicken (THE CHICKEN only)
+
+```
+A whole rotisserie chicken in a clear plastic dome container, lid fogged with steam, juice pooled at the bottom, a blank price sticker. Single object, plain seamless studio backdrop, flat even light, slight three-quarter top-down angle, photoreal, true colors, no text, no logos, no hands. 1:1.
+```
+
+The usher, the ticket stub, and the phone are one-scene items already
+described in the prompts. Generate them fresh.
