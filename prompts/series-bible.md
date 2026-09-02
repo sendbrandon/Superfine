@@ -101,6 +101,12 @@ four reference images, same order, every generation.
 The short in-prompt tags are enough when the reference images are attached.
 Use the full visual and wardrobe locks only if a character drifts.
 
+### Recurring, no reference image (described in the prompt each time)
+
+- **The bodega owner.** A man in his sixties behind the register. Does not blink. Says nothing. Has seen this before.
+- **The laundromat owner.** A woman in her fifties, laundromat apron, reading glasses on a chain. Never stops folding. Negotiates while folding a fitted sheet perfectly. Never angry, worse than angry, already doing the math.
+- **The landlord.** Not seen yet. The season is building to him.
+
 ---
 
 ## 4. LOCATIONS and their one light
@@ -203,9 +209,62 @@ Same kitchen, midnight, and the only light is six tall glass saint candles in a 
 
 ---
 
-## 8. Episode slate (one-liners, untested)
+## 8. Episode 2, working title "THE RATE"
 
-- **Ep 2, "THE RATE."** The laundromat owner finds the cord. FLEECE negotiates a monthly rate for electricity they are already stealing. DOT wants it in writing.
+Six scenes, 90 seconds. The whole episode runs on one extension cord with one
+outlet, so the one light source per scene is literally whatever is plugged in:
+lava lamp, fridge, daylight, laundromat, work light, work light dimming.
+
+| # | Scene | Location | Light | Who |
+|---|---|---|---|---|
+| 1 | Cold open. The cord reached. The one outlet is in a lava lamp. It's warm. DAGGER told nobody. | Living room | the lava lamp | all four |
+| 2 | The fridge. The outlet went to the fridge. DOT holds the door open because it's the only light. "It's a lamp with food in it." | Kitchen | the open fridge | all four |
+| 3 | The owner. She's on the fire escape holding two cords. The second one is hers. He stole her cord to steal her electricity. | Fire escape | grey daylight | all four + owner |
+| 4 | The rate. "It's not theft, it's a utility." Forty a month. Every head turns to CANVAS. DOT wants it in writing. | Laundromat | fluorescent + dryer glow | all four + owner |
+| 5 | The contract. Written on the back of the shut-off notice. DAGGER, signing as witness: "Whose outlet is it, though." It's the landlord's hallway circuit. | Kitchen | the clamp work light | all four |
+| 6 | The verdict. Free electricity, signed contract. "A deal is a deal." The dryers kick on, the light dims, CANVAS gets out his wallet. | Kitchen | the work light, dimming | all four |
+
+### Scene 1 — THE LAVA LAMP
+
+```
+Living room, night, and the only light in the whole scene is a lava lamp, red-orange blobs rolling up and down, sitting on the milk-crate table, everything past it black. @Image4, DAGGER, long hair, black cap, blue hoodie, is lying on the floor next to it like it's a fireplace. @Image1, DOT, the blonde with the polka-dot neckerchief, @Image2, FLEECE, the guy in the black fleece hoodie with the gold hoop, and @Image3, CANVAS, the buzzed redhead in the tan work jacket, walk in from the kitchen with their phone lights up and stop dead. The cord reached. He got the power on. There is one outlet on the end of that extension cord and it is in a fucking lava lamp, right? And the lamp is warm, which means it's been on twenty minutes and he told nobody. CANVAS: "There's meat in the fridge." DOT: "The router. We need the router." FLEECE, dead calm: "The plan is on my phone." DAGGER, not moving: "It's already warm." And when they ask how the cord reached: "Found one." It's a high-energy, high-paced, quick-cut 15-second scene, five to seven cuts, everybody playing straight into the lens like the camera is the other person, faces lit red from below by the lamp, one wide shot of three people standing over one guy on the floor and one lava lamp in a black room, and it ends on DAGGER's face, calm, orange blobs moving across it. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, vulgar, cutting each other up on purpose, every insult about who the other person actually is, not overdone, done with taste, right? This is raw, vulgar comedy that has that action-packed, hyper-cut cinematic quality, photoreal, handheld, grainy, one light source, no music, dead fucking serious, nobody winks.
+```
+
+### Scene 2 — THE FRIDGE
+
+```
+Kitchen, same night, and the only light is the inside of the open refrigerator, that cold white fridge light, four people standing around it like a campfire, everything behind them black. The cord's one outlet went to the fridge. @Image3, CANVAS, the buzzed redhead in the tan work jacket, wants the door shut, because the entire point of a fridge is the door being shut. @Image1, DOT, the blonde with the polka-dot neckerchief, is holding it open with her hip because it's the only light in the apartment and she is not standing in the dark in her own kitchen. "Close the door." "It's the only light." "It's a fridge." "It's a lamp with food in it," right? @Image2, FLEECE, the guy in the black fleece hoodie with the gold hoop, already has a policy: rotation, fridge by day, lamp by night, a schedule taped to the door, and he's calling it a grid. @Image4, DAGGER, long hair, black cap, blue hoodie, is eating deli meat straight out of the fridge in the middle of the argument about the fridge. It's a high-energy, high-paced, quick-cut 15-second scene, five to seven cuts, everybody playing straight into the lens like the camera is the other person, faces lit flat and cold from the side, one wide shot of four people crowded around an open fridge in a black kitchen, and it ends on CANVAS's face as he reaches past her and shuts the door and the frame goes black. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, vulgar, cutting each other up on purpose, every insult about who the other person actually is, not overdone, done with taste, right? This is raw, vulgar comedy that has that action-packed, hyper-cut cinematic quality, photoreal, handheld, grainy, one light source, no music, dead fucking serious, nobody winks.
+```
+
+### Scene 3 — THE OWNER
+
+```
+The fire escape and the open window, next morning, and the only light is flat grey daylight coming up from the alley, no sun, everything the color of wet concrete. The laundromat owner, a woman in her fifties in a laundromat apron with reading glasses on a chain, is standing on the fire escape holding the end of the orange extension cord up like a dead snake. Four faces stacked in the window above her: @Image1, DOT, the blonde with the polka-dot neckerchief, @Image2, FLEECE, the guy in the black fleece hoodie with the gold hoop, @Image3, CANVAS, the buzzed redhead in the tan work jacket, and @Image4, DAGGER, long hair, black cap, blue hoodie. She doesn't say anything. She holds up the cord. Then she holds up the second cord, the one that made it reach, and turns it so they can see the masking tape on it with her laundromat's name written in marker. It's her cord. He stole her cord to steal her electricity, right? FLEECE, from the window, dead calm: "We can explain." Her: "Explain in the store." DAGGER, quietly, to nobody: "I found it." It's a high-energy, quick-cut 15-second scene, five to seven cuts, everybody playing straight into the lens like the camera is the other person, one wide shot from the alley below of one woman on a fire escape holding two cords and four faces stacked in a window, and it ends on the owner's face, not angry, worse than angry, already doing the math. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, vulgar, cutting each other up on purpose, every insult about who the other person actually is, not overdone, done with taste, right? This is raw, vulgar comedy that has that action-packed, hyper-cut cinematic quality, photoreal, handheld, grainy, one light source, no music, dead fucking serious, nobody winks.
+```
+
+### Scene 4 — THE RATE
+
+```
+Inside the laundromat, and the only light is the flat fluorescent overhead with the dryer windows glowing orange down the wall, greenish skin, the hum of machines. The laundromat owner, fifties, apron, reading glasses on a chain, is behind the folding table folding a fitted sheet perfectly, corner into corner, and she does not stop folding for the entire scene. @Image2, FLEECE, the guy in the black fleece hoodie with the gold hoop, is across the table from her, dead calm, negotiating: "It's not theft. It's a utility." He proposes a rate. She keeps folding. She says forty a month. Every head turns to @Image3, CANVAS, the buzzed redhead in the tan work jacket, because he's the one with a job, and he erupts, teeth out: "I'm not a bank. I'm the fucking grid." @Image1, DOT, the blonde with the polka-dot neckerchief: "I want it in writing." CANVAS: "It's a crime. Why do you want a crime in writing." DOT: "A crime with terms is a business. Every landlord is a crime with terms," right? @Image4, DAGGER, long hair, black cap, blue hoodie, is sitting inside an open dryer with his legs hanging out. It's a high-energy, high-paced, quick-cut 15-second scene, five to seven cuts, everybody playing straight into the lens like the camera is the other person, one wide shot down the row of machines of four of them at a folding table across from one woman folding a fitted sheet, and it ends on the owner's face as the sheet lands folded and her hand comes out flat, palm up. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, vulgar, cutting each other up on purpose, every insult about who the other person actually is, not overdone, done with taste, right? This is raw, vulgar comedy that has that action-packed, hyper-cut cinematic quality, photoreal, handheld, grainy, one light source, no music, dead fucking serious, nobody winks.
+```
+
+### Scene 5 — THE CONTRACT
+
+```
+Kitchen, that night, and the only light is a caged clamp work light, the redhead's, from his job, clamped to a cabinet door, hard white, ugly shadows, everything else black, because the cord's one outlet is in the work light now, the fridge is off, and the meat is going. @Image1, DOT, the blonde with the polka-dot neckerchief, is writing the contract on the back of the shut-off notice in pen, tongue between her teeth, clauses. @Image2, FLEECE, the guy in the black fleece hoodie with the gold hoop, reads over her shoulder: "Clause four. The party of the first part." DOT: "It's binding." @Image3, CANVAS, the buzzed redhead in the tan work jacket, signs it like a man signing a confession. @Image4, DAGGER, long hair, black cap, blue hoodie, signs as witness, and while he's signing, not looking up: "Whose outlet is it, though." Silence. The outlet on the wall outside is on the hallway circuit. The hallway is the landlord's meter. The laundromat isn't paying for it either. She's selling them the hallway, right? It's a high-energy, quick-cut 15-second scene, five to seven cuts, everybody playing straight into the lens like the camera is the other person, hard white light and black, one wide shot of four people around a shut-off notice on a counter under one clamp light, and it ends on FLEECE's face, and for the first time in the series the calm doesn't come back. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, vulgar, cutting each other up on purpose, every insult about who the other person actually is, not overdone, done with taste, right? This is raw, vulgar comedy that has that action-packed, hyper-cut cinematic quality, photoreal, handheld, grainy, one light source, no music, dead fucking serious, nobody winks.
+```
+
+### Scene 6 — THE VERDICT
+
+```
+Same kitchen, same clamp work light, ten minutes later. They negotiated a monthly rate for free electricity and all four of them know it. @Image3, CANVAS, the buzzed redhead in the tan work jacket: "We don't pay. It's not hers." @Image1, DOT, the blonde with the polka-dot neckerchief: "We signed." "For stolen electricity." "A deal is a deal. We honor our debts in this house," right? @Image2, FLEECE, the guy in the black fleece hoodie with the gold hoop: "It's not a debt, it's a" and he can't find the word. First time in his life he doesn't have the business word. @Image4, DAGGER, long hair, black cap, blue hoodie, is eating the deli meat before it turns. Then the dryers kick on downstairs and the work light dims to brown and everybody's face goes half dark, and CANVAS reaches into his jacket and takes out his wallet. It's a high-energy, quick-cut 15-second scene, five to seven cuts, everybody playing straight into the lens like the camera is the other person, one wide shot of four people in one hard light that's dimming, and it ends on CANVAS's face, wallet open, the light almost gone. It competes with fucking Rick and Morty meets fucking Larry David meets Patrice O'Neal, vulgar, cutting each other up on purpose, every insult about who the other person actually is, not overdone, done with taste, right? This is raw, vulgar comedy that has that action-packed, hyper-cut cinematic quality, photoreal, handheld, grainy, one light source, no music, dead fucking serious, nobody winks.
+```
+
+---
+
+## 9. Episode slate (one-liners, untested)
+
+- **Ep 2, "THE RATE."** Written. See section 8.
 - **Ep 3, "THE DOORBELL."** CANVAS buys a $200 video doorbell "for safety" for a door that doesn't lock. It records everything. Someone walks in and takes the doorbell.
 - **Ep 4, "THE MEMBERSHIP."** FLEECE renews a warehouse-club card with no car and no warehouse club nearby. "We're not members. We're a distributor." Bus scene with a granny cart.
 - **Ep 5, "THE TOTE."** The contents of DOT's tote are finally litigated. Bathroom, one bulb over the mirror, everything laid out on the sink.
@@ -214,7 +273,7 @@ Same kitchen, midnight, and the only light is six tall glass saint candles in a 
 
 ---
 
-## 9. Production notes
+## 10. Production notes
 
 - **One scene, one generation.** Same four reference images, same order, same `@Image` numbers, every time.
 - **Cut points.** Every scene ends on a face. Cut on the face. When the location does not change between scenes, take the last frame of the previous scene as the first-frame reference of the next.
